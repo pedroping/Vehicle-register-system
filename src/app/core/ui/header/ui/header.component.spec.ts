@@ -1,0 +1,3 @@
+/* tslint:disable:no-unused-variable */
+
+describe('HeaderComponent', () => {});

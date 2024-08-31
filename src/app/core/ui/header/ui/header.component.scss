@@ -1,0 +1,27 @@
+:host {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+    box-shadow: 0px 0px 8px var(--light-black-01);
+    height: 60px;
+
+    img {
+      height: 50px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .actions {
+      button {
+        display: flex;
+        align-items: start;
+        gap: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@mixin default-btn {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17.07px;
+  text-align: left;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 100ms;
+}
+
+@mixin animated {
+  span, i {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::before {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    content: "";
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 200ms;
+    width: 0;
+  }
+
+  &:hover {
+    transform: scale(1.03) translateY(-1px);
+    
+    span,
+    i {
+      color: var(--text-color-01);
+    }
+
+    &::before {
+      width: 110%;
+    }
+  }
+}
+
+.primary-btn {
+  @include default-btn;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+
+  &.animated {
+    @include animated;
+
+    &::before {
+      background: var(--primary);
+    }
+  }
+}
