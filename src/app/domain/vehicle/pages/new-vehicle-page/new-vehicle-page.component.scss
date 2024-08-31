@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  .header {
+    h1 {
+      font-weight: 700;
+      font-size: 24px;
+      span {
+        color: var(--primary);
+      }
+    }
+
+    margin-bottom: 25px;
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    margin: 25px auto;
+    max-width: 1350px;
+
+    button {
+      width: 115px;
+    }
+  }
+}

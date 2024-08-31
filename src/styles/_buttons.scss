@@ -12,10 +12,16 @@
   position: relative;
   overflow: hidden;
   transition: all 100ms;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
 }
 
 @mixin animated {
-  span, i {
+  span,
+  i {
     position: relative;
     z-index: 2;
   }
@@ -34,7 +40,7 @@
 
   &:hover {
     transform: scale(1.03) translateY(-1px);
-    
+
     span,
     i {
       color: var(--text-color-01);
@@ -48,14 +54,23 @@
 
 .primary-btn {
   @include default-btn;
-  color: var(--primary);
+  color: var(--text-color-01);
   border: 1px solid var(--primary);
+  background-color: var(--primary);
 
   &.animated {
+    color: var(--primary);
+    background-color: transparent;
     @include animated;
 
     &::before {
       background: var(--primary);
     }
   }
+}
+
+.secondary-btn {
+  @include default-btn;
+  color: var(--black-01);
+  border: 1px solid var(--black-01);
 }

@@ -1,0 +1,18 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { IBrand } from '@shared/models';
+import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BrandsApiService {
+  private readonly http = inject(HttpClient);
+  private readonly environment = inject(ENVIRONMENT_TOKEN);
+
+  private readonly BRANDS = 'brands';
+
+  getBrands() {
+    return this.http.get<IBrand[]>(`${this.environment}/${this.BRANDS}`);
+  }
+}

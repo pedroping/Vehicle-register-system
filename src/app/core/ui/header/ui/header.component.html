@@ -1,11 +1,15 @@
 <header>
-  <img src="/assets/pngs/info-logo.png" alt="Logo Info Sistemas" />
+  <a [routerLink]="vehicleListRoute" replaceUrl="true">
+    <img src="/assets/pngs/info-logo.png" alt="Logo Info Sistemas" />
+  </a>
 
   <h2>Sua gestão de veículos</h2>
 
   <div class="actions">
-    <button class="primary-btn animated">
-      <span>Adicionar veiculo</span><i class="fa-solid fa-car"></i>
-    </button>
+    <a [routerLink]="newVehicleRoute" replaceUrl="true">
+      <button class="primary-btn animated">
+        <span>Adicionar veiculo</span><i class="fa-solid fa-car"></i>
+      </button>
+    </a>
   </div>
 </header>
