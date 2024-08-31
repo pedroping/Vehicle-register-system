@@ -2,425 +2,425 @@
   "vehicles": [],
   "categories": [
     {
-      "id": 0,
+      "id": "0",
       "description": "Categoria A - Motocicletas, motonetas e triciclos"
     },
     {
-      "id": 1,
+      "id": "1",
       "description": "Categoria B - Carros, picapes e vans"
     },
     {
-      "id": 2,
+      "id": "2",
       "description": "Categoria C - Caminhões, caminhonetes e vans de Carga"
     },
     {
-      "id": 3,
+      "id": "3",
       "description": "Categoria D - Ônibus, micro-ônibus, vans de passageiros"
     },
     {
-      "id": 4,
+      "id": "4",
       "description": "Categoria E - Treminhão, ônibus articulados, veículos com trailers"
     }
   ],
   "brands": [
     {
-      "id": 0,
+      "id": "0",
       "name": "Toyota"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Honda"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Ford"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Chevrolet"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "BMW"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Mercedes-Benz"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Volkswagen"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Audi"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Nissan"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Hyundai"
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Kia"
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Subaru"
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Mazda"
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Jaguar"
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Lexus"
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "Land Rover"
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "Porsche"
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "Ferrari"
     },
     {
-      "id": 18,
+      "id": "18",
       "name": "Lamborghini"
     },
     {
-      "id": 19,
+      "id": "19",
       "name": "Maserati"
     },
     {
-      "id": 20,
+      "id": "20",
       "name": "Bentley"
     },
     {
-      "id": 21,
+      "id": "21",
       "name": "Rolls-Royce"
     },
     {
-      "id": 22,
+      "id": "22",
       "name": "Volvo"
     },
     {
-      "id": 23,
+      "id": "23",
       "name": "Jeep"
     },
     {
-      "id": 24,
+      "id": "24",
       "name": "Tesla"
     },
     {
-      "id": 25,
+      "id": "25",
       "name": "Cadillac"
     },
     {
-      "id": 26,
+      "id": "26",
       "name": "Buick"
     },
     {
-      "id": 27,
+      "id": "27",
       "name": "GMC"
     },
     {
-      "id": 28,
+      "id": "28",
       "name": "Dodge"
     },
     {
-      "id": 29,
+      "id": "29",
       "name": "Chrysler"
     },
     {
-      "id": 30,
+      "id": "30",
       "name": "Lincoln"
     },
     {
-      "id": 31,
+      "id": "31",
       "name": "Acura"
     },
     {
-      "id": 32,
+      "id": "32",
       "name": "Infiniti"
     },
     {
-      "id": 33,
+      "id": "33",
       "name": "Mitsubishi"
     },
     {
-      "id": 34,
+      "id": "34",
       "name": "Mini"
     },
     {
-      "id": 35,
+      "id": "35",
       "name": "Alfa Romeo"
     },
     {
-      "id": 36,
+      "id": "36",
       "name": "Peugeot"
     },
     {
-      "id": 37,
+      "id": "37",
       "name": "Renault"
     },
     {
-      "id": 38,
+      "id": "38",
       "name": "Citroën"
     },
     {
-      "id": 39,
+      "id": "39",
       "name": "Fiat"
     },
     {
-      "id": 40,
+      "id": "40",
       "name": "Aston Martin"
     },
     {
-      "id": 41,
+      "id": "41",
       "name": "Bugatti"
     },
     {
-      "id": 42,
+      "id": "42",
       "name": "Pagani"
     },
     {
-      "id": 43,
+      "id": "43",
       "name": "McLaren"
     },
     {
-      "id": 44,
+      "id": "44",
       "name": "Genesis"
     },
     {
-      "id": 45,
+      "id": "45",
       "name": "Suzuki"
     },
     {
-      "id": 46,
+      "id": "46",
       "name": "Saab"
     },
     {
-      "id": 47,
+      "id": "47",
       "name": "Isuzu"
     },
     {
-      "id": 48,
+      "id": "48",
       "name": "Skoda"
     },
     {
-      "id": 49,
+      "id": "49",
       "name": "Seat"
     },
     {
-      "id": 50,
+      "id": "50",
       "name": "Opel"
     },
     {
-      "id": 51,
+      "id": "51",
       "name": "Lancia"
     },
     {
-      "id": 52,
+      "id": "52",
       "name": "Daihatsu"
     },
     {
-      "id": 53,
+      "id": "53",
       "name": "Smart"
     },
     {
-      "id": 54,
+      "id": "54",
       "name": "Hummer"
     },
     {
-      "id": 55,
+      "id": "55",
       "name": "Saturn"
     },
     {
-      "id": 56,
+      "id": "56",
       "name": "Pontiac"
     },
     {
-      "id": 57,
+      "id": "57",
       "name": "Oldsmobile"
     },
     {
-      "id": 58,
+      "id": "58",
       "name": "Scion"
     },
     {
-      "id": 59,
+      "id": "59",
       "name": "Plymouth"
     },
     {
-      "id": 60,
+      "id": "60",
       "name": "Rover"
     },
     {
-      "id": 61,
+      "id": "61",
       "name": "MG"
     },
     {
-      "id": 62,
+      "id": "62",
       "name": "Dacia"
     },
     {
-      "id": 63,
+      "id": "63",
       "name": "Geely"
     },
     {
-      "id": 64,
+      "id": "64",
       "name": "Tata"
     },
     {
-      "id": 65,
+      "id": "65",
       "name": "Proton"
     },
     {
-      "id": 66,
+      "id": "66",
       "name": "Mahindra"
     },
     {
-      "id": 67,
+      "id": "67",
       "name": "Maruti Suzuki"
     },
     {
-      "id": 68,
+      "id": "68",
       "name": "Great Wall"
     },
     {
-      "id": 69,
+      "id": "69",
       "name": "Chery"
     },
     {
-      "id": 70,
+      "id": "70",
       "name": "BYD"
     },
     {
-      "id": 71,
+      "id": "71",
       "name": "Baojun"
     },
     {
-      "id": 72,
+      "id": "72",
       "name": "FAW"
     },
     {
-      "id": 73,
+      "id": "73",
       "name": "Dongfeng"
     },
     {
-      "id": 74,
+      "id": "74",
       "name": "Lifan"
     },
     {
-      "id": 75,
+      "id": "75",
       "name": "Zotye"
     },
     {
-      "id": 76,
+      "id": "76",
       "name": "Hongqi"
     },
     {
-      "id": 77,
+      "id": "77",
       "name": "Haval"
     },
     {
-      "id": 78,
+      "id": "78",
       "name": "Lynk & Co"
     },
     {
-      "id": 79,
+      "id": "79",
       "name": "Weilai (Nio)"
     },
     {
-      "id": 80,
+      "id": "80",
       "name": "Wuling"
     },
     {
-      "id": 81,
+      "id": "81",
       "name": "Rimac"
     },
     {
-      "id": 82,
+      "id": "82",
       "name": "Fisker"
     },
     {
-      "id": 83,
+      "id": "83",
       "name": "Lucid"
     },
     {
-      "id": 84,
+      "id": "84",
       "name": "Koenigsegg"
     },
     {
-      "id": 85,
+      "id": "85",
       "name": "Caterham"
     },
     {
-      "id": 86,
+      "id": "86",
       "name": "Ariel"
     },
     {
-      "id": 87,
+      "id": "87",
       "name": "Morgan"
     },
     {
-      "id": 88,
+      "id": "88",
       "name": "Ginetta"
     },
     {
-      "id": 89,
+      "id": "89",
       "name": "Dodge"
     },
     {
-      "id": 90,
+      "id": "90",
       "name": "Shelby"
     },
     {
-      "id": 91,
+      "id": "91",
       "name": "Studebaker"
     },
     {
-      "id": 92,
+      "id": "92",
       "name": "Packard"
     },
     {
-      "id": 93,
+      "id": "93",
       "name": "Delorean"
     },
     {
-      "id": 94,
+      "id": "94",
       "name": "Trabant"
     },
     {
-      "id": 95,
+      "id": "95",
       "name": "Yugo"
     },
     {
-      "id": 96,
+      "id": "96",
       "name": "Tucker"
     },
     {
-      "id": 97,
+      "id": "97",
       "name": "TVR"
     },
     {
-      "id": 98,
+      "id": "98",
       "name": "Vauxhall"
     },
     {
-      "id": 99,
+      "id": "99",
       "name": "Holden"
     }
   ]

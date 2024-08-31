@@ -10,6 +10,7 @@ import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { environment } from '@environment/environment';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideToastr } from 'ngx-toastr';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
@@ -18,10 +19,11 @@ const ENVIRONMENT_PROVIDER: Provider = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withViewTransitions()),
     provideHttpClient(),
     provideAnimationsAsync(),
+    provideRouter(routes, withViewTransitions()),
+    provideToastr({ maxOpened: 1, autoDismiss: true }),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     ENVIRONMENT_PROVIDER,
   ],
 };

@@ -7,18 +7,36 @@ import { IVehicleForm } from '@shared/models';
 })
 export class VehicleDataHandleService {
   private vehicleForm = new FormGroup<IVehicleForm>({
-    id: new FormControl<number | null>(null),
+    id: new FormControl<string | number>(
+      {
+        value: '',
+        disabled: true,
+      },
+      { nonNullable: true }
+    ),
     image: new FormControl<string | ArrayBuffer>('', { nonNullable: true }),
     licensePlate: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(7)],
+      validators: [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(7),
+      ],
     }),
     chassi: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(17)],
+      validators: [
+        Validators.required,
+        Validators.minLength(17),
+        Validators.maxLength(17),
+      ],
     }),
-    renavam: new FormControl<number | null>(null, {
-      validators: [Validators.required, Validators.minLength(11)],
+    renavam: new FormControl<string | null>(null, {
+      validators: [
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(11),
+      ],
     }),
     model: new FormControl<string>('', {
       nonNullable: true,
@@ -27,7 +45,8 @@ export class VehicleDataHandleService {
     carBrand: new FormControl<number | null>(null, {
       validators: [Validators.required],
     }),
-    year: new FormControl<number | null>(null, {
+    year: new FormControl<string>('', {
+      nonNullable: true,
       validators: [Validators.required],
     }),
     category: new FormControl<number | null>(null, {

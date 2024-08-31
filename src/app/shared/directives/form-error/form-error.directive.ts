@@ -50,14 +50,22 @@ export class FormErrorDirective {
 
   createSubscriptions() {
     if (!this.control) return;
-    merge(this.control.statusChanges, this.control.valueChanges)
+
+    merge(
+      this.control.statusChanges,
+      this.control.valueChanges,
+      this.control.events
+    )
       .pipe(takeUntilDestroyed(this.destroyRef), startWith(null))
       .subscribe(() => {
-        if (this.control?.valid || !this.control?.dirty) {
+        if (
+          this.control?.valid ||
+          (!this.control?.dirty && !this.control?.touched)
+        ) {
           this.elementRef.nativeElement.innerHTML = '';
           return;
         }
-
+        
         const errorKey = Object.keys(this.control?.errors ?? {})[0];
 
         if (errorKey)

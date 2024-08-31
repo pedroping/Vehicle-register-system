@@ -1,11 +1,13 @@
 export interface IVehicle {
-  id: number;
+  id: string | number;
   licensePlate: string;
   chassi: string;
-  renavam: number;
+  renavam: string;
   model: string;
   carBrand: number;
-  year: number;
+  year: string;
   category: number;
   image: string | ArrayBuffer;
 }
+
+export type INewVehicle = Omit<IVehicle, 'id'>;
