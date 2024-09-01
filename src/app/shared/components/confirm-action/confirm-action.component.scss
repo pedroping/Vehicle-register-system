@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  border-radius: 10px;
+  background-color: var(--white-01);
+  padding: 20px;
+
+  .header {
+    position: relative;
+    padding-bottom: 13px;
+    margin-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 10%,
+        var(--black-01),
+        transparent 90%
+      );
+    }
+
+    h4 {
+      font-size: 20px;
+      font-weight: 600;
+
+      span {
+        color: var(--red-01);
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+  }
+}

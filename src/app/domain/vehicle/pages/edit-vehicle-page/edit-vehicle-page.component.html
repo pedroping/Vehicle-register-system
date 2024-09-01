@@ -1,7 +1,13 @@
+<div class="header">
+  <h1>
+    Editar o veículo: <span>{{ modelControl.value }}</span>
+  </h1>
+</div>
+
 <info-vehicle-form [formGroup]="vehicleForm" />
 
 <div class="actions">
   <button class="primary-btn" (click)="save()">SALVAR</button>
-  <button class="danger-btn" (click)="save()">DELETAR</button>
+  <button class="danger-btn" (click)="deleteVehicle()">DELETAR</button>
   <button class="secondary-btn" (click)="cancel()">CANCELAR</button>
 </div>

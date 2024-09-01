@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { switchMap, take } from 'rxjs';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
+import { ConfirmActionComponent } from '@shared/components';
+import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
 
 @Component({
   selector: 'info-edit-vehicle-page',
@@ -25,6 +27,8 @@ export class EditVehiclePageComponent implements OnInit {
   private readonly vehiclesFacade = inject(VehiclesFacade);
   private readonly toastrService = inject(ToastrService);
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly dialogHandleService: DialogHandleService<boolean> =
+    inject(DialogHandleService);
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -74,6 +78,23 @@ export class EditVehiclePageComponent implements OnInit {
     this.editVehicle();
   }
 
+  deleteVehicle() {
+    const instance = this.dialogHandleService.openModal(ConfirmActionComponent);
+
+    instance.event.subscribe((value) => {
+      if (!value) return;
+
+      const id = this.vehicleForm.getRawValue().id;
+
+      this.vehiclesFacade.deleteVehicle(id).subscribe(() => {
+        this.vehicleForm.reset();
+        this.vehiclesFacade.setVehicles();
+        this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+        this.toastrService.success('Veículo deletado com sucesso!');
+      });
+    });
+  }
+
   editVehicle() {
     const formValue = this.vehicleForm.getRawValue();
     const newVehicle: IVehicle = {
@@ -108,5 +129,9 @@ export class EditVehiclePageComponent implements OnInit {
         formValue[key as keyof IVehicle]
       );
     });
+  }
+
+  get modelControl() {
+    return this.vehicleForm.controls.model;
   }
 }

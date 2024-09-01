@@ -1,0 +1,7 @@
+<div
+  class="dialog"
+  (click)="$event.stopImmediatePropagation()"
+  [@inOutAnimation]="state$ | async"
+>
+  <ng-container #vcr></ng-container>
+</div>

@@ -24,3 +24,14 @@ input::-webkit-inner-spin-button {
 .toast-message {
   font-family: "Roboto", sans-serif !important;
 }
+
+::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
+}
