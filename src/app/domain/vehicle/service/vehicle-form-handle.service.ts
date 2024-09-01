@@ -5,7 +5,7 @@ import { IVehicleForm } from '@shared/models';
 @Injectable({
   providedIn: 'root',
 })
-export class VehicleDataHandleService {
+export class VehicleFormHandleService {
   private vehicleForm = new FormGroup<IVehicleForm>({
     id: new FormControl<string | number>(
       {

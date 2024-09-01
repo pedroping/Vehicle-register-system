@@ -1,18 +1,18 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, inject } from '@angular/core/testing';
-import { VehicleDataHandleService } from './vehicle-data-handle.service';
+import { VehicleFormHandleService } from './vehicle-form-handle.service';
 
 describe('Service: VehicleDataHandle', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [VehicleDataHandleService],
+      providers: [VehicleFormHandleService],
     });
   });
 
   it('should ...', inject(
-    [VehicleDataHandleService],
-    (service: VehicleDataHandleService) => {
+    [VehicleFormHandleService],
+    (service: VehicleFormHandleService) => {
       expect(service).toBeTruthy();
     }
   ));

@@ -4,9 +4,10 @@ import { VehiclesApiService } from '@core/services/api';
 import { INewVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
-import { VehicleDataHandleService } from '../../service/vehicle-data-handle.service';
+import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
 import { eRoutes } from '@shared/enums';
 import { Router } from '@angular/router';
+import { VehiclesFacade } from '@core/services/facades/vehicles-facade/vehicles-facade.service';
 
 @Component({
   selector: 'info-new-vehicle-page',
@@ -17,11 +18,12 @@ import { Router } from '@angular/router';
 })
 export class NewVehiclePageComponent {
   vehicleListRoute = eRoutes.VEHICLE;
+  vehicleForm = inject(VehicleFormHandleService).form;
 
-  router = inject(Router);
-  toastrService = inject(ToastrService);
-  vehiclesApiService = inject(VehiclesApiService);
-  vehicleForm = inject(VehicleDataHandleService).form;
+  private readonly router = inject(Router);
+  private readonly toastrService = inject(ToastrService);
+  private readonly vehiclesFacade = inject(VehiclesFacade);
+  private readonly vehiclesApiService = inject(VehiclesApiService);
 
   save() {
     if (this.vehicleForm.invalid) {
@@ -53,13 +55,14 @@ export class NewVehiclePageComponent {
   }
 
   cancel() {
-    this.vehicleForm.reset();
     this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+    this.vehicleForm.reset();
   }
 
   postVehicle(newVehicle: INewVehicle) {
     this.vehiclesApiService.addVehicle(newVehicle).subscribe(() => {
       this.vehicleForm.reset();
+      this.vehiclesFacade.setVehicles();
       this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
       this.toastrService.success('Veículo adicionado com sucesso!');
     });

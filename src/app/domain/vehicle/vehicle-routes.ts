@@ -9,7 +9,7 @@ export default [
         .ListVehiclePageComponent,
   },
   {
-    path: eRoutes.VEHICLE_EDIT,
+    path: eRoutes.VEHICLE_EDIT + '/:id',
     loadComponent: async () =>
       (await import('./pages/edit-vehicle-page/edit-vehicle-page.component'))
         .EditVehiclePageComponent,

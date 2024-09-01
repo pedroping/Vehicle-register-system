@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { BrandsApiService } from '@core/services/api/brands-api/brands-api.service';
 import { IBrand } from '@shared/models';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,13 @@ export class BrandsFacade {
 
   get brands() {
     return this.brands$.value;
+  }
+
+  getBrandById(id: number) {
+    return this.getBrands$$().pipe(
+      map((brands) => {
+        return brands.find((brand) => brand.id === id.toString());
+      })
+    );
   }
 }

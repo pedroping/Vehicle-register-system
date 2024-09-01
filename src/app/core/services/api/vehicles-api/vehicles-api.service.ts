@@ -13,7 +13,7 @@ export class VehiclesApiService {
   private readonly VEHICLES = 'vehicles';
 
   getVehicles() {
-    return this.http.get<IVehicle>(`${this.environment}/${this.VEHICLES}`);
+    return this.http.get<IVehicle[]>(`${this.environment}/${this.VEHICLES}`);
   }
 
   getVehicle(id: string | number) {

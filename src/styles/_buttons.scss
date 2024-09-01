@@ -74,3 +74,9 @@
   color: var(--black-01);
   border: 1px solid var(--black-01);
 }
+
+.danger-btn {
+  @include default-btn;
+  color: var(--red-01);
+  border: 1px solid var(--red-01);
+}

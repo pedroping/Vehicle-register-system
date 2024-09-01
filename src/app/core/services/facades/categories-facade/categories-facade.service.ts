@@ -1,14 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { CategoriesApiService } from '@core/services/api';
 import { ICategory } from '@shared/models';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesFacade {
   private readonly categoriesApi = inject(CategoriesApiService);
-
   private readonly categories$ = new BehaviorSubject<ICategory[]>([]);
 
   private setCategories() {
@@ -27,5 +26,13 @@ export class CategoriesFacade {
 
   get categories() {
     return this.categories$.value;
+  }
+
+  getCategoryById(id: number) {
+    return this.getCategories$$().pipe(
+      map((categories) => {
+        return categories.find((category) => category.id === id.toString());
+      })
+    );
   }
 }

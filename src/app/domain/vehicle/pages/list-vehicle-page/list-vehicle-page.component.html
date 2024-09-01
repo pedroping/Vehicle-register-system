@@ -1,3 +1,5 @@
-<p>
-  list-vehicle-page works!
-</p>
+<div class="vehicles-list">
+  @for (vehicle of vehicles$ | async; track $index) {
+  <info-vehicle [vehicle]="vehicle" />
+  }
+</div>

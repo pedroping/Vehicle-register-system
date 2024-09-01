@@ -1,0 +1,27 @@
+<div class="image-content">
+  <img
+    [src]="vehicle().image || noImage"
+    [alt]="'Imagem do carro: ' + vehicle().model"
+  />
+</div>
+<div class="description">
+  <h3>
+    #{{ vehicle().id }} <span> - </span>
+    <span>{{ vehicle().model | uppercase }}</span>
+  </h3>
+  <div class="details">
+    <p>
+      <span>Fabricante:</span> {{ (brand$ | async)?.name ?? "Não Definida" }}
+    </p>
+    <p><span>Fabricação:</span> {{ vehicle().year }}</p>
+    <p><span>Placa:</span> {{ vehicle().licensePlate | uppercase }}</p>
+    <p><span>Renavam:</span> {{ vehicle().renavam | uppercase }}</p>
+    <p><span>Chassi:</span> {{ vehicle().chassi | uppercase }}</p>
+    <p><span>Categoria:</span> {{ (category$ | async)?.description }}</p>
+  </div>
+</div>
+
+<div class="actions">
+  <i class="fa-solid fa-trash"></i>
+  <i class="fa-solid fa-pen" [routerLink]="editRoute()" replaceUrl="true"></i>
+</div>

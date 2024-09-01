@@ -1,3 +1,7 @@
-<p>
-  edit-vehicle works!
-</p>
+<info-vehicle-form [formGroup]="vehicleForm" />
+
+<div class="actions">
+  <button class="primary-btn" (click)="save()">SALVAR</button>
+  <button class="danger-btn" (click)="save()">DELETAR</button>
+  <button class="secondary-btn" (click)="cancel()">CANCELAR</button>
+</div>
