@@ -1,6 +1,5 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
 import { DragFileDirective } from './drag-file.directive';
 
 describe('Directive: DragFile', () => {

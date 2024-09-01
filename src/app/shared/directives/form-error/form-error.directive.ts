@@ -3,8 +3,7 @@ import {
   Directive,
   ElementRef,
   inject,
-  Input,
-  ViewContainerRef,
+  Input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormControl } from '@angular/forms';
@@ -22,7 +21,6 @@ export class FormErrorDirective {
 
   control?: FormControl;
 
-  private readonly vcr = inject(ViewContainerRef);
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
   private readonly controlContainer = inject(ControlContainer, {
@@ -31,8 +29,6 @@ export class FormErrorDirective {
 
   ngOnInit(): void {
     if (!this.controlSelector) return;
-
-    this.vcr.clear();
 
     if (this.controlSelector instanceof FormControl) {
       this.control = this.controlSelector;

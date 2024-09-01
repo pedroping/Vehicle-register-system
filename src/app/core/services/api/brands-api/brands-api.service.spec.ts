@@ -1,16 +1,59 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, inject } from '@angular/core/testing';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { BrandsApiService } from './brands-api.service';
 
 describe('Service: BrandsApi', () => {
+  let service: BrandsApiService;
+  let httpClient: HttpClient;
+  let httpTestingController: HttpTestingController;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BrandsApiService],
+      imports: [],
+      providers: [
+        provideHttpClientTesting(),
+        provideHttpClient(),
+        {
+          provide: ENVIRONMENT_TOKEN,
+          useValue: 'http://localhost:3000',
+        },
+      ],
+    });
+    httpClient = TestBed.inject(HttpClient);
+    service = TestBed.inject(BrandsApiService);
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  describe('getBrands()', () => {
+    it('should do return 100 brands', (done) => {
+      service.getBrands().subscribe((brands) => {
+        expect(brands.length).toEqual(100);
+        done();
+      });
     });
   });
 
-  it('should ...', inject([BrandsApiService], (service: BrandsApiService) => {
-    expect(service).toBeTruthy();
-  }));
+  describe('getBrand()', () => {
+    it('should do return 100 brands', (done) => {
+      service.getBrand(0).subscribe((brand) => {
+        expect(brand.id).toEqual('0');
+        done();
+      });
+    });
+  });
 });
