@@ -5,10 +5,20 @@
   padding: 25px;
 
   .vehicles-list {
-    display: inline-flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     flex-wrap: wrap;
     gap: 20px;
     max-width: 1350px;
+  }
+
+  @media (max-width: 1350px) {
+    .vehicles-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 15px;
   }
 }

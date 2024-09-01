@@ -80,4 +80,12 @@
       }
     }
   }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+
+    .description h3 {
+      width: 100%;
+    }
+  }
 }

@@ -104,5 +104,9 @@
 
   @media (max-width: 800px) {
     aspect-ratio: 2 / 1;
+
+    .item-image i {
+      opacity: 1 !important;
+    }
   }
 }
