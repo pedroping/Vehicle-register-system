@@ -15,4 +15,10 @@ export class CategoriesApiService {
   getCategories() {
     return this.http.get<ICategory[]>(`${this.environment}/${this.CATEGORIES}`);
   }
+
+  getCategory(id: number | string) {
+    return this.http.get<ICategory>(
+      `${this.environment}/${this.CATEGORIES}/${id}`
+    );
+  }
 }

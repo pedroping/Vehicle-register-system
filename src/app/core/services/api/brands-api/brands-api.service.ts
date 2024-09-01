@@ -15,4 +15,8 @@ export class BrandsApiService {
   getBrands() {
     return this.http.get<IBrand[]>(`${this.environment}/${this.BRANDS}`);
   }
+
+  getBrand(id: number | string) {
+    return this.http.get<IBrand>(`${this.environment}/${this.BRANDS}/${id}`);
+  }
 }

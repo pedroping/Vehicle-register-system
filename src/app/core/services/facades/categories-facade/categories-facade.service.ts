@@ -29,10 +29,6 @@ export class CategoriesFacade {
   }
 
   getCategoryById(id: number) {
-    return this.getCategories$$().pipe(
-      map((categories) => {
-        return categories.find((category) => category.id === id.toString());
-      })
-    );
+    return this.categoriesApi.getCategory(id);
   }
 }

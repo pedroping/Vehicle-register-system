@@ -15,10 +15,19 @@ import { environment } from '@environment/environment';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
+import { IMAGE_CONFIG } from '@angular/common';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
   useValue: environment.API,
+};
+
+const IMAGE_PROVIDER: Provider = {
+  provide: IMAGE_CONFIG,
+  useValue: {
+    disableImageSizeWarning: true,
+    disableImageLazyLoadWarning: true,
+  },
 };
 
 export const appConfig: ApplicationConfig = {
@@ -30,6 +39,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
     ),
+    IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,
   ],
 };

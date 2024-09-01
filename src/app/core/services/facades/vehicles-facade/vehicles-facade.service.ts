@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { VehiclesApiService } from '@core/services/api';
-import { IVehicle } from '@shared/models';
+import { INewVehicle, IVehicle } from '@shared/models';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -22,6 +22,22 @@ export class VehiclesFacade {
     }
 
     return this.vehicles$.asObservable();
+  }
+
+  getVehicle(id: string | number) {
+    return this.vehiclesApiService.getVehicle(id);
+  }
+
+  deleteVehicle(id: string | number) {
+    return this.vehiclesApiService.deleteVehicle(id);
+  }
+
+  addVehicle(newVehicle: INewVehicle) {
+    return this.vehiclesApiService.addVehicle(newVehicle);
+  }
+
+  editVehicle(vehicle: IVehicle) {
+    return this.vehiclesApiService.editVehicle(vehicle);
   }
 
   get vehicles() {

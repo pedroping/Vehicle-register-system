@@ -30,10 +30,6 @@ export class BrandsFacade {
   }
 
   getBrandById(id: number) {
-    return this.getBrands$$().pipe(
-      map((brands) => {
-        return brands.find((brand) => brand.id === id.toString());
-      })
-    );
+    return this.brandsApiService.getBrand(id);
   }
 }

@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { VehiclesFacade } from '@core/services/facades/vehicles-facade/vehicles-facade.service';
-import { VehicleComponent } from '../../components/vehicle/vehicle.component';
 import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { VehiclesFacade } from '@core/services/facades';
+import { VehicleComponent } from '../../components/vehicle/vehicle.component';
 
 @Component({
   selector: 'info-list-vehicle-page',
