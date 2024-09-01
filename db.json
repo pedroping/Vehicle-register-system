@@ -1,25 +1,37 @@
 {
-  "vehicles": [],
+  "vehicles": [
+    {
+      "id": "1afe",
+      "year": 2200,
+      "image": "https://production.autoforce.com/uploads/version/profile_image/9408/comprar-exl-honda-sensing_4d3b4cc7a5.png",
+      "model": "Hrv",
+      "chassi": "123321313asffasf2",
+      "renavam": "12323213333",
+      "licensePlate": "1asffxv",
+      "carBrand": 1,
+      "category": 4
+    }
+  ],
   "categories": [
     {
       "id": "0",
-      "description": "Categoria A - Motocicletas, motonetas e triciclos"
+      "description": "A - Motocicletas, motonetas e triciclos"
     },
     {
       "id": "1",
-      "description": "Categoria B - Carros, picapes e vans"
+      "description": "B - Carros, picapes e vans"
     },
     {
       "id": "2",
-      "description": "Categoria C - Caminhões, caminhonetes e vans de Carga"
+      "description": "C - Caminhões, caminhonetes e vans de Carga"
     },
     {
       "id": "3",
-      "description": "Categoria D - Ônibus, micro-ônibus, vans de passageiros"
+      "description": "D - Ônibus, micro-ônibus, vans de passageiros"
     },
     {
       "id": "4",
-      "description": "Categoria E - Treminhão, ônibus articulados, veículos com trailers"
+      "description": "E - Treminhão, ônibus articulados, veículos com trailers"
     }
   ],
   "brands": [
