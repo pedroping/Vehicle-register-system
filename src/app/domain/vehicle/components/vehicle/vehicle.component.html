@@ -22,6 +22,10 @@
 </div>
 
 <div class="actions">
-  <i class="fa-solid fa-trash" (click)="deleteVehicle()"></i>
-  <i class="fa-solid fa-pen" [routerLink]="editRoute()" replaceUrl="true"></i>
+  <a (click)="deleteVehicle()">
+    <i class="fa-solid fa-trash"></i>
+  </a>
+  <a [routerLink]="editRoute()" replaceUrl="true">
+    <i class="fa-solid fa-pen"></i>
+  </a>
 </div>

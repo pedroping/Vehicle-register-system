@@ -66,14 +66,19 @@
     top: 15px;
     right: 15px;
 
+    a {
+      text-decoration: none;
+      color: var(--black-01);
+
+      &:first-of-type i {
+        color: var(--red-01);
+      }
+    }
+
     i {
       font-size: 16px;
       transition: all 200ms ease-in-out;
       cursor: pointer;
-
-      &:first-of-type {
-        color: var(--red-01);
-      }
 
       &:hover {
         transform: translateY(-1px) scale(1.03);
