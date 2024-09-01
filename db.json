@@ -2,14 +2,47 @@
   "vehicles": [
     {
       "id": "1afe",
-      "year": 2200,
+      "year": 2024,
       "image": "https://production.autoforce.com/uploads/version/profile_image/9408/comprar-exl-honda-sensing_4d3b4cc7a5.png",
       "model": "Hrv",
       "chassi": "123321313asffasf2",
       "renavam": "12323213333",
       "licensePlate": "1asffxv",
       "carBrand": 1,
-      "category": 4
+      "category": 0
+    },
+    {
+      "id": "74b8",
+      "year": 2024,
+      "image": "https://cdn.motor1.com/images/mgl/kNREB/s3/lamborghini-huracan-sto.jpg",
+      "model": "Huracán Sport",
+      "chassi": "123321313asffasf2",
+      "renavam": "12323213333",
+      "licensePlate": "1asffxv",
+      "carBrand": 18,
+      "category": 0
+    },
+    {
+      "id": "226d",
+      "year": 1800,
+      "image": "https://mobi.fiat.com.br/content/dam/fiat/products/341/acs/0/2025/page/hero.webp",
+      "model": "Mobi",
+      "chassi": "123321313asffasf2",
+      "renavam": "12323213333",
+      "licensePlate": "1asffxv",
+      "carBrand": 39,
+      "category": 1
+    },
+    {
+      "id": "38fb",
+      "year": 1800,
+      "image": "https://files.tecnoblog.net/wp-content/uploads/2021/01/bf-weevil-700x388.png",
+      "model": "Um fusca",
+      "chassi": "123321313asffasf2",
+      "renavam": "12323213333",
+      "licensePlate": "1asffxv",
+      "carBrand": 39,
+      "category": 1
     }
   ],
   "categories": [
