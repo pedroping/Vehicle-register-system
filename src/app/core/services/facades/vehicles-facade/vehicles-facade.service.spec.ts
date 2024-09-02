@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
@@ -8,11 +8,11 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { VehiclesApiService } from '@core/services/api';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { skip, take } from 'rxjs';
 import { VehiclesFacade } from './vehicles-facade.service';
 
 describe('Service: VehiclesFacade', () => {
   let service: VehiclesFacade;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -29,11 +29,26 @@ describe('Service: VehiclesFacade', () => {
       ],
     });
     service = TestBed.inject(VehiclesFacade);
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  describe('setVehicles()', () => {
+    it('should do return an array of vehicles', (done) => {
+      service
+        .getVehicles$$()
+        .pipe(skip(1), take(1))
+        .subscribe((vehicles) => {
+          expect(Array.isArray(vehicles)).toBeTrue();
+          done();
+        });
+    });
   });
 });

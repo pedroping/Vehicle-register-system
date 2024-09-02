@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
@@ -11,7 +11,6 @@ import { CategoriesApiService } from './categories-api.service';
 
 describe('Service: CategoriesApi', () => {
   let service: CategoriesApiService;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -27,7 +26,6 @@ describe('Service: CategoriesApi', () => {
       ],
     });
     service = TestBed.inject(CategoriesApiService);
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 

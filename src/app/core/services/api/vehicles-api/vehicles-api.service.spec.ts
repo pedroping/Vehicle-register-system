@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
@@ -8,12 +8,11 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { INewVehicle } from '@shared/models';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
-import { VehiclesApiService } from './vehicles-api.service';
 import { switchMap } from 'rxjs';
+import { VehiclesApiService } from './vehicles-api.service';
 
 describe('Service: Vehicles', () => {
   let service: VehiclesApiService;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -29,7 +28,6 @@ describe('Service: Vehicles', () => {
       ],
     });
     service = TestBed.inject(VehiclesApiService);
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 

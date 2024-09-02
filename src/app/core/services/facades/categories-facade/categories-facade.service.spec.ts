@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
@@ -8,11 +8,12 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { CategoriesApiService } from '@core/services/api';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { skip, take } from 'rxjs';
 import { CategoriesFacade } from './categories-facade.service';
 
 describe('Service: CategoriesFacade', () => {
   let service: CategoriesFacade;
-  let httpClient: HttpClient;
+
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -29,11 +30,35 @@ describe('Service: CategoriesFacade', () => {
       ],
     });
     service = TestBed.inject(CategoriesFacade);
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  describe('setCategories()', () => {
+    it('should do return an array of categories', (done) => {
+      service
+        .getCategories$$()
+        .pipe(skip(1), take(1))
+        .subscribe((categories) => {
+          expect(Array.isArray(categories)).toBeTrue();
+          done();
+        });
+    });
+  });
+
+  describe('getBrandById()', () => {
+    it('should do return an category', (done) => {
+      service.getCategoryById(0).subscribe((caregory) => {
+        expect(caregory).toBeTruthy();
+        done();
+      });
+    });
   });
 });
