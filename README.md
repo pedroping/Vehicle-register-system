@@ -65,5 +65,6 @@ Lembre-se sempre de executar o comando para rodar o back-end antes de tentar usa
 |    ReactiveX                          |
 |    Dependency Injection               |
 |    Observable Pattern                 | 
+|    Facade Pattern                     | 
 
 </div>
