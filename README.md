@@ -51,6 +51,10 @@ Execute `npm install json-server` para instalar as dependências necessárias pa
 
 ## Testes unitários 
 
+Execute `npm run build` ou `ng test` para iniciar o ambiente de teste, após isso uma janela nova será aberta com o testes no seu computador.
+
+Lembre-se sempre de executar o comando para rodar o back-end antes de tentar usar o projeto ou testá-lo.
+
 ## :brain: _Conceitos Aplicados_
 <div align="center">
   
