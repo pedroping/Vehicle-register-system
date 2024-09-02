@@ -14,6 +14,6 @@ describe('Service: DialogHandle', () => {
     [DialogHandleService],
     (service: DialogHandleService<boolean>) => {
       expect(service).toBeTruthy();
-    }
+    },
   ));
 });

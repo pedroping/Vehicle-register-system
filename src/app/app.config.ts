@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
-      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
+      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn]),
     ),
     IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,

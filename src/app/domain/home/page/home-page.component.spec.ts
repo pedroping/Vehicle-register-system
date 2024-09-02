@@ -16,7 +16,7 @@ describe('HomePageComponent', () => {
           },
         },
       ],
-    })
+    }),
   );
 
   it('should create the app', () => {

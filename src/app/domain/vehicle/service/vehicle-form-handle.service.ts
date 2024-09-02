@@ -12,7 +12,7 @@ export class VehicleFormHandleService {
         value: '',
         disabled: true,
       },
-      { nonNullable: true }
+      { nonNullable: true },
     ),
     image: new FormControl<string | ArrayBuffer>('', { nonNullable: true }),
     licensePlate: new FormControl<string>('', {

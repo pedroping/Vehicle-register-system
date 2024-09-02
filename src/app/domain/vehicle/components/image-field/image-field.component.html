@@ -1,21 +1,17 @@
 <div class="drop-zone" dragFile (outputFiles)="onFileDrop($event)">
-	@if (image$ | async; as image) {
-		<div class="item-image">
-			<img
-				[src]="image"
-				alt="Imagem do produto"
-				(click)="upLoadImg()"
-			/>
-			<i class="fa-solid fa-trash" (click)="removeImage()"></i>
-		</div>
-	} @else {
-		<div class="no-image">
-			<i class="fa-solid fa-cloud-arrow-up"></i>
-			<p class="normal-xs">Arraste ou solte uma image aqui</p>
+  @if (image$ | async; as image) {
+    <div class="item-image">
+      <img [src]="image" alt="Imagem do produto" (click)="upLoadImg()" />
+      <i class="fa-solid fa-trash" (click)="removeImage()"></i>
+    </div>
+  } @else {
+    <div class="no-image">
+      <i class="fa-solid fa-cloud-arrow-up"></i>
+      <p class="normal-xs">Arraste ou solte uma image aqui</p>
 
-			<button class="secondary-btn" (click)="upLoadImg()">
-				<span class="normal-xs">ou selecione por aqui...</span>
-			</button>
-		</div>
-	}
+      <button class="secondary-btn" (click)="upLoadImg()">
+        <span class="normal-xs">ou selecione por aqui...</span>
+      </button>
+    </div>
+  }
 </div>

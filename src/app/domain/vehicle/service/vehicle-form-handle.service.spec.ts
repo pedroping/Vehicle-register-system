@@ -14,6 +14,6 @@ describe('Service: VehicleDataHandle', () => {
     [VehicleFormHandleService],
     (service: VehicleFormHandleService) => {
       expect(service).toBeTruthy();
-    }
+    },
   ));
 });

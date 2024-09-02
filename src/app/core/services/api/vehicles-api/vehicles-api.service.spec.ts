@@ -76,11 +76,11 @@ describe('Service: Vehicles', () => {
                   .pipe(
                     switchMap((finalVehicle) => {
                       return service.deleteVehicle(finalVehicle.id);
-                    })
+                    }),
                   );
-              })
+              }),
             );
-          })
+          }),
         )
         .subscribe((response) => {
           expect(response).toBeTruthy();

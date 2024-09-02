@@ -9,12 +9,12 @@ import { finalize } from 'rxjs';
 
 export const loadingHttpInterceptorFn: HttpInterceptorFn = (
   req: HttpRequest<any>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ) => {
   const loadingHandleService = inject(LoadingHandleService);
   loadingHandleService.enableInterceptor();
 
   return next(req).pipe(
-    finalize(() => loadingHandleService.disableInterceptor())
+    finalize(() => loadingHandleService.disableInterceptor()),
   );
 };

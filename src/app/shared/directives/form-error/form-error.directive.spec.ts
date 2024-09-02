@@ -51,7 +51,7 @@ describe('Directive: FormError', () => {
 
   it('Error to be required', () => {
     expect(errorElement.nativeElement.innerHTML).toBe(
-      'Esse campo é obrigatório!'
+      'Esse campo é obrigatório!',
     );
   });
 });

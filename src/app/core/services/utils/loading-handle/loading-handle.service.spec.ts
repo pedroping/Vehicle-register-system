@@ -14,6 +14,6 @@ describe('Service: LoadingHandle', () => {
     [LoadingHandleService],
     (service: LoadingHandleService) => {
       expect(service).toBeTruthy();
-    }
+    },
   ));
 });

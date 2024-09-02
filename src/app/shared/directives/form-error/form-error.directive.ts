@@ -3,7 +3,7 @@ import {
   Directive,
   ElementRef,
   inject,
-  Input
+  Input,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormControl } from '@angular/forms';
@@ -38,7 +38,7 @@ export class FormErrorDirective {
     if (!this.controlContainer) return;
 
     this.control = this.controlContainer.control?.get(
-      this.controlSelector
+      this.controlSelector,
     ) as FormControl;
 
     return this.createSubscriptions();
@@ -50,7 +50,7 @@ export class FormErrorDirective {
     merge(
       this.control.statusChanges,
       this.control.valueChanges,
-      this.control.events
+      this.control.events,
     )
       .pipe(takeUntilDestroyed(this.destroyRef), startWith(null))
       .subscribe(() => {
@@ -61,12 +61,12 @@ export class FormErrorDirective {
           this.elementRef.nativeElement.innerHTML = '';
           return;
         }
-        
+
         const errorKey = Object.keys(this.control?.errors ?? {})[0];
 
         if (errorKey)
           this.elementRef.nativeElement.innerHTML = FORM_ERRORS[errorKey]?.(
-            this.control?.errors?.[errorKey]
+            this.control?.errors?.[errorKey],
           );
       });
   }

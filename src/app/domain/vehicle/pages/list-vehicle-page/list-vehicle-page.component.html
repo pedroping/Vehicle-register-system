@@ -2,20 +2,22 @@
   <h1>Todos os <span>veículos</span>:</h1>
 </div>
 
-@if (vehicles$ | async; as vehicles) { @if (vehicles.length <= 0) {
-<div class="no-data">
-  <img src="/assets/svgs/no-data.svg" alt="Nenhuma dado encontrado" />
-  <h3>Nenhum veiculo encontrado :(</h3>
-  <a [routerLink]="newVehicleRoute" replaceUrl="true">
-    <button class="primary-btn animated">
-      <span>Adicionar veiculo</span><i class="fa-solid fa-car"></i>
-    </button>
-  </a>
-</div>
-} @else {
-<div class="vehicles-list">
-  @for (vehicle of vehicles; track $index) {
-  <info-vehicle [vehicle]="vehicle" />
+@if (vehicles$ | async; as vehicles) {
+  @if (vehicles.length <= 0) {
+    <div class="no-data">
+      <img src="/assets/svgs/no-data.svg" alt="Nenhuma dado encontrado" />
+      <h3>Nenhum veiculo encontrado :(</h3>
+      <a [routerLink]="newVehicleRoute" replaceUrl="true">
+        <button class="primary-btn animated">
+          <span>Adicionar veiculo</span><i class="fa-solid fa-car"></i>
+        </button>
+      </a>
+    </div>
+  } @else {
+    <div class="vehicles-list">
+      @for (vehicle of vehicles; track $index) {
+        <info-vehicle [vehicle]="vehicle" />
+      }
+    </div>
   }
-</div>
-} }
+}

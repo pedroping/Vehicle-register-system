@@ -39,7 +39,7 @@ export class VehicleComponent implements OnInit {
   ngOnInit(): void {
     this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);
     this.category$ = this.categoriesFacade.getCategoryById(
-      this.vehicle().category
+      this.vehicle().category,
     );
   }
 

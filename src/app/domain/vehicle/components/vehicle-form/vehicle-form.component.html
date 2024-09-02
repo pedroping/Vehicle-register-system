@@ -78,7 +78,7 @@
   <select name="carBrand" id="carBrand" formControlName="carBrand">
     <option disabled selected [value]="null">Selecione uma marca:</option>
     @for (carBrand of brands$ | async; track $index) {
-    <option [value]="carBrand.id">{{ carBrand.name }}</option>
+      <option [value]="carBrand.id">{{ carBrand.name }}</option>
     }
   </select>
   <div formError="carBrand" class="error"></div>
@@ -89,7 +89,7 @@
   <select name="category" id="category" formControlName="category">
     <option disabled selected [value]="null">Selecione uma Categoria:</option>
     @for (category of categories$ | async; track $index) {
-    <option [value]="category.id">{{ category.description }}</option>
+      <option [value]="category.id">{{ category.description }}</option>
     }
   </select>
   <div formError="category" class="error"></div>
