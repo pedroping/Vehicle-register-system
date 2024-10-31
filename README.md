@@ -1,9 +1,5 @@
 <div align="center"> 
-  <img alt="info-sistemas-logo" src="/src/assets/pngs/info-logo.png" />  
-</div>
-
-<div align="center"> 
-  <h1>Processo seletivo Info Sistemas</h1>
+  <h1>Sistema de cadastro de Veiculos</h1>
 </div>
 
 <p align="center"> 
