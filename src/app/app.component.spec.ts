@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,5 +16,25 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('shoul create info-dialog', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const infoDialog = fixture.debugElement.query(
+      By.css('[data-testid=info-dialog-template]')
+    );
+
+    expect(infoDialog).toBeTruthy();
+  });
+
+  it('shoul create info-loading-spinner', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const infoSpinner = fixture.debugElement.query(
+      By.css('[data-testid=info-loading-spinner-template]')
+    );
+
+    expect(infoSpinner).toBeTruthy();
   });
 });

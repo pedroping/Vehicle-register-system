@@ -8,11 +8,9 @@ import { LoadingSpinnerComponent } from '@core/ui/loading-spinner';
   standalone: true,
   imports: [RouterOutlet, LoadingSpinnerComponent, DialogComponent],
   template: `
-    <info-dialog />
+    <info-dialog data-testid="info-dialog-template" />
     <router-outlet />
-    <info-loading-spinner />
+    <info-loading-spinner data-testid="info-loading-spinner-template" />
   `,
 })
-export class AppComponent {
-  title = 'Processo-Seletivo-Info-FrontEnd';
-}
+export class AppComponent {}
