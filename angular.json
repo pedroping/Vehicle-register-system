@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Processo-Seletivo-Info-FrontEnd": {
+    "vehicle-register-system": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/processo-seletivo-info-front-end",
+            "outputPath": "dist/vehicle-register-system",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Processo-Seletivo-Info-FrontEnd:build:production"
+              "buildTarget": "vehicle-register-system:build:production"
             },
             "development": {
-              "buildTarget": "Processo-Seletivo-Info-FrontEnd:build:development"
+              "buildTarget": "vehicle-register-system:build:development"
             }
           },
           "defaultConfiguration": "development"

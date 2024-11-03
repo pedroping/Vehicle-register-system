@@ -21,7 +21,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/processo-seletivo-info-front-end'),
+      dir: require('path').join(__dirname, './coverage/vehicle-register-system'),
       subdir: '.',
       reporters: [
         { type: 'html' },
