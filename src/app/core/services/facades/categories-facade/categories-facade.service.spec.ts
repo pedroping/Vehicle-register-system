@@ -61,4 +61,10 @@ describe('Service: CategoriesFacade', () => {
       });
     });
   });
+
+  describe('get categories()', () => {
+    it('should do return an empty array', () => {
+      expect(service.categories.length).toBe(0);
+    });
+  });
 });

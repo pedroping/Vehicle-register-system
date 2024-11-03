@@ -2,24 +2,36 @@
 
 import { provideHttpClient } from '@angular/common/http';
 import {
+  HttpClientTestingModule,
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, tick } from '@angular/core/testing';
 import { VehiclesApiService } from '@core/services/api';
+import { IVehicle } from '@shared/models';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
-import { skip, take } from 'rxjs';
+import { of, skip, take } from 'rxjs';
 import { VehiclesFacade } from './vehicles-facade.service';
 
 describe('Service: VehiclesFacade', () => {
   let service: VehiclesFacade;
   let httpTestingController: HttpTestingController;
+  let environmentToken: string;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        VehiclesApiService,
+        {
+          provide: VehiclesApiService,
+          useValue: {
+            getVehicles: () => of([<IVehicle>{}]),
+            getVehicle: (id: number | string) => of(<IVehicle>{}),
+            editVehicle: (id: number | string) => of(<IVehicle>{}),
+            addVehicle: (vehicle: IVehicle) => of(<IVehicle>{}),
+            deleteVehicle: (id: number | string) => of(<IVehicle>{}),
+          },
+        },
         provideHttpClientTesting(),
         provideHttpClient(),
         {
@@ -29,6 +41,7 @@ describe('Service: VehiclesFacade', () => {
       ],
     });
     service = TestBed.inject(VehiclesFacade);
+    environmentToken = TestBed.inject(ENVIRONMENT_TOKEN);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -40,15 +53,59 @@ describe('Service: VehiclesFacade', () => {
     httpTestingController.verify();
   });
 
-  describe('setVehicles()', () => {
+  describe('all functions test', () => {
     it('should do return an array of vehicles', (done) => {
       service
         .getVehicles$$()
-        .pipe(skip(1), take(1))
+        .pipe(take(1))
         .subscribe((vehicles) => {
           expect(Array.isArray(vehicles)).toBeTrue();
           done();
         });
+    });
+
+    it('should get an veichle', (done) => {
+      service
+        .getVehicle(0)
+        .pipe(take(1))
+        .subscribe((vehicle) => {
+          expect(vehicle).toBeTruthy();
+          done();
+        });
+    });
+
+    it('should add an veichle', (done) => {
+      service
+        .addVehicle(<IVehicle>{})
+        .pipe(take(1))
+        .subscribe((vehicle) => {
+          expect(vehicle).toBeTruthy();
+          done();
+        });
+    });
+
+    it('should edit an veichle', (done) => {
+      service
+        .editVehicle(<IVehicle>{})
+        .pipe(take(1))
+        .subscribe((vehicle) => {
+          expect(vehicle).toBeTruthy();
+          done();
+        });
+    });
+
+    it('should delete an veichle', (done) => {
+      service
+        .deleteVehicle(0)
+        .pipe(take(1))
+        .subscribe((vehicle) => {
+          expect(vehicle).toBeTruthy();
+          done();
+        });
+    });
+
+    it('should return an array of vehicles', () => {
+      expect(Array.isArray(service.vehicles)).toBeTrue();
     });
   });
 });

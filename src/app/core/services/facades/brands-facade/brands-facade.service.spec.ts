@@ -62,4 +62,10 @@ describe('Service: BrandsFacade', () => {
       });
     });
   });
+
+  describe('get brands()', () => {
+    it('should do return an empty array', () => {
+      expect(service.brands.length).toBe(0);
+    });
+  });
 });
