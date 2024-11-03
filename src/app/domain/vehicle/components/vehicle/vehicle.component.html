@@ -22,7 +22,7 @@
 </div>
 
 <div class="actions">
-  <a (click)="deleteVehicle()">
+  <a (click)="deleteVehicle()" data-testid="delete-btn">
     <i class="fa-solid fa-trash"></i>
   </a>
   <a [routerLink]="editRoute()" replaceUrl="true">

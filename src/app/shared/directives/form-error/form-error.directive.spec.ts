@@ -5,6 +5,7 @@ import {
   DebugElement,
   ElementRef,
   OnInit,
+  signal,
   ViewContainerRef,
 } from '@angular/core';
 import {
@@ -13,7 +14,12 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ControlContainer,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FormErrorDirective } from './form-error.directive';
 
@@ -52,13 +58,20 @@ describe('Directive: FormError', () => {
             nativeElement: document.createElement('div'),
           },
         },
+        {
+          provide: ControlContainer,
+          useValue: {
+            control: {
+              get: (key: string) => new FormControl(),
+            },
+          },
+        },
       ],
     });
 
     fixture = TestBed.createComponent(TestComponent);
     elementRef = TestBed.inject(ElementRef);
     fixture.detectChanges();
-
     errorElement = fixture.debugElement.query(By.directive(FormErrorDirective));
   });
 
@@ -113,7 +126,10 @@ describe('Directive: FormError', () => {
   it('should call createSubscriptions', () => {
     const directive = fixture.debugElement.injector.get(FormErrorDirective);
 
-    directive.controlSelector = new FormControl();
+    const controlSignal = signal(new FormControl());
+
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
 
     const createSubscriptionsSpy = spyOn(directive, 'createSubscriptions');
 
@@ -125,7 +141,10 @@ describe('Directive: FormError', () => {
   it('should set requied error value at mocked element', fakeAsync(() => {
     const directive = fixture.debugElement.injector.get(FormErrorDirective);
 
-    directive.controlSelector = new FormControl('', [Validators.required]);
+    const controlSignal = signal(new FormControl('', [Validators.required]));
+
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
 
     directive.ngOnInit();
 
@@ -143,8 +162,14 @@ describe('Directive: FormError', () => {
   it('should set maxLenght error value at mocked element', fakeAsync(() => {
     const directive = fixture.debugElement.injector.get(FormErrorDirective);
 
-    directive.controlSelector = new FormControl('', [Validators.maxLength(5)]);
-    directive.controlSelector.setValue('123456');
+    const controlSignal = signal(
+      new FormControl('', [Validators.maxLength(5)])
+    );
+
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
+
+    (directive.controlSelector() as FormControl).setValue('123456');
     directive.ngOnInit();
 
     directive.control?.markAsDirty();
@@ -161,8 +186,14 @@ describe('Directive: FormError', () => {
   it('should set minLenght error value at mocked element', fakeAsync(() => {
     const directive = fixture.debugElement.injector.get(FormErrorDirective);
 
-    directive.controlSelector = new FormControl('', [Validators.minLength(5)]);
-    directive.controlSelector.setValue('123');
+    const controlSignal = signal(
+      new FormControl('', [Validators.minLength(5)])
+    );
+
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
+
+    (directive.controlSelector() as FormControl).setValue('123');
     directive.ngOnInit();
 
     directive.control?.markAsDirty();
@@ -175,4 +206,54 @@ describe('Directive: FormError', () => {
       'Minimo de 5 caracteres permitidos. Quantidade atual 3'
     );
   }));
+
+  it('should not call createSubscriptions', () => {
+    const directive = fixture.debugElement.injector.get(FormErrorDirective);
+
+    const controlSignal = signal(undefined);
+
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
+
+    const createSubscriptionsSpy = spyOn(directive, 'createSubscriptions');
+    directive.ngOnInit();
+
+    expect(createSubscriptionsSpy).not.toHaveBeenCalled();
+  });
+
+  it('should get control not found controlcontainer', () => {
+    const directive = fixture.debugElement.injector.get(FormErrorDirective);
+
+    const controlSignal = signal('Teste');
+
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
+    (directive as any)['controlContainer'] = undefined;
+
+    const createSubscriptionsSpy = spyOn(directive, 'createSubscriptions');
+    directive.ngOnInit();
+
+    expect(createSubscriptionsSpy).not.toHaveBeenCalled();
+  });
+
+  it('should get control by controlContainer', () => {
+    const directive = fixture.debugElement.injector.get(FormErrorDirective);
+
+    const controlSignal = signal('Teste');
+    directive.controlSelector =
+      controlSignal as unknown as typeof directive.controlSelector;
+
+    const createSubscriptionsSpy = spyOn(directive, 'createSubscriptions');
+    directive.ngOnInit();
+
+    expect(createSubscriptionsSpy).toHaveBeenCalled();
+  });
+
+  it('should not start subscriptions on undefined control', () => {
+    const directive = fixture.debugElement.injector.get(FormErrorDirective);
+
+    const fnReturn = directive.createSubscriptions();
+
+    expect(fnReturn).toBeFalsy();
+  });
 });

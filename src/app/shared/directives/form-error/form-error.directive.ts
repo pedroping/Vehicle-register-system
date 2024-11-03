@@ -3,7 +3,7 @@ import {
   Directive,
   ElementRef,
   inject,
-  Input,
+  input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormControl } from '@angular/forms';
@@ -15,9 +15,9 @@ import { merge, startWith } from 'rxjs';
   standalone: true,
 })
 export class FormErrorDirective {
-  @Input({ required: true, alias: 'formError' }) controlSelector?:
-    | FormControl
-    | string;
+  controlSelector = input.required<FormControl | string>({
+    alias: 'formError',
+  });
 
   control?: FormControl;
 
@@ -28,20 +28,22 @@ export class FormErrorDirective {
   });
 
   ngOnInit(): void {
-    if (!this.controlSelector) return;
+    const controlSelector = this.controlSelector();
 
-    if (this.controlSelector instanceof FormControl) {
-      this.control = this.controlSelector;
+    if (!controlSelector) return;
+
+    if (controlSelector instanceof FormControl) {
+      this.control = controlSelector;
       return this.createSubscriptions();
     }
 
     if (!this.controlContainer) return;
 
     this.control = this.controlContainer.control?.get(
-      this.controlSelector,
+      controlSelector
     ) as FormControl;
 
-    return this.createSubscriptions();
+    this.createSubscriptions();
   }
 
   createSubscriptions() {
@@ -50,7 +52,7 @@ export class FormErrorDirective {
     merge(
       this.control.statusChanges,
       this.control.valueChanges,
-      this.control.events,
+      this.control.events
     )
       .pipe(takeUntilDestroyed(this.destroyRef), startWith(null))
       .subscribe(() => {
@@ -66,7 +68,7 @@ export class FormErrorDirective {
 
         if (errorKey)
           this.elementRef.nativeElement.innerHTML = FORM_ERRORS[errorKey]?.(
-            this.control?.errors?.[errorKey],
+            this.control?.errors?.[errorKey]
           );
       });
   }

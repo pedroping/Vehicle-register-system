@@ -20,7 +20,7 @@ export class DialogHandleService<T> {
   }
 
   openModal(component: Type<IDialogComponent<T>>) {
-    if (!this.vcr) throw new Error('Vcr not seted!');
+    if (!this?.vcr) throw new Error('Vcr not seted!');
 
     this.setState(true);
     const { instance } = this.vcr?.createComponent(component);

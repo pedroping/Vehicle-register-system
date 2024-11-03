@@ -77,4 +77,16 @@ describe('Service: DialogHandle', () => {
       done();
     });
   });
+
+  it('should return error on undefined vcr', () => {
+    service.setVcr(false as unknown as ViewContainerRef);
+
+    const openModalFn = service.openModal;
+
+    try {
+      openModalFn({} as Type<any>);
+    } catch (e: any) {
+      expect(e.message).toBe('Vcr not seted!');
+    }
+  });
 });

@@ -24,6 +24,9 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
   onTouch?: (value: string | ArrayBuffer) => {};
   image$ = new BehaviorSubject<string | ArrayBuffer>('');
 
+  _uploadFile = uploadFile;
+  _fileToBase64 = fileToBase64;
+
   ngOnInit(): void {
     this.image$.pipe().subscribe((img) => {
       this.onChange?.(img);
@@ -44,8 +47,8 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
   }
 
   upLoadImg() {
-    uploadFile()
-      .pipe(switchMap((file) => fileToBase64(file)))
+    this._uploadFile()
+      .pipe(switchMap((file) => this._fileToBase64(file)))
       .subscribe((img) => this.image$.next(img));
   }
 
@@ -58,6 +61,6 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
 
     if (!file) return;
 
-    fileToBase64(files[0]).subscribe((img) => this.image$.next(img));
+    this._fileToBase64(files[0]).subscribe((img) => this.image$.next(img));
   }
 }

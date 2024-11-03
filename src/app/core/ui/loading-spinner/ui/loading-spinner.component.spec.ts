@@ -34,4 +34,23 @@ describe('LoadingSpinnerComponent', () => {
       done();
     });
   });
+
+  it('should set display none on init', (done) => {
+    const fixture = TestBed.createComponent(LoadingSpinnerComponent);
+    const app = fixture.componentInstance;
+
+    const loadingHandleService =
+      fixture.debugElement.injector.get(LoadingHandleService);
+
+    loadingHandleService.disableInterceptor();
+    app.ngOnInit();
+    loadingHandleService.disableInterceptor();
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(fixture.debugElement.nativeElement.style.display).toBe('none');
+      done();
+    });
+  });
 });

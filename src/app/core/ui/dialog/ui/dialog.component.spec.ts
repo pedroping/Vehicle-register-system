@@ -17,4 +17,36 @@ describe('DialogComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+
+  it('should set call setState on click', () => {
+    const fixture = TestBed.createComponent(DialogComponent);
+
+    const dialogHandleService =
+      fixture.debugElement.injector.get(DialogHandleService);
+
+    const setStateSpy = spyOn(dialogHandleService, 'setState');
+
+    fixture.debugElement.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(setStateSpy).toHaveBeenCalled();
+  });
+
+  it('should set flex state on init', () => {
+    const fixture = TestBed.createComponent(DialogComponent);
+    const app = fixture.componentInstance;
+
+    const dialogHandleService =
+      fixture.debugElement.injector.get(DialogHandleService);
+
+    dialogHandleService.setState(true);
+
+    const stateSpy = jasmine.createSpy('image$');
+
+    dialogHandleService.state$$.subscribe(stateSpy);
+
+    app.ngOnInit();
+
+    expect(stateSpy).toHaveBeenCalled();
+  });
 });

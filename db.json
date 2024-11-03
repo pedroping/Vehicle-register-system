@@ -43,6 +43,17 @@
       "licensePlate": "1asffxv",
       "carBrand": 39,
       "category": 1
+    },
+    {
+      "id": "e114",
+      "image": "https://cdn.motor1.com/images/mgl/kNREB/s3/lamborghini-huracan-sto.jpg",
+      "model": "Teste Novo",
+      "year": "2024",
+      "chassi": "123321313asffasf2",
+      "renavam": "12323213333",
+      "licensePlate": "1asffxv",
+      "carBrand": 18,
+      "category": 0
     }
   ],
   "categories": [

@@ -34,7 +34,7 @@ export class EditVehiclePageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         take(1),
-        switchMap((params) => this.vehiclesFacade.getVehicle(params['id'])),
+        switchMap((params) => this.vehiclesFacade.getVehicle(params['id']))
       )
       .subscribe((vehicle) => {
         this.vehicleForm.patchValue(vehicle);
@@ -60,7 +60,7 @@ export class EditVehiclePageComponent implements OnInit {
       this.vehicleForm.updateValueAndValidity();
 
       this.toastrService.warning(
-        'Por favor, preencha todos os campos corretamente.',
+        'Por favor, preencha todos os campos corretamente.'
       );
 
       return;
@@ -70,7 +70,7 @@ export class EditVehiclePageComponent implements OnInit {
 
     if (!hasChange) {
       this.toastrService.warning(
-        'Nenhum valor alterado, por favor tente alterar algum campo para editar o veículo.',
+        'Nenhum valor alterado, por favor tente alterar algum campo para editar o veículo.'
       );
       return;
     }
@@ -121,14 +121,11 @@ export class EditVehiclePageComponent implements OnInit {
     if (!this.initialFormValue) return false;
     const formValue = this.vehicleForm.getRawValue();
 
-    return Object.keys(this.initialFormValue).some((key) => {
-      if (!this.initialFormValue) return false;
-
-      return (
-        this.initialFormValue[key as keyof IVehicle] !=
+    return Object.keys(this.initialFormValue).some(
+      (key) =>
+        this.initialFormValue![key as keyof IVehicle] !=
         formValue[key as keyof IVehicle]
-      );
-    });
+    );
   }
 
   get modelControl() {
