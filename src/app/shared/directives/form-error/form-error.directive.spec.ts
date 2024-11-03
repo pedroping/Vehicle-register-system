@@ -3,6 +3,7 @@
 import {
   Component,
   DebugElement,
+  ElementRef,
   OnInit,
   ViewContainerRef,
 } from '@angular/core';
@@ -51,7 +52,43 @@ describe('Directive: FormError', () => {
 
   it('Error to be required', () => {
     expect(errorElement.nativeElement.innerHTML).toBe(
-      'Esse campo é obrigatório!',
+      'Esse campo é obrigatório!'
     );
+  });
+
+  it('Error to be minlength', () => {
+    const control = fixture.componentInstance.testeControl;
+    control.removeValidators([Validators.required]);
+    control.addValidators([Validators.minLength(5)]);
+    control.setValue('1');
+    control.updateValueAndValidity();
+
+    fixture.componentInstance.ngOnInit();
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(errorElement.nativeElement.innerHTML).toBe(
+        'Minimo de 5 caracteres permitidos. Quantidade atual 1'
+      );
+    });
+  });
+
+  it('Error to be maxlength', () => {
+    const control = fixture.componentInstance.testeControl;
+    control.removeValidators([Validators.required]);
+    control.addValidators([Validators.maxLength(5)]);
+    control.setValue('123456');
+    control.updateValueAndValidity();
+
+    fixture.componentInstance.ngOnInit();
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(errorElement.nativeElement.innerHTML).toBe(
+        'Máximo de 5 caracteres permitidos. Quantidade atual 6'
+      );
+    });
   });
 });
