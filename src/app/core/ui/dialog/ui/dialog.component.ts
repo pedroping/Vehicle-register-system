@@ -41,7 +41,10 @@ export class DialogComponent implements OnInit {
     this.setVcr();
     this.dialogHandleService.state$$
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((state) => this.display.set(state ? 'flex' : 'none'));
+      .subscribe((state) => {
+        document.body.style.overflow = state ? 'hidden' : 'auto';
+        this.display.set(state ? 'flex' : 'none');
+      });
   }
 
   setVcr() {

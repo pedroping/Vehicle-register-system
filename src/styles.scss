@@ -16,6 +16,10 @@ main {
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  transition: all 200ms ease-in-out;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

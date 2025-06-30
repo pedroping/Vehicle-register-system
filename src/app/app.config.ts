@@ -3,8 +3,12 @@ import {
   Provider,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  withViewTransitions
+} from '@angular/router';
 
+import { IMAGE_CONFIG } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -15,7 +19,6 @@ import { environment } from '@environment/environment';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
-import { IMAGE_CONFIG } from '@angular/common';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
@@ -37,7 +40,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
-      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn]),
+      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
     ),
     IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,
