@@ -46,13 +46,13 @@ export class VehicleComponent implements OnInit {
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal(ConfirmActionComponent);
 
-    instance.event.subscribe((value) => {
-      if (!value) return;
+    // instance.event.subscribe((value) => {
+    //   if (!value) return;
 
-      this.vehiclesFacade.deleteVehicle(this.vehicle().id).subscribe(() => {
-        this.vehiclesFacade.setVehicles();
-        this.toastrService.success('Veículo deletado com sucesso!');
-      });
-    });
+    //   this.vehiclesFacade.deleteVehicle(this.vehicle().id).subscribe(() => {
+    //     this.vehiclesFacade.setVehicles();
+    //     this.toastrService.success('Veículo deletado com sucesso!');
+    //   });
+    // });
   }
 }

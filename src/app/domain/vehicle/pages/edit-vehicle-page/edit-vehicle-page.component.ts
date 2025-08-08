@@ -81,18 +81,18 @@ export class EditVehiclePageComponent implements OnInit {
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal(ConfirmActionComponent);
 
-    instance.event.subscribe((value) => {
-      if (!value) return;
+    // instance.event.subscribe((value) => {
+    //   if (!value) return;
 
-      const id = this.vehicleForm.getRawValue().id;
+    //   const id = this.vehicleForm.getRawValue().id;
 
-      this.vehiclesFacade.deleteVehicle(id).subscribe(() => {
-        this.vehicleForm.reset();
-        this.vehiclesFacade.setVehicles();
-        this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
-        this.toastrService.success('Veículo deletado com sucesso!');
-      });
-    });
+    //   this.vehiclesFacade.deleteVehicle(id).subscribe(() => {
+    //     this.vehicleForm.reset();
+    //     this.vehiclesFacade.setVehicles();
+    //     this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+    //     this.toastrService.success('Veículo deletado com sucesso!');
+    //   });
+    // });
   }
 
   editVehicle() {
