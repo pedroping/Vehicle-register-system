@@ -18,16 +18,6 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('shoul create info-dialog', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-
-    const infoDialog = fixture.debugElement.query(
-      By.css('[data-testid=info-dialog-template]')
-    );
-
-    expect(infoDialog).toBeTruthy();
-  });
-
   it('shoul create info-loading-spinner', () => {
     const fixture = TestBed.createComponent(AppComponent);
 

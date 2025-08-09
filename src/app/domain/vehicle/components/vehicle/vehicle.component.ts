@@ -39,20 +39,20 @@ export class VehicleComponent implements OnInit {
   ngOnInit(): void {
     this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);
     this.category$ = this.categoriesFacade.getCategoryById(
-      this.vehicle().category,
+      this.vehicle().category
     );
   }
 
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal(ConfirmActionComponent);
 
-    // instance.event.subscribe((value) => {
-    //   if (!value) return;
+    instance.close$.subscribe((value) => {
+      if (!value) return;
 
-    //   this.vehiclesFacade.deleteVehicle(this.vehicle().id).subscribe(() => {
-    //     this.vehiclesFacade.setVehicles();
-    //     this.toastrService.success('Veículo deletado com sucesso!');
-    //   });
-    // });
+      this.vehiclesFacade.deleteVehicle(this.vehicle().id).subscribe(() => {
+        this.vehiclesFacade.setVehicles();
+        this.toastrService.success('Veículo deletado com sucesso!');
+      });
+    });
   }
 }

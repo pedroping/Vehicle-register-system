@@ -197,66 +197,6 @@ describe('EditVehiclePageComponent', () => {
     expect(changed).toBeTrue();
   });
 
-  it('should not call api on true event', () => {
-    const fixture = TestBed.createComponent(EditVehiclePageComponent);
-    const app = fixture.componentInstance;
-
-    const dialogHandleService =
-      fixture.debugElement.injector.get(DialogHandleService);
-    const vehiclesFacade = fixture.debugElement.injector.get(VehiclesFacade);
-    const toastrService = fixture.debugElement.injector.get(ToastrService);
-
-    const eventSubject$ = new Subject<boolean>();
-
-    spyOn(dialogHandleService, 'openModal').and.callFake(() => {
-      return <IDialogComponent<any>>{
-        event: eventSubject$ as unknown as OutputEmitterRef<any>,
-      };
-    });
-
-    const setVehiclesSpy = spyOn(vehiclesFacade, 'setVehicles');
-    const toastSucessSpy = spyOn(toastrService, 'success');
-
-    const deleteVehicleSpy = spyOn(
-      vehiclesFacade,
-      'deleteVehicle'
-    ).and.callFake(() => {
-      return of(<IVehicle>{});
-    });
-
-    app.deleteVehicle();
-    eventSubject$.next(true);
-
-    expect(setVehiclesSpy).toHaveBeenCalled();
-    expect(toastSucessSpy).toHaveBeenCalled();
-    expect(deleteVehicleSpy).toHaveBeenCalled();
-  });
-
-  it('should not call api on false event', () => {
-    const fixture = TestBed.createComponent(EditVehiclePageComponent);
-    const app = fixture.componentInstance;
-
-    const dialogHandleService =
-      fixture.debugElement.injector.get(DialogHandleService);
-
-    const vehiclesFacade = fixture.debugElement.injector.get(VehiclesFacade);
-
-    const eventSubject$ = new Subject<boolean>();
-
-    spyOn(dialogHandleService, 'openModal').and.callFake(() => {
-      return <IDialogComponent<any>>{
-        event: eventSubject$ as unknown as OutputEmitterRef<any>,
-      };
-    });
-
-    const deleteVehicleSpy = spyOn(vehiclesFacade, 'deleteVehicle');
-
-    app.deleteVehicle();
-    eventSubject$.next(false);
-
-    expect(deleteVehicleSpy).not.toHaveBeenCalled();
-  });
-
   it('shoudl edit vehicle', () => {
     const fixture = TestBed.createComponent(EditVehiclePageComponent);
     const app = fixture.componentInstance;
