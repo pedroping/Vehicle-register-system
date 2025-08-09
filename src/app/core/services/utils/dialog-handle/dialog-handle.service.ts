@@ -8,12 +8,11 @@ import {
   Injector,
   NgZone,
   Type,
-  ViewContainerRef,
 } from '@angular/core';
 import { DialogComponent } from '@core/ui/dialog';
 import { IDialogComponent } from '@shared/models';
 import { DIALOG_TOKEN } from '@shared/tokens/dialog/dialog-token';
-import { BehaviorSubject, debounceTime, Subject, take, tap } from 'rxjs';
+import { debounceTime, Subject, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
