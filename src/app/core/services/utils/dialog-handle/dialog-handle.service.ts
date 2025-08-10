@@ -30,8 +30,8 @@ export class DialogHandleService<T> {
       close$.next(arg);
     };
 
-    const elementInjector = Injector.create(
-      [
+    const elementInjector = Injector.create({
+      providers: [
         {
           provide: DIALOG_TOKEN,
           useValue: {
@@ -41,8 +41,8 @@ export class DialogHandleService<T> {
           },
         },
       ],
-      this._environmentInjector
-    );
+      parent: this._environmentInjector,
+    });
 
     const ref = createComponent(component, {
       environmentInjector: this._environmentInjector,
