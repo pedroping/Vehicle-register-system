@@ -1,6 +1,5 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
 import { IN_OUT_ANIMATION_Y } from '@shared/animations';
 import { IDialogTokenData } from '@shared/models';
 import { DIALOG_TOKEN } from '@shared/tokens/dialog/dialog-token';
@@ -17,7 +16,6 @@ import { take } from 'rxjs';
   animations: [IN_OUT_ANIMATION_Y],
 })
 export class DialogComponent implements OnInit {
-  private readonly dialogHandleService = inject(DialogHandleService);
   private readonly dialogToken =
     inject<IDialogTokenData<boolean>>(DIALOG_TOKEN);
 
