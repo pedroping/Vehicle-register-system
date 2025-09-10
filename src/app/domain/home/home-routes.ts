@@ -9,18 +9,18 @@ export default [
     children: [
       {
         path: '',
-        redirectTo: eRoutes.VEHICLE,
+        redirectTo: '',
         pathMatch: 'full',
       },
       {
-        path: eRoutes.VEHICLE,
+        path: '',
         loadChildren: async () => await import('../vehicle/vehicle-routes'),
       },
     ],
   },
   {
     path: '**',
-    redirectTo: eRoutes.VEHICLE,
+    redirectTo: '',
     pathMatch: 'full',
   },
 ] as Routes;

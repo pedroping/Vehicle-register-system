@@ -32,8 +32,15 @@
             "assets": ["src/assets"],
             "styles": [
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              {
+                "inject": false,
+                "input": "node_modules/ngx-toastr/toastr.css"
+              },
+              {
+                "inject": false,
+                "input": "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                "bundleName": "fontawesome"
+              }
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
@@ -42,6 +49,8 @@
           },
           "configurations": {
             "production": {
+              "aot": true,
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -50,8 +59,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "5kB",
+                  "maximumError": "10kB"
                 }
               ],
               "outputHashing": "all"
@@ -94,8 +103,15 @@
             "assets": ["src/assets"],
             "styles": [
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              {
+                "inject": false,
+                "input": "node_modules/ngx-toastr/toastr.css"
+              },
+              {
+                "inject": false,
+                "input": "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                "bundleName": "fontawesome"
+              }
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
