@@ -2,8 +2,6 @@ import { AfterViewInit, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoadingSpinnerComponent } from '@core/ui/loading-spinner';
 
-const styles = ['fontawesome.css', 'toastr.css'];
-
 @Component({
   selector: 'info-root',
   standalone: true,
@@ -19,13 +17,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   private loadStyles() {
-    const appenStyle = (name: string) => {
-      let style = document.createElement('link');
-      style.rel = 'stylesheet';
-      style.type = 'text/css';
-      style.href = name;
-      document.head.appendChild(style);
-    };
-    styles.forEach((style) => appenStyle(style));
+    let style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.type = 'text/css';
+    style.href = 'toastr.css';
+    document.head.appendChild(style);
   }
 }

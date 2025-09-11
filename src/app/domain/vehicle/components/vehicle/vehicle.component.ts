@@ -7,18 +7,22 @@ import {
   VehiclesFacade,
 } from '@core/services/facades';
 import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmActionComponent } from '@shared/components';
 import { eRoutes } from '@shared/enums';
 import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-
 @Component({
   selector: 'info-vehicle',
   templateUrl: './vehicle.component.html',
   styleUrls: ['./vehicle.component.scss'],
   standalone: true,
-  imports: [AsyncPipe, UpperCasePipe, RouterLink],
+  imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule],
 })
 export class VehicleComponent implements OnInit {
   private readonly brandsFacade = inject(BrandsFacade);
@@ -35,6 +39,10 @@ export class VehicleComponent implements OnInit {
   editRoute = computed(() => `${eRoutes.VEHICLE_EDIT}/${this.vehicle().id}`);
 
   noImage = '/assets/pngs/no-image.png';
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faTrash, faPen);
+  }
 
   ngOnInit(): void {
     this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);

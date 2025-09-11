@@ -70,17 +70,20 @@
       text-decoration: none;
       color: var(--black-01);
 
-      &:first-of-type i {
+      &:first-of-type fa-icon {
         color: var(--red-01);
       }
     }
 
-    i {
+    fa-icon {
       font-size: 16px;
-      transition: all 200ms ease-in-out;
       cursor: pointer;
 
-      &:hover {
+      ::ng-deep svg {
+        transition: all 200ms ease-in-out;
+      }
+
+      &:hover ::ng-deep svg {
         transform: translateY(-1px) scale(1.03);
       }
     }

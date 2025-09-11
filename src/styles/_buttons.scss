@@ -21,7 +21,8 @@
 
 @mixin animated {
   span,
-  i {
+  i,
+  ::ng-deep svg {
     position: relative;
     z-index: 2;
   }
@@ -42,7 +43,8 @@
     transform: scale(1.03) translateY(-1px);
 
     span,
-    i {
+    i,
+    ::ng-deep svg {
       color: var(--text-color-01);
     }
 
@@ -58,10 +60,18 @@
   border: 1px solid var(--primary);
   background-color: var(--primary);
 
+  svg {
+    color: var(--text-color-01);
+  }
+
   &.animated {
     color: var(--primary);
     background-color: transparent;
     @include animated;
+
+    svg {
+      color: var(--primary);
+    }
 
     &::before {
       background: var(--primary);

@@ -1,9 +1,5 @@
 <div class="image-content">
-  <img
-    [src]="vehicle().image || noImage"
-    [alt]="'Imagem do carro: ' + vehicle().model"
-    fetchpriority="high"
-  />
+  <img [src]="vehicle().image || noImage" [alt]="'Imagem do carro: ' + vehicle().model" fetchpriority="high" />
 </div>
 <div class="description">
   <h3 [title]="vehicle().id + ' - ' + vehicle().model">
@@ -24,9 +20,9 @@
 
 <div class="actions">
   <a (click)="deleteVehicle()" data-testid="delete-btn">
-    <i class="fa-solid fa-trash"></i>
+    <fa-icon [icon]="['fas', 'trash']"></fa-icon>
   </a>
   <a [routerLink]="editRoute()" replaceUrl="true">
-    <i class="fa-solid fa-pen"></i>
+    <fa-icon [icon]="['fas', 'pen']"></fa-icon>
   </a>
 </div>

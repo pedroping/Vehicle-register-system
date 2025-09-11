@@ -1,16 +1,20 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { faCloudArrowUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DragFileDirective } from '@shared/directives';
 import { fileToBase64, uploadFile } from '@shared/utils';
 import { BehaviorSubject, switchMap } from 'rxjs';
-
 @Component({
   selector: 'info-image-field',
   templateUrl: './image-field.component.html',
   styleUrls: ['./image-field.component.scss'],
   standalone: true,
-  imports: [DragFileDirective, AsyncPipe],
+  imports: [DragFileDirective, AsyncPipe, FontAwesomeModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,6 +30,10 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
 
   _uploadFile = uploadFile;
   _fileToBase64 = fileToBase64;
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faTrash, faCloudArrowUp);
+  }
 
   ngOnInit(): void {
     this.image$.pipe().subscribe((img) => {
