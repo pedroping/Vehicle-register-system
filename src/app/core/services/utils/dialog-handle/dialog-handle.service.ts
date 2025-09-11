@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
   ApplicationRef,
   createComponent,
@@ -20,7 +19,7 @@ import { debounceTime, Subject, take } from 'rxjs';
 export class DialogHandleService<T> {
   private _applicationRef = inject(ApplicationRef);
   private _environmentInjector = inject(EnvironmentInjector);
-  private _document = inject(DOCUMENT);
+  // private _document = inject(DOCUMENT, { optional: true });
   private _ngZone = inject(NgZone);
 
   openModal<Y = unknown>(component: Type<IDialogComponent<T>>) {
@@ -56,14 +55,14 @@ export class DialogHandleService<T> {
     });
 
     this._applicationRef.attachView(modalRef.hostView);
-    this._document.body.appendChild(modalRef.location.nativeElement);
+    // this._document?.body.appendChild(modalRef.location.nativeElement);
 
     this._ngZone.onStable.pipe(debounceTime(10), take(1)).subscribe(() => {
       open$.next();
     });
 
     close$.pipe(debounceTime(300), take(1)).subscribe(() => {
-      this._document.body.removeChild(modalRef.location.nativeElement);
+      // this._document?.body.removeChild(modalRef.location.nativeElement);
       ref.destroy();
       modalRef.destroy();
     });

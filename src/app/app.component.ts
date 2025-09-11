@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, afterNextRender } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoadingSpinnerComponent } from '@core/ui/loading-spinner';
 
@@ -7,13 +7,15 @@ import { LoadingSpinnerComponent } from '@core/ui/loading-spinner';
   standalone: true,
   imports: [RouterOutlet, LoadingSpinnerComponent],
   template: `
-    <router-outlet />
-    <info-loading-spinner data-testid="info-loading-spinner-template" />
+    <!-- <router-outlet />
+    <info-loading-spinner data-testid="info-loading-spinner-template" /> -->
   `,
 })
-export class AppComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    this.loadStyles();
+export class AppComponent {
+  constructor() {
+    afterNextRender(() => {
+      // this.loadStyles();
+    });
   }
 
   private loadStyles() {

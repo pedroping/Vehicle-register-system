@@ -28,7 +28,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dialogToken.open$.pipe(take(1)).subscribe(() => {
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
       this.display.set('flex');
       this.state.set(true);
     });
@@ -41,7 +41,7 @@ export class DialogComponent implements OnInit {
   animationEnd(event: AnimationEvent) {
     if (event['fromState' as keyof AnimationEvent]) {
       this.display.set('none');
-      document.body.style.overflow = 'auto';
+      // document.body.style.overflow = 'auto';
     }
   }
 }

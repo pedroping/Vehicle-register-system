@@ -19,6 +19,7 @@ import { environment } from '@environment/environment';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
+import { provideClientHydration } from '@angular/platform-browser';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
@@ -35,14 +36,14 @@ const IMAGE_PROVIDER: Provider = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimationsAsync(),
+    // provideAnimationsAsync(),
     provideRouter(routes, withViewTransitions()),
-    provideToastr({ maxOpened: 1, autoDismiss: true }),
+    // provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
-      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
+      // withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
     ),
-    IMAGE_PROVIDER,
-    ENVIRONMENT_PROVIDER,
+    // IMAGE_PROVIDER,
+    // ENVIRONMENT_PROVIDER, provideClientHydration(),
   ],
 };
