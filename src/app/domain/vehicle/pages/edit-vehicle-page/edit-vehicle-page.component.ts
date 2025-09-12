@@ -12,11 +12,10 @@ import { ConfirmActionComponent } from '@shared/components';
 import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
 
 @Component({
-  selector: 'info-edit-vehicle-page',
-  templateUrl: './edit-vehicle-page.component.html',
-  styleUrls: ['./edit-vehicle-page.component.scss'],
-  standalone: true,
-  imports: [VehicleFormComponent, ReactiveFormsModule],
+    selector: 'info-edit-vehicle-page',
+    templateUrl: './edit-vehicle-page.component.html',
+    styleUrls: ['./edit-vehicle-page.component.scss'],
+    imports: [VehicleFormComponent, ReactiveFormsModule]
 })
 export class EditVehiclePageComponent implements OnInit {
   initialFormValue?: IVehicle;

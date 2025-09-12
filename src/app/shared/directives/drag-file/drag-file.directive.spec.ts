@@ -6,10 +6,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-test',
-  standalone: true,
-  imports: [DragFileDirective],
-  template: ` <div dragFile></div> `,
+    selector: 'app-test',
+    imports: [DragFileDirective],
+    template: ` <div dragFile></div> `
 })
 class TestComponent {}
 

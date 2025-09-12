@@ -9,11 +9,10 @@ import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
 
 @Component({
-  selector: 'info-new-vehicle-page',
-  templateUrl: './new-vehicle-page.component.html',
-  styleUrls: ['./new-vehicle-page.component.scss'],
-  standalone: true,
-  imports: [VehicleFormComponent, ReactiveFormsModule],
+    selector: 'info-new-vehicle-page',
+    templateUrl: './new-vehicle-page.component.html',
+    styleUrls: ['./new-vehicle-page.component.scss'],
+    imports: [VehicleFormComponent, ReactiveFormsModule]
 })
 export class NewVehiclePageComponent implements OnInit {
   vehicleListRoute = eRoutes.VEHICLE;

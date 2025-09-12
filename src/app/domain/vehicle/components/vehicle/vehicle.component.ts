@@ -18,11 +18,10 @@ import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 @Component({
-  selector: 'info-vehicle',
-  templateUrl: './vehicle.component.html',
-  styleUrls: ['./vehicle.component.scss'],
-  standalone: true,
-  imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule],
+    selector: 'info-vehicle',
+    templateUrl: './vehicle.component.html',
+    styleUrls: ['./vehicle.component.scss'],
+    imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule]
 })
 export class VehicleComponent implements OnInit {
   private readonly brandsFacade = inject(BrandsFacade);

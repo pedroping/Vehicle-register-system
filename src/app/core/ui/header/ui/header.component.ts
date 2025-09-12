@@ -7,11 +7,10 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 @Component({
-  selector: 'info-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  standalone: true,
-  imports: [RouterLink, FontAwesomeModule],
+    selector: 'info-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    imports: [RouterLink, FontAwesomeModule]
 })
 export class HeaderComponent {
   vehicleListRoute = eRoutes.VEHICLE;

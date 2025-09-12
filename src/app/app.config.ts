@@ -36,14 +36,14 @@ const IMAGE_PROVIDER: Provider = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // provideAnimationsAsync(),
+    provideAnimationsAsync(),
     provideRouter(routes, withViewTransitions()),
-    // provideToastr({ maxOpened: 1, autoDismiss: true }),
+    provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
-      // withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
+      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
     ),
-    // IMAGE_PROVIDER,
-    // ENVIRONMENT_PROVIDER, provideClientHydration(),
+    IMAGE_PROVIDER,
+    ENVIRONMENT_PROVIDER, provideClientHydration(),
   ],
 };

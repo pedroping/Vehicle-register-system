@@ -24,10 +24,9 @@ import { By } from '@angular/platform-browser';
 import { FormErrorDirective } from './form-error.directive';
 
 @Component({
-  selector: 'app-test',
-  standalone: true,
-  imports: [FormErrorDirective, ReactiveFormsModule],
-  template: ` <div [formError]="testeControl"></div> `,
+    selector: 'app-test',
+    imports: [FormErrorDirective, ReactiveFormsModule],
+    template: ` <div [formError]="testeControl"></div> `
 })
 class TestComponent implements OnInit {
   testeControl = new FormControl<string>('', {

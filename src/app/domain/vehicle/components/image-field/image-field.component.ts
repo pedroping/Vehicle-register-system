@@ -10,18 +10,17 @@ import { DragFileDirective } from '@shared/directives';
 import { fileToBase64, uploadFile } from '@shared/utils';
 import { BehaviorSubject, switchMap } from 'rxjs';
 @Component({
-  selector: 'info-image-field',
-  templateUrl: './image-field.component.html',
-  styleUrls: ['./image-field.component.scss'],
-  standalone: true,
-  imports: [DragFileDirective, AsyncPipe, FontAwesomeModule],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ImageFieldComponent),
-      multi: true,
-    },
-  ],
+    selector: 'info-image-field',
+    templateUrl: './image-field.component.html',
+    styleUrls: ['./image-field.component.scss'],
+    imports: [DragFileDirective, AsyncPipe, FontAwesomeModule],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ImageFieldComponent),
+            multi: true,
+        },
+    ]
 })
 export class ImageFieldComponent implements ControlValueAccessor, OnInit {
   onChange?: (value: string | ArrayBuffer) => {};
