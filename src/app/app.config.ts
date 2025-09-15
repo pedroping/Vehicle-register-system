@@ -3,13 +3,14 @@ import {
   Provider,
   provideZoneChangeDetection,
 } from '@angular/core';
-import {
-  provideRouter,
-  withViewTransitions
-} from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { IMAGE_CONFIG } from '@angular/common';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   errorHandleInterceptor,
@@ -41,9 +42,11 @@ export const appConfig: ApplicationConfig = {
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
-      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn])
+      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn]),
+      withFetch()
     ),
     IMAGE_PROVIDER,
-    ENVIRONMENT_PROVIDER, provideClientHydration(),
+    ENVIRONMENT_PROVIDER,
+    provideClientHydration(),
   ],
 };

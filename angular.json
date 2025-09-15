@@ -26,14 +26,10 @@
             "outputPath": "dist/vehicle-register-system",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/assets"
-            ],
+            "assets": ["src/assets", "src/robots.txt"],
             "styles": [
               "src/styles.scss",
               {
@@ -42,9 +38,7 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles"
-              ]
+              "includePaths": ["src/styles"]
             },
             "scripts": [],
             "server": "src/main.server.ts",

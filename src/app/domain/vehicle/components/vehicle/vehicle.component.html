@@ -2,10 +2,10 @@
   <img [src]="vehicle().image || noImage" [alt]="'Imagem do carro: ' + vehicle().model" fetchpriority="high" />
 </div>
 <div class="description">
-  <h3 [title]="vehicle().id + ' - ' + vehicle().model">
+  <h2 [title]="vehicle().id + ' - ' + vehicle().model">
     #{{ vehicle().id }} <span> - </span>
     <span>{{ vehicle().model | uppercase }}</span>
-  </h3>
+  </h2>
   <div class="details">
     <p>
       <span>Fabricante:</span> {{ (brand$ | async)?.name ?? "Não Definida" }}
@@ -19,10 +19,10 @@
 </div>
 
 <div class="actions">
-  <a (click)="deleteVehicle()" data-testid="delete-btn">
+  <a (click)="deleteVehicle()" data-testid="delete-btn" aria-label="Delete esse veículo." role="button">
     <fa-icon [icon]="['fas', 'trash']"></fa-icon>
   </a>
-  <a [routerLink]="editRoute()" replaceUrl="true">
+  <a [routerLink]="editRoute()" replaceUrl="true" aria-label="Edite esse veículo.">
     <fa-icon [icon]="['fas', 'pen']"></fa-icon>
   </a>
 </div>
