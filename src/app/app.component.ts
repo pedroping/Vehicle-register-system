@@ -1,15 +1,12 @@
 import { Component, afterNextRender, inject } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import { LoadingSpinnerComponent } from '@core/ui/loading-spinner';
 
 @Component({
   selector: 'info-root',
-  imports: [RouterOutlet, LoadingSpinnerComponent],
-  template: `
-    <router-outlet />
-    <info-loading-spinner data-testid="info-loading-spinner-template" />
-  `,
+  imports: [RouterOutlet],
+  providers: [],
+  template: ` <router-outlet />`,
 })
 export class AppComponent {
   private readonly meta = inject(Meta);

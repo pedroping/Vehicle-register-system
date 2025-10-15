@@ -21,6 +21,7 @@ import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
+import { loadingSpinnerProvider } from '@core/providers/loading-spinner-provider';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
@@ -37,6 +38,7 @@ const IMAGE_PROVIDER: Provider = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    loadingSpinnerProvider(),
     provideAnimationsAsync(),
     provideRouter(routes, withViewTransitions()),
     provideToastr({ maxOpened: 1, autoDismiss: true }),
