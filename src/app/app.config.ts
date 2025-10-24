@@ -1,27 +1,27 @@
-import {
-  ApplicationConfig,
-  Provider,
-  provideZoneChangeDetection,
-} from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
-
 import { IMAGE_CONFIG } from '@angular/common';
 import {
   provideHttpClient,
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  Provider,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter, RouteReuseStrategy, withViewTransitions } from '@angular/router';
 import {
   errorHandleInterceptor,
   loadingHttpInterceptorFn,
 } from '@core/interceptors';
+import { loadingSpinnerProvider } from '@core/providers/loading-spinner-provider';
+import { CustomRouteReuseStrategy } from '@core/services/utils/custom-route-reuse-strategy/custom-route-reuse-strategy.service';
 import { environment } from '@environment/environment';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
-import { loadingSpinnerProvider } from '@core/providers/loading-spinner-provider';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
@@ -50,5 +50,6 @@ export const appConfig: ApplicationConfig = {
     IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,
     provideClientHydration(),
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
   ],
 };

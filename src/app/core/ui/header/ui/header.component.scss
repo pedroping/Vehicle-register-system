@@ -8,6 +8,10 @@
     padding: 0px 20px;
     box-shadow: 0px 0px 8px var(--light-black-01);
     height: 60px;
+    position: sticky;
+    top: 0;
+    background-color: var(--white-01);
+    z-index: 10;
 
     img {
       height: 50px;
@@ -20,6 +24,21 @@
 
     a {
       text-decoration: none;
+    }
+
+    .page-tittle {
+      font-weight: 700;
+      font-size: 16px;
+      opacity: 0;
+      transition: all 200ms ease-in-out;
+
+      &.showText {
+        opacity: 1;
+      }
+
+      span {
+        color: var(--primary);
+      }
     }
 
     .actions {

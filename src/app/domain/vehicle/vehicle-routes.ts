@@ -7,6 +7,7 @@ export default [
     loadComponent: async () =>
       (await import('./pages/list-vehicle-page/list-vehicle-page.component'))
         .ListVehiclePageComponent,
+    data: { reuse: true },
   },
   {
     path: eRoutes.VEHICLE_EDIT + '/:id',
@@ -19,5 +20,6 @@ export default [
     loadComponent: async () =>
       (await import('./pages/new-vehicle-page/new-vehicle-page.component'))
         .NewVehiclePageComponent,
+    data: { reuse: true },
   },
 ] as Routes;
