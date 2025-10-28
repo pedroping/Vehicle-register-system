@@ -8,8 +8,9 @@
     padding: 0px 20px;
     box-shadow: 0px 0px 8px var(--light-black-01);
     height: 60px;
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
     background-color: var(--white-01);
     z-index: 10;
 
