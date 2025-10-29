@@ -1,30 +1,52 @@
+@use "buttons";
+
 :host {
   width: 100%;
+  padding: 5px;
 
   .header {
     width: 100%;
-    margin: 25px auto auto 25px;
     transition: all 200ms ease-in-out;
     display: flex;
     align-items: flex-start;
-    max-width: 300px;
+    height: 500px;
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
 
-    // &.showText {
-    //   z-index: 0;
-    //   transform: translate3d(calc(50% - 120px), -92px, 38px);
-    //   font-size: 16px;
-    //   opacity: 0;
-    // }
+    position: relative;
+    background: url(https://images.wallpaperscraft.com/image/single/road_marking_mountains_123985_1600x900.jpg)
+      no-repeat 50% 50% fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
 
-    h1 {
-      font-weight: 700;
-      font-size: 24px;
-
-      span {
-        color: var(--primary);
-      }
+    p {
+      color: var(--white-02);
+      font-size: 36px;
+      text-shadow: 1px 1px 2px var(--yellow-01);
     }
 
-    margin-bottom: 25px;
+    a {
+      text-decoration: none;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: 20px;
+      border-bottom: 2px solid var(--primary);
+      line-height: 40px;
+      color: var(--primary);
+    }
+
+    button {
+      display: flex;
+      align-items: start;
+      gap: 10px;
+    }
   }
 }

@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 25px;
 
   .header {
     width: 100%;
@@ -74,6 +73,7 @@
   .section-2 {
     margin: 20px auto;
     font-size: 16px;
+    padding: 25px;
   }
 
   @media (max-width: 600px) {

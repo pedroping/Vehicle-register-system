@@ -14,6 +14,7 @@
     background-color: var(--white-01);
     z-index: 10;
     transition: all 200ms ease-in-out;
+    transform: translateY(-60px);
 
     img {
       height: 50px;
