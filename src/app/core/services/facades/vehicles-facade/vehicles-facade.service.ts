@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { VehiclesApiService } from '@core/services/api';
 import { INewVehicle, IVehicle } from '@shared/models';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,11 @@ export class VehiclesFacade {
   setVehicles() {
     this.vehiclesApiService
       .getVehicles()
+      .pipe(
+        map((vehicles) =>
+          vehicles.map((vehicle, i) => ({ ...vehicle, index: i }))
+        )
+      )
       .subscribe((vehicles) => this.vehicles$.next(vehicles));
   }
 

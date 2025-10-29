@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+
+  .header {
+    width: 100%;
+    margin: 25px auto auto 25px;
+    transition: all 200ms ease-in-out;
+    display: flex;
+    align-items: flex-start;
+    max-width: 300px;
+
+    // &.showText {
+    //   z-index: 0;
+    //   transform: translate3d(calc(50% - 120px), -92px, 38px);
+    //   font-size: 16px;
+    //   opacity: 0;
+    // }
+
+    h1 {
+      font-weight: 700;
+      font-size: 24px;
+
+      span {
+        color: var(--primary);
+      }
+    }
+
+    margin-bottom: 25px;
+  }
+}

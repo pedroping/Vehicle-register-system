@@ -8,6 +8,7 @@ export interface IVehicle {
   year: string;
   category: number;
   image: string | ArrayBuffer;
+  index?: number;
 }
 
 export type INewVehicle = Omit<IVehicle, 'id'>;

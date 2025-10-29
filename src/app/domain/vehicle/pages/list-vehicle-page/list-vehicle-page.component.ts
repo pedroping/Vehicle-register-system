@@ -17,13 +17,20 @@ import {
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { eRoutes } from '@shared/enums';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
+import { ListVehicleHeaderComponent } from '../../components/list-vehicle-header/list-vehicle-header.component';
 import { VehicleComponent } from '../../components/vehicle/vehicle.component';
 
 @Component({
   selector: 'info-list-vehicle-page',
   templateUrl: './list-vehicle-page.component.html',
   styleUrls: ['./list-vehicle-page.component.scss'],
-  imports: [VehicleComponent, AsyncPipe, RouterLink, FontAwesomeModule],
+  imports: [
+    VehicleComponent,
+    AsyncPipe,
+    RouterLink,
+    FontAwesomeModule,
+    ListVehicleHeaderComponent,
+  ],
 })
 export class ListVehiclePageComponent implements OnInit {
   newVehicleRoute = `${eRoutes.VEHICLE}/${eRoutes.VEHICLE_NEW}`;

@@ -3,10 +3,6 @@
     <img src="/assets/pngs/car-logo.png" alt="Logo Car" fetchpriority="high" />
   </a>
 
-  @if (onHome) {
-  <span class="page-tittle" [class.showText]="showText$ | async">Todos os <span>veículos</span></span>
-  }
-
   <div class="actions">
     <a [routerLink]="newVehicleRoute" replaceUrl="true">
       <button class="primary-btn animated">

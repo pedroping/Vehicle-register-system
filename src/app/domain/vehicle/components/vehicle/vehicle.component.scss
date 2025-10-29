@@ -2,7 +2,7 @@
 
 :host {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 250px;
   align-items: center;
   width: clamp(450px, 80%, 100%);
   gap: 10px;
@@ -12,18 +12,14 @@
   background-color: var(--white-01);
   margin: 0 auto;
   position: sticky;
-  top: 80px;
+  top: 100px;
   right: 0;
   left: 0;
-  height: 450px;
+  height: 650px;
+  transition: all 200ms ease-out;
 
-  &:not(&:last-child) {
-    view-timeline-name: --card;
-    animation-timeline: --card;
-    view-timeline-axis: block;
-    animation-name: in-n-out;
-    animation-range: entry 0% cover 40%;
-    animation-fill-mode: both;
+  &:last-child {
+    scale: 100% !important;
   }
 
   .image-content {

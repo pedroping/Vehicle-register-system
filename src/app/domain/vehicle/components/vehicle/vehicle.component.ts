@@ -11,17 +11,25 @@ import {
   FaIconLibrary,
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
-import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmActionComponent } from '@shared/components';
 import { eRoutes } from '@shared/enums';
 import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { ScrollAnimationDirective } from '../../directive/scroll-animation.directive';
+
 @Component({
-    selector: 'info-vehicle',
-    templateUrl: './vehicle.component.html',
-    styleUrls: ['./vehicle.component.scss'],
-    imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule]
+  selector: 'info-vehicle',
+  templateUrl: './vehicle.component.html',
+  styleUrls: ['./vehicle.component.scss'],
+  imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule],
+  hostDirectives: [
+    {
+      directive: ScrollAnimationDirective,
+      inputs: ['vehicle'],
+    },
+  ],
 })
 export class VehicleComponent implements OnInit {
   private readonly brandsFacade = inject(BrandsFacade);

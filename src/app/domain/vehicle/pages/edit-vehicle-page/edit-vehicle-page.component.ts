@@ -118,7 +118,7 @@ export class EditVehiclePageComponent implements OnInit {
 
   hasChangedAnyValue() {
     if (!this.initialFormValue) return false;
-    const formValue = this.vehicleForm.getRawValue();
+    const formValue = this.vehicleForm.getRawValue() as IVehicle;
 
     return Object.keys(this.initialFormValue).some(
       (key) =>
