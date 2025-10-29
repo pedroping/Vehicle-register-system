@@ -1,111 +1,131 @@
 @use "animations";
 
 :host {
-  display: grid;
-  grid-template-columns: 1fr 250px;
-  align-items: center;
-  width: clamp(450px, 80%, 100%);
-  gap: 10px;
-  box-shadow: 0px 0px 8px var(--light-black-01);
-  padding: 10px;
-  border-radius: 10px;
-  background-color: var(--white-01);
-  margin: 0 auto;
+  --index0: calc(var(--index) - 1);
+  --reverse-index: calc(var(--numcards) - var(--index0));
+  --reverse-index0: calc(var(--reverse-index) - 1);
   position: sticky;
-  top: 100px;
-  right: 0;
-  left: 0;
+  top: 120px;
+  padding-top: calc(var(--index) * 10px);
   height: 650px;
-  transition: all 200ms ease-out;
+  width: 1000px;
+  margin: 0 auto;
 
-  &:last-child {
-    scale: 100% !important;
-  }
-
-  .image-content {
-    display: flex;
+  .card__content {
+    display: grid;
+    grid-template-columns: 1fr 250px;
     align-items: center;
-    justify-content: center;
+    width: clamp(450px, 80%, 100%);
+    gap: 10px;
+    box-shadow: 0px 0px 8px var(--light-black-01);
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--white-01);
+    height: 100%;
     width: 100%;
 
-    img {
-      max-width: 100%;
-      height: 100%;
-    }
-  }
+    transform-origin: 50% 0%;
+    will-change: transform;
 
-  .description {
-    width: 100%;
-    overflow: hidden;
+    --start-range: calc(var(--index0) / var(--numcards) * 100%);
+    --end-range: calc((var(--index)) / var(--numcards) * 100%);
 
-    h2 {
-      font-size: 14px;
-      margin-bottom: 8px;
-      width: calc(100% - 45px);
-      text-wrap: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    animation: linear scale forwards;
+    animation-timeline: --cards-element-scrolls-in-body;
+    animation-range: exit-crossing var(--start-range) exit-crossing
+      var(--end-range);
 
-      span {
-        font-size: 20px;
-
-        &:last-of-type {
-          color: var(--primary);
-        }
-      }
-    }
-
-    .details {
+    .image-content {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
 
-      p {
-        line-height: 18px;
+      img {
+        max-width: 100%;
+        height: 100%;
+      }
+    }
+
+    .description {
+      width: 100%;
+      overflow: hidden;
+
+      h2 {
+        font-size: 14px;
+        margin-bottom: 8px;
+        width: calc(100% - 45px);
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         span {
-          font-size: 16px;
-          font-weight: 600;
+          font-size: 20px;
+
+          &:last-of-type {
+            color: var(--primary);
+          }
+        }
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        p {
+          line-height: 18px;
+          span {
+            font-size: 16px;
+            font-weight: 600;
+          }
         }
       }
     }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+
+      a {
+        text-decoration: none;
+        color: var(--black-01);
+
+        &:first-of-type fa-icon {
+          color: var(--red-01);
+        }
+      }
+
+      fa-icon {
+        font-size: 16px;
+        cursor: pointer;
+
+        ::ng-deep svg {
+          transition: all 200ms ease-in-out;
+        }
+
+        &:hover ::ng-deep svg {
+          transform: translateY(-1px) scale(1.03);
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+
+      .description h3 {
+        width: 100%;
+      }
+    }
   }
+}
 
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-
-    a {
-      text-decoration: none;
-      color: var(--black-01);
-
-      &:first-of-type fa-icon {
-        color: var(--red-01);
-      }
-    }
-
-    fa-icon {
-      font-size: 16px;
-      cursor: pointer;
-
-      ::ng-deep svg {
-        transition: all 200ms ease-in-out;
-      }
-
-      &:hover ::ng-deep svg {
-        transform: translateY(-1px) scale(1.03);
-      }
-    }
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-
-    .description h3 {
-      width: 100%;
-    }
+@keyframes scale {
+  to {
+    transform: scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
   }
 }

@@ -1,5 +1,12 @@
 import { AsyncPipe, UpperCasePipe } from '@angular/common';
-import { Component, computed, inject, input, OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  OnInit
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   BrandsFacade,
@@ -17,19 +24,12 @@ import { eRoutes } from '@shared/enums';
 import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { ScrollAnimationDirective } from '../../directive/scroll-animation.directive';
 
 @Component({
   selector: 'info-vehicle',
   templateUrl: './vehicle.component.html',
   styleUrls: ['./vehicle.component.scss'],
   imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule],
-  hostDirectives: [
-    {
-      directive: ScrollAnimationDirective,
-      inputs: ['vehicle'],
-    },
-  ],
 })
 export class VehicleComponent implements OnInit {
   private readonly brandsFacade = inject(BrandsFacade);
@@ -47,11 +47,17 @@ export class VehicleComponent implements OnInit {
 
   noImage = '/assets/pngs/no-image.png';
 
+  private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
   constructor(library: FaIconLibrary) {
     library.addIcons(faTrash, faPen);
   }
 
   ngOnInit(): void {
+    this._elementRef.nativeElement.style.setProperty(
+      '--index',
+      ((this.vehicle().index ?? 0) + 1).toString()
+    );
     this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);
     this.category$ = this.categoriesFacade.getCategoryById(
       this.vehicle().category

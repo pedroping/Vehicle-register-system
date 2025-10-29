@@ -1,3 +1,5 @@
+<info-list-vehicle-header />
+
 @if (vehicles$ | async; as vehicles) {
 @if (vehicles.length <= 0) { <div class="no-data">
   <img src="/assets/svgs/no-data.svg" alt="Nenhuma dado encontrado" />
@@ -9,8 +11,7 @@
   </a>
   </div>
   } @else {
-  <div class="vehicles-list">
-    <info-list-vehicle-header />
+  <div class="vehicles-list" [style]="'--numcards:' + vehicles.length">
     @for (vehicle of vehicles; track $index) {
     <info-vehicle [vehicle]="vehicle" />
     }

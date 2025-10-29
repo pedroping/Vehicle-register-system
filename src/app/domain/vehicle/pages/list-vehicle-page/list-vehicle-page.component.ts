@@ -5,7 +5,7 @@ import {
   Inject,
   inject,
   OnInit,
-  PLATFORM_ID,
+  PLATFORM_ID
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';

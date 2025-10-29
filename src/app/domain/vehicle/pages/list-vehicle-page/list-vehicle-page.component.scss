@@ -63,11 +63,12 @@
   }
 
   .vehicles-list {
+    padding-bottom: calc(var(--numcards) * 5px);
     display: grid;
     grid-template-columns: 1fr;
-    max-width: 1350px;
-    grid-gap: 40px;
-    width: 100%;
+    grid-template-rows: repeat(var(--numcards), 650px);
+    gap: 4vw;
+    view-timeline-name: --cards-element-scrolls-in-body;
   }
 
   .section-2 {
