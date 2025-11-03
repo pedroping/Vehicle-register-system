@@ -4,7 +4,7 @@
 @if (vehicles.length <= 0) { <div class="no-data">
   <img src="/assets/svgs/no-data.svg" alt="Nenhuma dado encontrado" />
   <h2>Nenhum veiculo encontrado :(</h2>
-  <a [routerLink]="newVehicleRoute" replaceUrl="true">
+  <a [routerLink]="newVehicleRoute">
     <button class="primary-btn animated">
       <span>Adicionar veiculo</span><fa-icon [icon]="['fas', 'car']"></fa-icon>
     </button>

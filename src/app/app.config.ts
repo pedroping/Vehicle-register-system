@@ -11,7 +11,12 @@ import {
 } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, RouteReuseStrategy, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  RouteReuseStrategy,
+  withInMemoryScrolling,
+  withViewTransitions
+} from '@angular/router';
 import {
   errorHandleInterceptor,
   loadingHttpInterceptorFn,
@@ -40,7 +45,14 @@ export const appConfig: ApplicationConfig = {
   providers: [
     loadingSpinnerProvider(),
     provideAnimationsAsync(),
-    provideRouter(routes, withViewTransitions()),
+    provideRouter(
+      routes,
+      withViewTransitions(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+        anchorScrolling: 'enabled',
+      }),
+    ),
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(

@@ -2,25 +2,25 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiclesFacade } from '@core/services/facades';
+import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
+import { ConfirmActionComponent } from '@shared/components';
 import { eRoutes } from '@shared/enums';
 import { IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
-import { switchMap, take } from 'rxjs';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
-import { ConfirmActionComponent } from '@shared/components';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
 
 @Component({
-    selector: 'info-edit-vehicle-page',
-    templateUrl: './edit-vehicle-page.component.html',
-    styleUrls: ['./edit-vehicle-page.component.scss'],
-    imports: [VehicleFormComponent, ReactiveFormsModule]
+  selector: 'info-edit-vehicle-page',
+  templateUrl: './edit-vehicle-page.component.html',
+  styleUrls: ['./edit-vehicle-page.component.scss'],
+  imports: [VehicleFormComponent, ReactiveFormsModule],
 })
 export class EditVehiclePageComponent implements OnInit {
   initialFormValue?: IVehicle;
   vehicleListRoute = eRoutes.VEHICLE;
   vehicleForm = inject(VehicleFormHandleService).form;
+  id: number | string | undefined;
 
   private readonly router = inject(Router);
   private readonly vehiclesFacade = inject(VehiclesFacade);
@@ -30,25 +30,20 @@ export class EditVehiclePageComponent implements OnInit {
     inject(DialogHandleService);
 
   ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(
-        take(1),
-        switchMap((params) => this.vehiclesFacade.getVehicle(params['id']))
-      )
-      .subscribe((vehicle) => {
-        this.vehicleForm.patchValue(vehicle);
-        const formValue = this.vehicleForm.getRawValue();
-        this.initialFormValue = {
-          ...formValue,
-          renavam: formValue.renavam ?? '',
-          carBrand: Number(formValue.carBrand ?? -1),
-          category: Number(formValue.category ?? -1),
-        };
-      });
+    const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
+    this.id = data.id;
+    this.vehicleForm.patchValue(data);
+    const formValue = this.vehicleForm.getRawValue();
+    this.initialFormValue = {
+      ...formValue,
+      renavam: formValue.renavam ?? '',
+      carBrand: Number(formValue.carBrand ?? -1),
+      category: Number(formValue.category ?? -1),
+    };
   }
 
   cancel() {
-    this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+    this.router.navigateByUrl(this.vehicleListRoute);
     this.vehicleForm.reset();
   }
 
@@ -88,7 +83,7 @@ export class EditVehiclePageComponent implements OnInit {
       this.vehiclesFacade.deleteVehicle(id).subscribe(() => {
         this.vehicleForm.reset();
         this.vehiclesFacade.setVehicles();
-        this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+        this.router.navigateByUrl(this.vehicleListRoute);
         this.toastrService.success('Veículo deletado com sucesso!');
       });
     });
@@ -111,7 +106,7 @@ export class EditVehiclePageComponent implements OnInit {
     this.vehiclesFacade.editVehicle(newVehicle).subscribe(() => {
       this.vehicleForm.reset();
       this.vehiclesFacade.setVehicles();
-      this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+      this.router.navigateByUrl(this.vehicleListRoute);
       this.toastrService.success('Veículo editado com sucesso!');
     });
   }

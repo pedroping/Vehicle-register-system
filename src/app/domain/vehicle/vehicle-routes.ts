@@ -1,4 +1,10 @@
-import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Routes,
+} from '@angular/router';
+import { VehiclesFacade } from '@core/services/facades';
 import { eRoutes } from '@shared/enums';
 
 export default [
@@ -14,6 +20,11 @@ export default [
     loadComponent: async () =>
       (await import('./pages/edit-vehicle-page/edit-vehicle-page.component'))
         .EditVehiclePageComponent,
+    resolve: {
+      data: (route: ActivatedRouteSnapshot, _: RouterStateSnapshot) => {
+        return inject(VehiclesFacade).getVehicle(route.params['id']);
+      },
+    },
   },
   {
     path: eRoutes.VEHICLE_NEW,

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import {
   ControlContainer,
   FormGroupDirective,
@@ -10,23 +10,25 @@ import { FormErrorDirective } from '@shared/directives';
 import { ImageFieldComponent } from '../image-field/image-field.component';
 
 @Component({
-    selector: 'info-vehicle-form',
-    templateUrl: './vehicle-form.component.html',
-    styleUrls: ['./vehicle-form.component.scss'],
-    imports: [
-        AsyncPipe,
-        FormErrorDirective,
-        ReactiveFormsModule,
-        ImageFieldComponent,
-    ],
-    viewProviders: [
-        {
-            provide: ControlContainer,
-            useExisting: FormGroupDirective,
-        },
-    ]
+  selector: 'info-vehicle-form',
+  templateUrl: './vehicle-form.component.html',
+  styleUrls: ['./vehicle-form.component.scss'],
+  imports: [
+    AsyncPipe,
+    FormErrorDirective,
+    ReactiveFormsModule,
+    ImageFieldComponent,
+  ],
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
 })
 export class VehicleFormComponent {
   brands$ = inject(BrandsFacade).getBrands$$();
   categories$ = inject(CategoriesFacade).getCategories$$();
+
+  id = input<number | string | null>(null);
 }

@@ -1,10 +1,10 @@
 <header #header>
-  <a [routerLink]="vehicleListRoute" replaceUrl="true">
+  <a [routerLink]="vehicleListRoute">
     <img src="/assets/pngs/car-logo.png" alt="Logo Car" fetchpriority="high" />
   </a>
 
   <div class="actions">
-    <a [routerLink]="newVehicleRoute" replaceUrl="true">
+    <a [routerLink]="newVehicleRoute">
       <button class="primary-btn animated">
         <span>Adicionar veiculo</span><fa-icon [icon]="['fas', 'car']"></fa-icon>
       </button>

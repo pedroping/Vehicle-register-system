@@ -43,7 +43,7 @@ export class NewVehiclePageComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+    this.router.navigateByUrl(this.vehicleListRoute);
     this.vehicleForm.reset();
   }
 
@@ -64,7 +64,7 @@ export class NewVehiclePageComponent implements OnInit {
     this.vehiclesFacade.addVehicle(newVehicle).subscribe(() => {
       this.vehicleForm.reset();
       this.vehiclesFacade.setVehicles();
-      this.router.navigateByUrl(this.vehicleListRoute, { replaceUrl: true });
+      this.router.navigateByUrl(this.vehicleListRoute);
       this.toastrService.success('Veículo adicionado com sucesso!');
     });
   }

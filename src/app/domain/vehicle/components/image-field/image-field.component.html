@@ -1,7 +1,8 @@
 <div class="drop-zone" dragFile (outputFiles)="onFileDrop($event)">
   @if (image$ | async; as image) {
   <div class="item-image">
-    <img [src]="image" alt="Imagem do produto" (click)="upLoadImg()" />
+    <img [src]="image" alt="Imagem do produto" (click)="upLoadImg()"
+      [style.viewTransitionName]="id() != null ? 'banner-img-' + id() : ''" />
     <fa-icon [icon]="['fas', 'trash']" (click)="removeImage()"></fa-icon>
   </div>
   } @else {

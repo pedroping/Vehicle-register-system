@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, effect, forwardRef, input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   FaIconLibrary,
@@ -10,22 +10,24 @@ import { DragFileDirective } from '@shared/directives';
 import { fileToBase64, uploadFile } from '@shared/utils';
 import { BehaviorSubject, switchMap } from 'rxjs';
 @Component({
-    selector: 'info-image-field',
-    templateUrl: './image-field.component.html',
-    styleUrls: ['./image-field.component.scss'],
-    imports: [DragFileDirective, AsyncPipe, FontAwesomeModule],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ImageFieldComponent),
-            multi: true,
-        },
-    ]
+  selector: 'info-image-field',
+  templateUrl: './image-field.component.html',
+  styleUrls: ['./image-field.component.scss'],
+  imports: [DragFileDirective, AsyncPipe, FontAwesomeModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ImageFieldComponent),
+      multi: true,
+    },
+  ],
 })
 export class ImageFieldComponent implements ControlValueAccessor, OnInit {
   onChange?: (value: string | ArrayBuffer) => {};
   onTouch?: (value: string | ArrayBuffer) => {};
   image$ = new BehaviorSubject<string | ArrayBuffer>('');
+
+  id = input<number | string | null>(null);
 
   _uploadFile = uploadFile;
   _fileToBase64 = fileToBase64;
