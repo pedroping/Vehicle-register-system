@@ -3,7 +3,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiclesFacade } from '@core/services/facades';
 import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
-import { ConfirmActionComponent } from '@shared/components';
 import { eRoutes } from '@shared/enums';
 import { IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
@@ -71,7 +70,9 @@ export class EditVehiclePageComponent implements OnInit {
   }
 
   deleteVehicle() {
-    const instance = this.dialogHandleService.openModal(ConfirmActionComponent);
+    const instance = this.dialogHandleService.openModal<boolean>(() =>
+      import('@shared/components').then((c) => c.ConfirmActionComponent)
+    );
 
     instance.close$.subscribe((value) => {
       if (!value) return;

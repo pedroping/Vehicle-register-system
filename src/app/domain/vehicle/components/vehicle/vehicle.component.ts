@@ -21,7 +21,6 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { ConfirmActionComponent } from '@shared/components';
 import { eRoutes } from '@shared/enums';
 import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
@@ -86,7 +85,9 @@ export class VehicleComponent implements OnInit, OnChanges {
   }
 
   deleteVehicle() {
-    const instance = this.dialogHandleService.openModal(ConfirmActionComponent);
+    const instance = this.dialogHandleService.openModal<boolean>(() =>
+      import('@shared/components').then((c) => c.ConfirmActionComponent)
+    );
 
     instance.close$.subscribe((value) => {
       if (!value) return;

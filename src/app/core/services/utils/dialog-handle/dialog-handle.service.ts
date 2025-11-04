@@ -23,9 +23,7 @@ export class DialogHandleService<T> {
   private _document = inject(DOCUMENT, { optional: true });
   private _ngZone = inject(NgZone);
 
-  constructor() {}
-
-  openModal<Y = unknown>(component: Type<IDialogComponent<T>>) {
+  openModal<Y = unknown>(component: () => Promise<Type<IDialogComponent<T>>>) {
     const close$ = new Subject<Y>();
     const open$ = new Subject<void>();
     const close = (arg: Y) => {
@@ -46,31 +44,33 @@ export class DialogHandleService<T> {
       parent: this._environmentInjector,
     });
 
-    const ref = createComponent(component, {
-      environmentInjector: this._environmentInjector,
-      elementInjector,
-    });
+    component().then((_component) => {
+      const ref = createComponent(_component, {
+        environmentInjector: this._environmentInjector,
+        elementInjector,
+      });
 
-    const modalRef = createComponent(DialogComponent, {
-      environmentInjector: this._environmentInjector,
-      elementInjector,
-    });
+      const modalRef = createComponent(DialogComponent, {
+        environmentInjector: this._environmentInjector,
+        elementInjector,
+      });
 
-    (modalRef.location.nativeElement as HTMLElement).firstChild!.appendChild(
-      ref.location.nativeElement
-    );
+      (modalRef.location.nativeElement as HTMLElement).firstChild!.appendChild(
+        ref.location.nativeElement
+      );
 
-    this._applicationRef.attachView(modalRef.hostView);
-    this._document?.body.appendChild(modalRef.location.nativeElement);
+      this._applicationRef.attachView(modalRef.hostView);
+      this._document?.body.appendChild(modalRef.location.nativeElement);
 
-    this._ngZone.onStable.pipe(debounceTime(10), take(1)).subscribe(() => {
-      open$.next();
-    });
+      this._ngZone.onStable.pipe(debounceTime(10), take(1)).subscribe(() => {
+        open$.next();
+      });
 
-    close$.pipe(debounceTime(300), take(1)).subscribe(() => {
-      this._document?.body.removeChild(modalRef.location.nativeElement);
-      ref.destroy();
-      modalRef.destroy();
+      close$.pipe(debounceTime(300), take(1)).subscribe(() => {
+        this._document?.body.removeChild(modalRef.location.nativeElement);
+        ref.destroy();
+        modalRef.destroy();
+      });
     });
 
     return { close$, open$, close };
