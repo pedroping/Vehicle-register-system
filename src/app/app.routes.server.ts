@@ -8,7 +8,7 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: eRoutes.VEHICLE_NEW,
-    renderMode: RenderMode.Server,
+    renderMode: RenderMode.Prerender,
   },
   {
     path: eRoutes.VEHICLE_EDIT + '/:id',

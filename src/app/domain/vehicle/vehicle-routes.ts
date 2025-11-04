@@ -24,6 +24,12 @@ export default [
       data: (route: ActivatedRouteSnapshot, _: RouterStateSnapshot) => {
         return inject(VehiclesFacade).getVehicle(route.params['id']);
       },
+      viewTransitionName: (
+        route: ActivatedRouteSnapshot,
+        _: RouterStateSnapshot
+      ) => {
+        return `banner-img-${route.params['id']}`;
+      },
     },
   },
   {

@@ -14,7 +14,8 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { eRoutes } from '@shared/enums';
-import { filter, fromEvent, startWith, switchMap } from 'rxjs';
+import { debounceTime, filter, fromEvent, startWith, switchMap } from 'rxjs';
+
 @Component({
   selector: 'info-header',
   templateUrl: './header.component.html',
@@ -43,13 +44,22 @@ export class HeaderComponent {
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         startWith(null),
-        switchMap(() => fromEvent(window, 'scroll').pipe(startWith(null))),
+        switchMap(() =>
+          fromEvent(window, 'scroll').pipe(startWith(null), debounceTime(20))
+        ),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
         const isAtHome = this.router.url === '/';
         const higherThanHeader =
           window.document.documentElement.scrollTop > 150;
+
+        const newState =
+          higherThanHeader || !isAtHome
+            ? 'translateY(0px)'
+            : 'translateY(-60px)';
+
+        if (newState === this.header().nativeElement.style.transform) return;
 
         this.header().nativeElement.style.transform =
           higherThanHeader || !isAtHome

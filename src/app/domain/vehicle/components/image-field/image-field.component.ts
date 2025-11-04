@@ -1,6 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, effect, forwardRef, input, OnInit } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  inject,
+  OnInit
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -13,7 +19,7 @@ import { BehaviorSubject, switchMap } from 'rxjs';
   selector: 'info-image-field',
   templateUrl: './image-field.component.html',
   styleUrls: ['./image-field.component.scss'],
-  imports: [DragFileDirective, AsyncPipe, FontAwesomeModule],
+  imports: [DragFileDirective, AsyncPipe, FontAwesomeModule, AsyncPipe],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,10 +33,11 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
   onTouch?: (value: string | ArrayBuffer) => {};
   image$ = new BehaviorSubject<string | ArrayBuffer>('');
 
-  id = input<number | string | null>(null);
-
   _uploadFile = uploadFile;
   _fileToBase64 = fileToBase64;
+
+  viewTransitionName =
+    inject(ActivatedRoute).snapshot.data['viewTransitionName'] ?? '';
 
   constructor(library: FaIconLibrary) {
     library.addIcons(faTrash, faCloudArrowUp);

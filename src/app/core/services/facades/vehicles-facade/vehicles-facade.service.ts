@@ -10,7 +10,7 @@ export class VehiclesFacade {
   private readonly vehiclesApiService = inject(VehiclesApiService);
   private vehicles$ = new BehaviorSubject<IVehicle[]>([]);
 
-  setVehicles() {
+  setVehicles() {    
     this.vehiclesApiService
       .getVehicles()
       .pipe(

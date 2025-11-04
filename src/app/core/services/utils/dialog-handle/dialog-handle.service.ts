@@ -23,6 +23,8 @@ export class DialogHandleService<T> {
   private _document = inject(DOCUMENT, { optional: true });
   private _ngZone = inject(NgZone);
 
+  constructor() {}
+
   openModal<Y = unknown>(component: Type<IDialogComponent<T>>) {
     const close$ = new Subject<Y>();
     const open$ = new Subject<void>();
@@ -52,8 +54,11 @@ export class DialogHandleService<T> {
     const modalRef = createComponent(DialogComponent, {
       environmentInjector: this._environmentInjector,
       elementInjector,
-      projectableNodes: [[ref.location.nativeElement]],
     });
+
+    (modalRef.location.nativeElement as HTMLElement).firstChild!.appendChild(
+      ref.location.nativeElement
+    );
 
     this._applicationRef.attachView(modalRef.hostView);
     this._document?.body.appendChild(modalRef.location.nativeElement);

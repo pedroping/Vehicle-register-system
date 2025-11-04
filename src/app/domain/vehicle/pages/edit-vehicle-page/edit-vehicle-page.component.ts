@@ -20,7 +20,6 @@ export class EditVehiclePageComponent implements OnInit {
   initialFormValue?: IVehicle;
   vehicleListRoute = eRoutes.VEHICLE;
   vehicleForm = inject(VehicleFormHandleService).form;
-  id: number | string | undefined;
 
   private readonly router = inject(Router);
   private readonly vehiclesFacade = inject(VehiclesFacade);
@@ -31,7 +30,6 @@ export class EditVehiclePageComponent implements OnInit {
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
-    this.id = data.id;
     this.vehicleForm.patchValue(data);
     const formValue = this.vehicleForm.getRawValue();
     this.initialFormValue = {

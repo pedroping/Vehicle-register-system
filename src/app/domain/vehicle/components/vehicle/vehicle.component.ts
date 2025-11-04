@@ -5,7 +5,9 @@ import {
   ElementRef,
   inject,
   input,
-  OnInit
+  OnChanges,
+  OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -31,7 +33,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./vehicle.component.scss'],
   imports: [AsyncPipe, UpperCasePipe, RouterLink, FontAwesomeModule],
 })
-export class VehicleComponent implements OnInit {
+export class VehicleComponent implements OnInit, OnChanges {
   private readonly brandsFacade = inject(BrandsFacade);
   private readonly toastrService = inject(ToastrService);
   private readonly vehiclesFacade = inject(VehiclesFacade);
@@ -62,6 +64,25 @@ export class VehicleComponent implements OnInit {
     this.category$ = this.categoriesFacade.getCategoryById(
       this.vehicle().category
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const vehicleChange = changes['vehicle'];
+    if (!vehicleChange || vehicleChange.firstChange) return;
+
+    if (
+      vehicleChange.previousValue.carBrand !=
+      vehicleChange.currentValue.carBrand
+    )
+      this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);
+
+    if (
+      vehicleChange.previousValue.category !=
+      vehicleChange.currentValue.category
+    )
+      this.category$ = this.categoriesFacade.getCategoryById(
+        this.vehicle().category
+      );
   }
 
   deleteVehicle() {

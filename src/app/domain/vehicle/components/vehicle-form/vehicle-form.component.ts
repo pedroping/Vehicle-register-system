@@ -29,6 +29,4 @@ import { ImageFieldComponent } from '../image-field/image-field.component';
 export class VehicleFormComponent {
   brands$ = inject(BrandsFacade).getBrands$$();
   categories$ = inject(CategoriesFacade).getCategories$$();
-
-  id = input<number | string | null>(null);
 }
