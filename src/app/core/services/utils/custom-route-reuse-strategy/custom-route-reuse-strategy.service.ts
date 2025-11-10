@@ -3,6 +3,7 @@ import {
   ActivatedRouteSnapshot,
   DetachedRouteHandle,
   RouteReuseStrategy,
+  UrlSegment,
 } from '@angular/router';
 
 @Injectable({
@@ -41,11 +42,12 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     curr: ActivatedRouteSnapshot
   ): boolean {
     if (future.data['onlySrr']) {
-      const hasAllKeys = future.data['keys'].every((key: string) => {
+      const hasAllKeys = future.data?.['keys']?.every((key: string) => {
         return !!this.transferState.get(makeStateKey<string>(key), null);
       });
 
-      if (!hasAllKeys) window.location.href = future.routeConfig?.path ?? '';
+      if (!hasAllKeys || !future.data?.['keys'])
+        window.location.href = this.buildUrlPath(future.url);
 
       return future.routeConfig === curr.routeConfig;
     }
@@ -55,5 +57,9 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 
   private getRouteKey(route: ActivatedRouteSnapshot) {
     return (route.routeConfig ?? '') as string;
+  }
+
+  private buildUrlPath(segments: UrlSegment[]): string {
+    return segments.map((segment) => segment.path).join('/');
   }
 }
