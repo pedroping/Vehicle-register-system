@@ -23,7 +23,6 @@ import { debounceTime, filter, fromEvent, startWith, switchMap } from 'rxjs';
   imports: [RouterLink, FontAwesomeModule],
 })
 export class HeaderComponent {
-  vehicleListRoute = eRoutes.VEHICLE;
   newVehicleRoute = `${eRoutes.VEHICLE_NEW}`;
 
   private readonly header =

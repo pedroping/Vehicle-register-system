@@ -17,7 +17,6 @@ import { VehicleFormHandleService } from '../../service/vehicle-form-handle.serv
 })
 export class EditVehiclePageComponent implements OnInit {
   initialFormValue?: IVehicle;
-  vehicleListRoute = eRoutes.VEHICLE;
   vehicleForm = inject(VehicleFormHandleService).form;
 
   private readonly router = inject(Router);
@@ -40,7 +39,7 @@ export class EditVehiclePageComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigateByUrl(this.vehicleListRoute);
+    this.router.navigateByUrl('');
     this.vehicleForm.reset();
   }
 
@@ -82,7 +81,7 @@ export class EditVehiclePageComponent implements OnInit {
       this.vehiclesFacade.deleteVehicle(id).subscribe(() => {
         this.vehicleForm.reset();
         this.vehiclesFacade.setVehicles();
-        this.router.navigateByUrl(this.vehicleListRoute);
+        this.router.navigateByUrl('');
         this.toastrService.success('Veículo deletado com sucesso!');
       });
     });
@@ -105,7 +104,7 @@ export class EditVehiclePageComponent implements OnInit {
     this.vehiclesFacade.editVehicle(newVehicle).subscribe(() => {
       this.vehicleForm.reset();
       this.vehiclesFacade.setVehicles();
-      this.router.navigateByUrl(this.vehicleListRoute);
+      this.router.navigateByUrl('');
       this.toastrService.success('Veículo editado com sucesso!');
     });
   }

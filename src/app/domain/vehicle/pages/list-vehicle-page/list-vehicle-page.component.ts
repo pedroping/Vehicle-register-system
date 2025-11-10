@@ -1,4 +1,8 @@
-import { AsyncPipe, isPlatformServer } from '@angular/common';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  isPlatformServer,
+} from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -44,7 +48,7 @@ export class ListVehiclePageComponent implements OnInit {
   showText$?: Observable<boolean>;
   _destroyRef = inject(DestroyRef);
 
-  a = '';
+  testKey = '';
 
   constructor(
     library: FaIconLibrary,
@@ -53,19 +57,24 @@ export class ListVehiclePageComponent implements OnInit {
   ) {
     library.addIcons(faCar);
 
-    if (isPlatformServer(this.platformId)) {
-      console.log(process.env['TEST_KEY']);
-      this.a = process.env['TEST_KEY'] ?? '';
-      this.transferState.set(MY_DATA_KEY, this.a);
-    } else {
-      const clientData = this.transferState.get(MY_DATA_KEY, null);
-      console.log(clientData);
+    const key = MY_DATA_KEY;
+    const isServer = isPlatformServer(this.platformId);
+    const isBrowser = isPlatformBrowser(this.platformId);
 
-      if (!clientData) {
-        window.location.reload();
-        return;
+    if (isServer) {
+      const envKey = process.env['TEST_KEY'] ?? '';
+      this.transferState.set(key, envKey);
+      this.testKey = envKey;
+      console.log('[SSR] TEST_KEY loaded:', envKey);
+      return;
+    }
+
+    if (isBrowser) {
+      const transferred = this.transferState.get<string>(key, '');
+      if (transferred) {
+        this.testKey = transferred;
+        console.log(`[Browser] TEST_KEY restored from TransferState: ${transferred}`);
       }
-      this.a = clientData ?? '';
     }
   }
 
