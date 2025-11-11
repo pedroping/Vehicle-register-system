@@ -5,7 +5,7 @@
   --reverse-index: calc(var(--numcards) - var(--index0));
   --reverse-index0: calc(var(--reverse-index) - 1);
   position: sticky;
-  top: 15vh;
+  top: min(10vh, 120px);
   padding-top: calc(var(--index) * 15px);
   height: clamp(65vh, 650px, 650px);
   width: 1000px;
