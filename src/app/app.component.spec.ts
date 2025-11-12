@@ -22,7 +22,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
 
     const infoSpinner = fixture.debugElement.query(
-      By.css('[data-testid=info-loading-spinner-template]')
+      By.css('[data-testid=info-loading-spinner-template]'),
     );
 
     expect(infoSpinner).toBeTruthy();

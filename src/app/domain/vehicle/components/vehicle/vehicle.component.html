@@ -1,7 +1,11 @@
 <div class="card__content">
   <div class="image-content">
-    <img [src]="vehicle().image || noImage" [alt]="'Imagem do carro: ' + vehicle().model" fetchpriority="high"
-      [style.viewTransitionName]="'banner-img-' + vehicle().id" />
+    <img
+      [src]="vehicle().image || noImage"
+      [alt]="'Imagem do carro: ' + vehicle().model"
+      fetchpriority="high"
+      [style.viewTransitionName]="'banner-img-' + vehicle().id"
+    />
   </div>
   <div class="description">
     <h2 [title]="vehicle().id + ' - ' + vehicle().model">
@@ -9,9 +13,7 @@
       <span>{{ vehicle().model | uppercase }}</span>
     </h2>
     <div class="details">
-      <p>
-        <span>Fabricante:</span> {{ (brand$ | async)?.name ?? "Não Definida" }}
-      </p>
+      <p><span>Fabricante:</span> {{ (brand$ | async)?.name ?? 'Não Definida' }}</p>
       <p><span>Fabricação:</span> {{ vehicle().year }}</p>
       <p><span>Placa:</span> {{ vehicle().licensePlate | uppercase }}</p>
       <p><span>Renavam:</span> {{ vehicle().renavam | uppercase }}</p>
@@ -21,7 +23,12 @@
   </div>
 
   <div class="actions">
-    <a (click)="deleteVehicle()" data-testid="delete-btn" aria-label="Delete esse veículo." role="button">
+    <a
+      (click)="deleteVehicle()"
+      data-testid="delete-btn"
+      aria-label="Delete esse veículo."
+      role="button"
+    >
       <fa-icon [icon]="['fas', 'trash']"></fa-icon>
     </a>
     <a [routerLink]="editRoute()" aria-label="Edite esse veículo.">

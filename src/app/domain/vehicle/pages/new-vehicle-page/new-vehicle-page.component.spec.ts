@@ -52,10 +52,7 @@ describe('NewVehiclePageComponent', () => {
 
     const markAsDirtySpy = spyOn(app.vehicleForm, 'markAsDirty');
     const markAllAsTouchedSpy = spyOn(app.vehicleForm, 'markAllAsTouched');
-    const updateValueAndValiditySpy = spyOn(
-      app.vehicleForm,
-      'updateValueAndValidity'
-    );
+    const updateValueAndValiditySpy = spyOn(app.vehicleForm, 'updateValueAndValidity');
 
     app.save();
 
@@ -118,11 +115,9 @@ describe('NewVehiclePageComponent', () => {
       category: 1,
     });
 
-    const addVehicleSpy = spyOn(vehiclesFacade, 'addVehicle').and.callFake(
-      () => {
-        return of(<IVehicle>{});
-      }
-    );
+    const addVehicleSpy = spyOn(vehiclesFacade, 'addVehicle').and.callFake(() => {
+      return of(<IVehicle>{});
+    });
     const navigateByUrlSpy = spyOn(router, 'navigateByUrl');
     const vehicleFormReset = spyOn(app.vehicleForm, 'reset');
     const setVehiclesSpy = spyOn(vehiclesFacade, 'setVehicles');
@@ -155,11 +150,9 @@ describe('NewVehiclePageComponent', () => {
       category: null,
     });
 
-    const addVehicleSpy = spyOn(vehiclesFacade, 'addVehicle').and.callFake(
-      () => {
-        return of(<IVehicle>{});
-      }
-    );
+    const addVehicleSpy = spyOn(vehiclesFacade, 'addVehicle').and.callFake(() => {
+      return of(<IVehicle>{});
+    });
     const navigateByUrlSpy = spyOn(router, 'navigateByUrl');
     const vehicleFormReset = spyOn(app.vehicleForm, 'reset');
     const setVehiclesSpy = spyOn(vehiclesFacade, 'setVehicles');

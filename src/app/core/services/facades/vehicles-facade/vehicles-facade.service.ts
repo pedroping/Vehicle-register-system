@@ -10,14 +10,10 @@ export class VehiclesFacade {
   private readonly vehiclesApiService = inject(VehiclesApiService);
   private vehicles$ = new BehaviorSubject<IVehicle[]>([]);
 
-  setVehicles() {    
+  setVehicles() {
     this.vehiclesApiService
       .getVehicles()
-      .pipe(
-        map((vehicles) =>
-          vehicles.map((vehicle, i) => ({ ...vehicle, index: i }))
-        )
-      )
+      .pipe(map((vehicles) => vehicles.map((vehicle, i) => ({ ...vehicle, index: i }))))
       .subscribe((vehicles) => this.vehicles$.next(vehicles));
   }
 

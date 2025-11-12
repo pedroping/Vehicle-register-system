@@ -1,10 +1,4 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 export const IN_OUT_ANIMATION_Y = trigger('inOutAnimation', [
   state('true', style({ opacity: 1, transform: 'translateY(0)' })),

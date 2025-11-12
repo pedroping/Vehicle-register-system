@@ -1,16 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import {
-  Component,
-  forwardRef,
-  inject,
-  OnInit
-} from '@angular/core';
+import { Component, forwardRef, inject, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {
-  FaIconLibrary,
-  FontAwesomeModule,
-} from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCloudArrowUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DragFileDirective } from '@shared/directives';
 import { fileToBase64, uploadFile } from '@shared/utils';
@@ -36,8 +28,7 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
   _uploadFile = uploadFile;
   _fileToBase64 = fileToBase64;
 
-  viewTransitionName =
-    inject(ActivatedRoute).snapshot.data['viewTransitionName'] ?? '';
+  viewTransitionName = inject(ActivatedRoute).snapshot.data['viewTransitionName'] ?? '';
 
   constructor(library: FaIconLibrary) {
     library.addIcons(faTrash, faCloudArrowUp);

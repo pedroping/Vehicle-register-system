@@ -59,11 +59,9 @@ describe('EditVehiclePageComponent', () => {
 
     const vehiclesFacade = fixture.debugElement.injector.get(VehiclesFacade);
 
-    const getVehicleSpy = spyOn(vehiclesFacade, 'getVehicle').and.callFake(
-      () => {
-        return of(<IVehicle>{});
-      }
-    );
+    const getVehicleSpy = spyOn(vehiclesFacade, 'getVehicle').and.callFake(() => {
+      return of(<IVehicle>{});
+    });
 
     app.ngOnInit();
 
@@ -92,10 +90,7 @@ describe('EditVehiclePageComponent', () => {
 
     const markAsDirtySpy = spyOn(app.vehicleForm, 'markAsDirty');
     const markAllAsTouchedSpy = spyOn(app.vehicleForm, 'markAllAsTouched');
-    const updateValueAndValiditySpy = spyOn(
-      app.vehicleForm,
-      'updateValueAndValidity'
-    );
+    const updateValueAndValiditySpy = spyOn(app.vehicleForm, 'updateValueAndValidity');
 
     app.save();
 
@@ -120,9 +115,7 @@ describe('EditVehiclePageComponent', () => {
       category: 1,
     });
 
-    const hasChangedAnyValueSpy = spyOn(app, 'hasChangedAnyValue').and.callFake(
-      () => false
-    );
+    const hasChangedAnyValueSpy = spyOn(app, 'hasChangedAnyValue').and.callFake(() => false);
 
     const warningSpy = spyOn(toastrService, 'warning');
 
@@ -146,9 +139,7 @@ describe('EditVehiclePageComponent', () => {
       category: 1,
     });
 
-    const hasChangedAnyValueSpy = spyOn(app, 'hasChangedAnyValue').and.callFake(
-      () => true
-    );
+    const hasChangedAnyValueSpy = spyOn(app, 'hasChangedAnyValue').and.callFake(() => true);
     const editVehicleSpy = spyOn(app, 'editVehicle');
 
     app.save();
@@ -209,9 +200,7 @@ describe('EditVehiclePageComponent', () => {
     const toastSucessSpy = spyOn(toastrService, 'success');
     const navigateByUrlSpy = spyOn(router, 'navigateByUrl');
     const resetSpy = spyOn(app.vehicleForm, 'reset');
-    const editVehicle = spyOn(vehiclesFacade, 'editVehicle').and.callFake(() =>
-      of(<IVehicle>{})
-    );
+    const editVehicle = spyOn(vehiclesFacade, 'editVehicle').and.callFake(() => of(<IVehicle>{}));
 
     app.vehicleForm.patchValue({
       licensePlate: '1234567',

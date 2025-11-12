@@ -10,16 +10,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  BrandsFacade,
-  CategoriesFacade,
-  VehiclesFacade,
-} from '@core/services/facades';
+import { BrandsFacade, CategoriesFacade, VehiclesFacade } from '@core/services/facades';
 import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
-import {
-  FaIconLibrary,
-  FontAwesomeModule,
-} from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { eRoutes } from '@shared/enums';
 import { IBrand, ICategory, IVehicle } from '@shared/models';
@@ -37,8 +30,7 @@ export class VehicleComponent implements OnInit, OnChanges {
   private readonly toastrService = inject(ToastrService);
   private readonly vehiclesFacade = inject(VehiclesFacade);
   private readonly categoriesFacade = inject(CategoriesFacade);
-  private readonly dialogHandleService: DialogHandleService<boolean> =
-    inject(DialogHandleService);
+  private readonly dialogHandleService: DialogHandleService<boolean> = inject(DialogHandleService);
 
   brand$?: Observable<IBrand | undefined>;
   category$?: Observable<ICategory | undefined>;
@@ -57,36 +49,26 @@ export class VehicleComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this._elementRef.nativeElement.style.setProperty(
       '--index',
-      ((this.vehicle().index ?? 0) + 1).toString()
+      ((this.vehicle().index ?? 0) + 1).toString(),
     );
     this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);
-    this.category$ = this.categoriesFacade.getCategoryById(
-      this.vehicle().category
-    );
+    this.category$ = this.categoriesFacade.getCategoryById(this.vehicle().category);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const vehicleChange = changes['vehicle'];
     if (!vehicleChange || vehicleChange.firstChange) return;
 
-    if (
-      vehicleChange.previousValue.carBrand !=
-      vehicleChange.currentValue.carBrand
-    )
+    if (vehicleChange.previousValue.carBrand != vehicleChange.currentValue.carBrand)
       this.brand$ = this.brandsFacade.getBrandById(this.vehicle().carBrand);
 
-    if (
-      vehicleChange.previousValue.category !=
-      vehicleChange.currentValue.category
-    )
-      this.category$ = this.categoriesFacade.getCategoryById(
-        this.vehicle().category
-      );
+    if (vehicleChange.previousValue.category != vehicleChange.currentValue.category)
+      this.category$ = this.categoriesFacade.getCategoryById(this.vehicle().category);
   }
 
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal<boolean>(() =>
-      import('@shared/components').then((c) => c.ConfirmActionComponent)
+      import('@shared/components').then((c) => c.ConfirmActionComponent),
     );
 
     instance.close$.subscribe((value) => {

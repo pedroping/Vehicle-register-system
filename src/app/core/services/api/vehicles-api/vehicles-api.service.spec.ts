@@ -1,10 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { INewVehicle } from '@shared/models';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
@@ -50,8 +47,7 @@ describe('Service: Vehicles', () => {
 
   describe('addVehicle(), getVehicle(), editVehicle(), deleteVehicle()', () => {
     const newVehicle: INewVehicle = {
-      image:
-        'https://cdn.motor1.com/images/mgl/kNREB/s3/lamborghini-huracan-sto.jpg',
+      image: 'https://cdn.motor1.com/images/mgl/kNREB/s3/lamborghini-huracan-sto.jpg',
       model: 'Huracán Sport',
       year: '2024',
       chassi: '123321313asffasf2',

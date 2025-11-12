@@ -66,9 +66,8 @@ describe('VehicleComponent', () => {
       id: 2,
     });
 
-    const deleteBtn = fixture.debugElement.query(
-      By.css('[data-testid=delete-btn]')
-    )?.nativeElement as HTMLButtonElement;
+    const deleteBtn = fixture.debugElement.query(By.css('[data-testid=delete-btn]'))
+      ?.nativeElement as HTMLButtonElement;
 
     const deleteSpy = spyOn(app, 'deleteVehicle');
 

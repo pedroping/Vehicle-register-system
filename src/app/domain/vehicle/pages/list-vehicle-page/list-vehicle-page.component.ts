@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  isPlatformBrowser,
-  isPlatformServer,
-} from '@angular/common';
+import { AsyncPipe, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -16,10 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { VehiclesFacade } from '@core/services/facades';
-import {
-  FaIconLibrary,
-  FontAwesomeModule,
-} from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { eRoutes } from '@shared/enums';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
@@ -32,13 +25,7 @@ const MY_DATA_KEY = makeStateKey<string>('myData');
   selector: 'info-list-vehicle-page',
   templateUrl: './list-vehicle-page.component.html',
   styleUrls: ['./list-vehicle-page.component.scss'],
-  imports: [
-    VehicleComponent,
-    AsyncPipe,
-    RouterLink,
-    FontAwesomeModule,
-    ListVehicleHeaderComponent,
-  ],
+  imports: [VehicleComponent, AsyncPipe, RouterLink, FontAwesomeModule, ListVehicleHeaderComponent],
 })
 export class ListVehiclePageComponent implements OnInit {
   newVehicleRoute = `${eRoutes.VEHICLE}/${eRoutes.VEHICLE_NEW}`;
@@ -53,7 +40,7 @@ export class ListVehiclePageComponent implements OnInit {
   constructor(
     library: FaIconLibrary,
     private transferState: TransferState,
-    @Inject(PLATFORM_ID) private readonly platformId: Object
+    @Inject(PLATFORM_ID) private readonly platformId: object,
   ) {
     library.addIcons(faCar);
 
@@ -86,7 +73,7 @@ export class ListVehiclePageComponent implements OnInit {
       startWith(null),
       map(() => {
         return document.documentElement.scrollTop >= 110;
-      })
+      }),
     );
   }
 }

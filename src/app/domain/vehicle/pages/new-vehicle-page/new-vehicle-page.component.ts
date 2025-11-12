@@ -30,9 +30,7 @@ export class NewVehiclePageComponent implements OnInit {
       this.vehicleForm.markAllAsTouched();
       this.vehicleForm.updateValueAndValidity();
 
-      this.toastrService.warning(
-        'Por favor, preencha todos os campos corretamente.'
-      );
+      this.toastrService.warning('Por favor, preencha todos os campos corretamente.');
 
       return;
     }

@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   private loadStyles() {
-    let style = document.createElement('link');
+    const style = document.createElement('link');
     style.rel = 'stylesheet';
     style.type = 'text/css';
     style.href = 'toastr.css';

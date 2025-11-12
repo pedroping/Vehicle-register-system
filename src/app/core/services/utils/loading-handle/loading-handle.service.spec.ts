@@ -13,12 +13,9 @@ describe('Service: LoadingHandle', () => {
     service = TestBed.inject(LoadingHandleService);
   });
 
-  it('should ...', inject(
-    [LoadingHandleService],
-    (service: LoadingHandleService) => {
-      expect(service).toBeTruthy();
-    }
-  ));
+  it('should ...', inject([LoadingHandleService], (service: LoadingHandleService) => {
+    expect(service).toBeTruthy();
+  }));
 
   describe('test all functions', () => {
     it('should return an observale and emit an true event', (done) => {

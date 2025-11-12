@@ -11,9 +11,7 @@ export class CategoriesFacade {
   private readonly categories$ = new BehaviorSubject<ICategory[]>([]);
 
   private setCategories() {
-    this.categoriesApi
-      .getCategories()
-      .subscribe((categories) => this.categories$.next(categories));
+    this.categoriesApi.getCategories().subscribe((categories) => this.categories$.next(categories));
   }
 
   getCategories$$() {

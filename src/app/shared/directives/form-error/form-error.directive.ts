@@ -1,10 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  inject,
-  input
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormControl } from '@angular/forms';
 import { FORM_ERRORS } from '@shared/models';
@@ -39,9 +33,7 @@ export class FormErrorDirective {
 
     if (!this.controlContainer) return;
 
-    this.control = this.controlContainer.control?.get(
-      controlSelector
-    ) as FormControl;
+    this.control = this.controlContainer.control?.get(controlSelector) as FormControl;
 
     this.createSubscriptions();
   }
@@ -49,17 +41,10 @@ export class FormErrorDirective {
   createSubscriptions() {
     if (!this.control) return;
 
-    merge(
-      this.control.statusChanges,
-      this.control.valueChanges,
-      this.control.events
-    )
+    merge(this.control.statusChanges, this.control.valueChanges, this.control.events)
       .pipe(takeUntilDestroyed(this.destroyRef), startWith(null))
       .subscribe(() => {
-        if (
-          this.control?.valid ||
-          (!this.control?.dirty && !this.control?.touched)
-        ) {
+        if (this.control?.valid || (!this.control?.dirty && !this.control?.touched)) {
           this.elementRef.nativeElement.innerHTML = '';
           return;
         }
@@ -68,7 +53,7 @@ export class FormErrorDirective {
 
         if (errorKey)
           this.elementRef.nativeElement.innerHTML = FORM_ERRORS[errorKey]?.(
-            this.control?.errors?.[errorKey]
+            this.control?.errors?.[errorKey],
           );
       });
   }

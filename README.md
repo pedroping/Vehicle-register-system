@@ -18,22 +18,22 @@
    <img alt="project-image" src="/public/no-data.png" />  
 </div>
 
-## :hammer_and_wrench: _Tecnologias_
+## :hammer*and_wrench: \_Tecnologias*
 
 <div align="center">
 
-|         :globe_with_meridians: Todas as Tecnologias          | 
-| :----------------------------------------------------------: |  
-|    [HTML](https://www.w3schools.com/html/)                   |    
-|          [SCSS](https://sass-lang.com/)                      | 
-|  [TypeScript](https://www.typescriptlang.org/)               |
-|          [Angular](https://angular.dev/)                     |  
-|  [Karma](https://karma-runner.github.io/latest/index.html)   |   
-|        [Jasmine](https://jasmine.github.io/)                 |   
-|    [Toastr](https://www.npmjs.com/package/ngx-toastr)        |   
-|              [Rxjs](https://rxjs.dev/)                       |   
-|      [Fortawesome](https://fontawesome.com/)                 |   
-|      [JSON Server](https://www.npmjs.com/package/json-server)                 |   
+|        :globe_with_meridians: Todas as Tecnologias        |
+| :-------------------------------------------------------: |
+|          [HTML](https://www.w3schools.com/html/)          |
+|              [SCSS](https://sass-lang.com/)               |
+|       [TypeScript](https://www.typescriptlang.org/)       |
+|              [Angular](https://angular.dev/)              |
+| [Karma](https://karma-runner.github.io/latest/index.html) |
+|           [Jasmine](https://jasmine.github.io/)           |
+|    [Toastr](https://www.npmjs.com/package/ngx-toastr)     |
+|                 [Rxjs](https://rxjs.dev/)                 |
+|          [Fortawesome](https://fontawesome.com/)          |
+| [JSON Server](https://www.npmjs.com/package/json-server)  |
 
 </div>
 
@@ -43,15 +43,16 @@ Execute `npm install` para instalar as dependências necessárias, após isso `n
 
 ## Ambiente de desenvolvimento Back-End
 
-Execute `npm install json-server` para instalar as dependências necessárias para rodar nosso back-end de teste, após isso rode `json-server --watch db.json` ou  `npx json-server --watch db.json`, depois disso o backend será criado em http://localhost:3000/.
+Execute `npm install json-server` para instalar as dependências necessárias para rodar nosso back-end de teste, após isso rode `json-server --watch db.json` ou `npx json-server --watch db.json`, depois disso o backend será criado em http://localhost:3000/.
 
-## Testes unitários 
+## Testes unitários
 
 Execute `npm run build` ou `ng test` para iniciar o ambiente de teste, após isso uma janela nova será aberta com o testes no seu computador.
 
 Lembre-se sempre de executar o comando para rodar o back-end antes de tentar usar o projeto ou testá-lo.
 
 ## :brain: _Conceitos Aplicados_
+
 <div align="center">
   
 |         🧠 Conceitos                  |   
@@ -61,6 +62,6 @@ Lembre-se sempre de executar o comando para rodar o back-end antes de tentar usa
 |    ReactiveX                          |
 |    Dependency Injection               |
 |    Observable Pattern                 | 
-|    Facade Pattern                     | 
+|    Facade Pattern                     |
 
 </div>

@@ -1,5 +1,5 @@
-@use "animations";
-@use "buttons";
+@use 'animations';
+@use 'buttons';
 
 :host {
   display: block;
@@ -60,7 +60,9 @@
       left: 25px;
       color: var(--primary);
       font-size: 16px;
-      transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+      transition:
+        opacity 200ms ease-in-out,
+        transform 200ms ease-in-out;
 
       &:hover {
         transform: scale(1.3);

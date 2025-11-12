@@ -6,16 +6,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
-    selector: 'app-test',
-    imports: [DragFileDirective],
-    template: ` <div dragFile></div> `
+  selector: 'app-test',
+  imports: [DragFileDirective],
+  template: ` <div dragFile></div> `,
 })
 class TestComponent {}
 
 describe('Directive: DragFile', () => {
   let fixture: ComponentFixture<TestComponent>;
   let dragElement: DebugElement;
-  let elementRef: ElementRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,7 +31,6 @@ describe('Directive: DragFile', () => {
     });
 
     fixture = TestBed.createComponent(TestComponent);
-    elementRef = TestBed.inject(ElementRef);
     dragElement = fixture.debugElement.query(By.directive(DragFileDirective));
     fixture.detectChanges();
   });
@@ -46,18 +44,14 @@ describe('Directive: DragFile', () => {
     dragElement.triggerEventHandler('dragover', new Event('dragover'));
     fixture.detectChanges();
 
-    expect((dragElement.nativeElement as HTMLElement).className).toContain(
-      'onDrag'
-    );
+    expect((dragElement.nativeElement as HTMLElement).className).toContain('onDrag');
   });
 
   it('should trigger dragleave event', () => {
     dragElement.triggerEventHandler('dragleave', new Event('dragleave'));
     fixture.detectChanges();
 
-    expect((dragElement.nativeElement as HTMLElement).className).not.toContain(
-      'onDrag'
-    );
+    expect((dragElement.nativeElement as HTMLElement).className).not.toContain('onDrag');
   });
 
   it('should trigger drop event and not emit files', () => {
@@ -85,9 +79,7 @@ describe('Directive: DragFile', () => {
     });
     fixture.detectChanges();
 
-    expect((dragElement.nativeElement as HTMLElement).className).not.toContain(
-      'onDrag'
-    );
+    expect((dragElement.nativeElement as HTMLElement).className).not.toContain('onDrag');
   });
 });
 

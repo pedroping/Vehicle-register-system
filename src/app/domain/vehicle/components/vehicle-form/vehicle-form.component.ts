@@ -1,10 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
-import {
-  ControlContainer,
-  FormGroupDirective,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { BrandsFacade, CategoriesFacade } from '@core/services/facades';
 import { FormErrorDirective } from '@shared/directives';
 import { ImageFieldComponent } from '../image-field/image-field.component';
@@ -13,12 +9,7 @@ import { ImageFieldComponent } from '../image-field/image-field.component';
   selector: 'info-vehicle-form',
   templateUrl: './vehicle-form.component.html',
   styleUrls: ['./vehicle-form.component.scss'],
-  imports: [
-    AsyncPipe,
-    FormErrorDirective,
-    ReactiveFormsModule,
-    ImageFieldComponent,
-  ],
+  imports: [AsyncPipe, FormErrorDirective, ReactiveFormsModule, ImageFieldComponent],
   viewProviders: [
     {
       provide: ControlContainer,

@@ -6,7 +6,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy.service'
 describe('Service: CustomRouteReuseStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CustomRouteReuseStrategy]
+      providers: [CustomRouteReuseStrategy],
     });
   });
 

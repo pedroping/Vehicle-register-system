@@ -16,10 +16,7 @@ describe('Service: DialogHandle', () => {
     service = TestBed.inject(DialogHandleService);
   });
 
-  it('should ...', inject(
-    [DialogHandleService],
-    (service: DialogHandleService<boolean>) => {
-      expect(service).toBeTruthy();
-    }
-  ));
+  it('should ...', inject([DialogHandleService], (service: DialogHandleService<boolean>) => {
+    expect(service).toBeTruthy();
+  }));
 });

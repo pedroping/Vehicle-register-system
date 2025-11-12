@@ -1,14 +1,6 @@
 import { IMAGE_CONFIG } from '@angular/common';
-import {
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from '@angular/common/http';
-import {
-  ApplicationConfig,
-  Provider,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { ApplicationConfig, Provider, provideZoneChangeDetection } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -18,10 +10,7 @@ import {
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
-import {
-  errorHandleInterceptor,
-  loadingHttpInterceptorFn,
-} from '@core/interceptors';
+import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@core/interceptors';
 import { loadingSpinnerProvider } from '@core/providers/loading-spinner-provider';
 import { CustomRouteReuseStrategy } from '@core/services/utils/custom-route-reuse-strategy/custom-route-reuse-strategy.service';
 import { environment } from '@environment/environment';
@@ -53,13 +42,13 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'top',
         anchorScrolling: 'enabled',
       }),
-      withEnabledBlockingInitialNavigation()
+      withEnabledBlockingInitialNavigation(),
     ),
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
       withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn]),
-      withFetch()
+      withFetch(),
     ),
     IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,

@@ -1,4 +1,4 @@
-@use "animations";
+@use 'animations';
 
 :host {
   --index0: calc(var(--index) - 1);
@@ -32,8 +32,7 @@
 
     animation: linear scale forwards;
     animation-timeline: --cards-element-scrolls-in-body;
-    animation-range: exit-crossing var(--start-range) exit-crossing
-      var(--end-range);
+    animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
 
     .image-content {
       display: flex;

@@ -69,13 +69,9 @@ describe('ImageFieldComponent', () => {
     const fixture = TestBed.createComponent(ImageFieldComponent);
     const app = fixture.componentInstance;
 
-    const uploadFileSpy = spyOn(app, '_uploadFile').and.callFake(() =>
-      of(new File([], ''))
-    );
+    const uploadFileSpy = spyOn(app, '_uploadFile').and.callFake(() => of(new File([], '')));
 
-    const fileToBase64Spy = spyOn(app, '_fileToBase64').and.callFake(() =>
-      of('')
-    );
+    const fileToBase64Spy = spyOn(app, '_fileToBase64').and.callFake(() => of(''));
 
     const imageSpy = jasmine.createSpy('image$');
     app.image$.subscribe(imageSpy);
@@ -94,9 +90,7 @@ describe('ImageFieldComponent', () => {
     const imageSpy = jasmine.createSpy('image$');
     app.image$.subscribe(imageSpy);
 
-    const fileToBase64Spy = spyOn(app, '_fileToBase64').and.callFake(() =>
-      of('')
-    );
+    const fileToBase64Spy = spyOn(app, '_fileToBase64').and.callFake(() => of(''));
 
     app.onFileDrop([new File([], '')]);
 
@@ -111,9 +105,7 @@ describe('ImageFieldComponent', () => {
     const imageSpy = jasmine.createSpy('image$');
     app.image$.pipe(skip(1)).subscribe(imageSpy);
 
-    const fileToBase64Spy = spyOn(app, '_fileToBase64').and.callFake(() =>
-      of('')
-    );
+    const fileToBase64Spy = spyOn(app, '_fileToBase64').and.callFake(() => of(''));
 
     app.onFileDrop([]);
 

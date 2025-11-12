@@ -8,14 +8,11 @@ import { DIALOG_TOKEN } from '@shared/tokens/dialog/dialog-token';
   styleUrls: ['./confirm-action.component.scss'],
   standalone: true,
 })
-export class ConfirmActionComponent
-  implements IDialogComponent<boolean>, OnDestroy
-{
+export class ConfirmActionComponent implements IDialogComponent<boolean>, OnDestroy {
   hasEmit = false;
   event = output<boolean>();
 
-  private readonly dialogToken =
-    inject<IDialogTokenData<boolean>>(DIALOG_TOKEN);
+  private readonly dialogToken = inject<IDialogTokenData<boolean>>(DIALOG_TOKEN);
 
   cancel() {
     this.hasEmit = true;

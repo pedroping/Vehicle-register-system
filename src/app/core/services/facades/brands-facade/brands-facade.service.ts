@@ -12,9 +12,7 @@ export class BrandsFacade {
   private readonly brands$ = new BehaviorSubject<IBrand[]>([]);
 
   private setBrands() {
-    this.brandsApiService
-      .getBrands()
-      .subscribe((brands) => this.brands$.next(brands));
+    this.brandsApiService.getBrands().subscribe((brands) => this.brands$.next(brands));
   }
 
   getBrands$$() {

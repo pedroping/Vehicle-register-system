@@ -1,9 +1,5 @@
 import { inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Routes,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { VehiclesFacade } from '@core/services/facades';
 import { eRoutes } from '@shared/enums';
 
@@ -24,10 +20,7 @@ export default [
       data: (route: ActivatedRouteSnapshot, _: RouterStateSnapshot) => {
         return inject(VehiclesFacade).getVehicle(route.params['id']);
       },
-      viewTransitionName: (
-        route: ActivatedRouteSnapshot,
-        _: RouterStateSnapshot
-      ) => {
+      viewTransitionName: (route: ActivatedRouteSnapshot, _: RouterStateSnapshot) => {
         return `banner-img-${route.params['id']}`;
       },
     },
@@ -35,8 +28,7 @@ export default [
   {
     path: eRoutes.VEHICLE_NEW,
     loadComponent: async () =>
-      (await import('./pages/new-vehicle-page/new-vehicle-page.component'))
-        .NewVehiclePageComponent,
+      (await import('./pages/new-vehicle-page/new-vehicle-page.component')).NewVehiclePageComponent,
     data: { reuse: true },
   },
 ] as Routes;

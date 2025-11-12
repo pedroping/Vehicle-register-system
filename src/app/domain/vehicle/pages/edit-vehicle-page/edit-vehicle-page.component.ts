@@ -23,8 +23,7 @@ export class EditVehiclePageComponent implements OnInit {
   private readonly vehiclesFacade = inject(VehiclesFacade);
   private readonly toastrService = inject(ToastrService);
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly dialogHandleService: DialogHandleService<boolean> =
-    inject(DialogHandleService);
+  private readonly dialogHandleService: DialogHandleService<boolean> = inject(DialogHandleService);
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
@@ -49,9 +48,7 @@ export class EditVehiclePageComponent implements OnInit {
       this.vehicleForm.markAllAsTouched();
       this.vehicleForm.updateValueAndValidity();
 
-      this.toastrService.warning(
-        'Por favor, preencha todos os campos corretamente.'
-      );
+      this.toastrService.warning('Por favor, preencha todos os campos corretamente.');
 
       return;
     }
@@ -60,7 +57,7 @@ export class EditVehiclePageComponent implements OnInit {
 
     if (!hasChange) {
       this.toastrService.warning(
-        'Nenhum valor alterado, por favor tente alterar algum campo para editar o veículo.'
+        'Nenhum valor alterado, por favor tente alterar algum campo para editar o veículo.',
       );
       return;
     }
@@ -70,7 +67,7 @@ export class EditVehiclePageComponent implements OnInit {
 
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal<boolean>(() =>
-      import('@shared/components').then((c) => c.ConfirmActionComponent)
+      import('@shared/components').then((c) => c.ConfirmActionComponent),
     );
 
     instance.close$.subscribe((value) => {
@@ -114,9 +111,7 @@ export class EditVehiclePageComponent implements OnInit {
     const formValue = this.vehicleForm.getRawValue() as IVehicle;
 
     return Object.keys(this.initialFormValue).some(
-      (key) =>
-        this.initialFormValue![key as keyof IVehicle] !=
-        formValue[key as keyof IVehicle]
+      (key) => this.initialFormValue![key as keyof IVehicle] != formValue[key as keyof IVehicle],
     );
   }
 

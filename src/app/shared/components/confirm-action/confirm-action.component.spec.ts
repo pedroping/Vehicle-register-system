@@ -25,9 +25,8 @@ describe('ConfirmActionComponent', () => {
     const fixture = TestBed.createComponent(ConfirmActionComponent);
     const app = fixture.componentInstance;
 
-    const cancleBtn = fixture.debugElement.query(
-      By.css('[data-testeid=cancel-btn]')
-    )?.nativeElement as HTMLButtonElement;
+    const cancleBtn = fixture.debugElement.query(By.css('[data-testeid=cancel-btn]'))
+      ?.nativeElement as HTMLButtonElement;
 
     expect(cancleBtn).toBeTruthy();
 
@@ -43,9 +42,8 @@ describe('ConfirmActionComponent', () => {
     const fixture = TestBed.createComponent(ConfirmActionComponent);
     const app = fixture.componentInstance;
 
-    const cancleBtn = fixture.debugElement.query(
-      By.css('[data-testeid=confirm-btn]')
-    )?.nativeElement as HTMLButtonElement;
+    const cancleBtn = fixture.debugElement.query(By.css('[data-testeid=confirm-btn]'))
+      ?.nativeElement as HTMLButtonElement;
 
     expect(cancleBtn).toBeTruthy();
 

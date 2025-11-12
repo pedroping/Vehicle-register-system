@@ -16,8 +16,7 @@ import { take } from 'rxjs';
   animations: [IN_OUT_ANIMATION_Y],
 })
 export class DialogComponent implements OnInit {
-  private readonly dialogToken =
-    inject<IDialogTokenData<boolean>>(DIALOG_TOKEN);
+  private readonly dialogToken = inject<IDialogTokenData<boolean>>(DIALOG_TOKEN);
 
   display = signal<'none' | 'flex'>('none');
   state = signal(false);

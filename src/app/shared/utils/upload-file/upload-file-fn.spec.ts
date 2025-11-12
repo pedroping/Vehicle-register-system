@@ -15,9 +15,7 @@ describe('Upload File', () => {
   it('should emit change event', () => {
     const newInput = document.createElement('input');
 
-    const createSpy = spyOn(document, 'createElement').and.callFake(
-      () => newInput
-    );
+    const createSpy = spyOn(document, 'createElement').and.callFake(() => newInput);
     const fnResult$ = uploadFile();
 
     newInput.dispatchEvent(new Event('change'));

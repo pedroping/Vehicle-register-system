@@ -1,8 +1,4 @@
-import {
-  HttpHandlerFn,
-  HttpInterceptorFn,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { LoadingHandleService } from '@core/services/utils';
 import { finalize } from 'rxjs';
@@ -14,7 +10,5 @@ export const loadingHttpInterceptorFn: HttpInterceptorFn = (
   const loadingHandleService = inject(LoadingHandleService);
   loadingHandleService.enableInterceptor();
 
-  return next(req).pipe(
-    finalize(() => loadingHandleService.disableInterceptor()),
-  );
+  return next(req).pipe(finalize(() => loadingHandleService.disableInterceptor()));
 };

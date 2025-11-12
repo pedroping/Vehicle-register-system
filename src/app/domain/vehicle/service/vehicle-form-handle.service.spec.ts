@@ -10,10 +10,7 @@ describe('Service: VehicleDataHandle', () => {
     });
   });
 
-  it('should ...', inject(
-    [VehicleFormHandleService],
-    (service: VehicleFormHandleService) => {
-      expect(service).toBeTruthy();
-    },
-  ));
+  it('should ...', inject([VehicleFormHandleService], (service: VehicleFormHandleService) => {
+    expect(service).toBeTruthy();
+  }));
 });

@@ -56,7 +56,7 @@ export class DialogHandleService<T> {
       });
 
       (modalRef.location.nativeElement as HTMLElement).firstChild!.appendChild(
-        ref.location.nativeElement
+        ref.location.nativeElement,
       );
 
       this._applicationRef.attachView(modalRef.hostView);

@@ -1,4 +1,4 @@
-@use "buttons";
+@use 'buttons';
 
 :host {
   display: block;
@@ -12,17 +12,12 @@
     margin-bottom: 15px;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 0px;
       height: 1px;
       width: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent 10%,
-        var(--black-01),
-        transparent 90%
-      );
+      background: linear-gradient(90deg, transparent 10%, var(--black-01), transparent 90%);
     }
 
     h4 {

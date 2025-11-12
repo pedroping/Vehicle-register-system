@@ -4,8 +4,7 @@ import { eRoutes } from '@shared/enums';
 export default [
   {
     path: '',
-    loadComponent: async () =>
-      (await import('./page/home-page.component')).HomePageComponent,
+    loadComponent: async () => (await import('./page/home-page.component')).HomePageComponent,
     children: [
       {
         path: '',

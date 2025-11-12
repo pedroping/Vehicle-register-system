@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  FaIconLibrary,
-  FontAwesomeModule,
-} from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { eRoutes } from '@shared/enums';
 

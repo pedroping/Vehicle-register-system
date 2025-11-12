@@ -22,8 +22,7 @@ describe('LoadingSpinnerComponent', () => {
     const fixture = TestBed.createComponent(LoadingSpinnerComponent);
     const app = fixture.componentInstance;
 
-    const loadingHandleService =
-      fixture.debugElement.injector.get(LoadingHandleService);
+    const loadingHandleService = fixture.debugElement.injector.get(LoadingHandleService);
 
     app.ngOnInit();
     loadingHandleService.enableInterceptor();
@@ -39,8 +38,7 @@ describe('LoadingSpinnerComponent', () => {
     const fixture = TestBed.createComponent(LoadingSpinnerComponent);
     const app = fixture.componentInstance;
 
-    const loadingHandleService =
-      fixture.debugElement.injector.get(LoadingHandleService);
+    const loadingHandleService = fixture.debugElement.injector.get(LoadingHandleService);
 
     loadingHandleService.disableInterceptor();
     app.ngOnInit();

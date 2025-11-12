@@ -5,12 +5,11 @@ describe('ListVehicleHeaderComponent', () => {
   let component: ListVehicleHeaderComponent;
   let fixture: ComponentFixture<ListVehicleHeaderComponent>;
 
-  beforeEach((() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListVehicleHeaderComponent]
-    })
-    .compileComponents();
-  }));
+      declarations: [ListVehicleHeaderComponent],
+    }).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListVehicleHeaderComponent);

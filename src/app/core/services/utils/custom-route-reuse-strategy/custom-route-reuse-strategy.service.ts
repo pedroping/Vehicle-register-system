@@ -17,10 +17,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     return route.data['reuse'] === true;
   }
 
-  store(
-    route: ActivatedRouteSnapshot,
-    handle: DetachedRouteHandle | null
-  ): void {
+  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null): void {
     if (handle && route.data['reuse'] === true) {
       const key = this.getRouteKey(route);
       this.handlers.set(key, handle);
@@ -34,13 +31,10 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
     const key = this.getRouteKey(route);
-    return route.data['reuse'] === true ? this.handlers.get(key) ?? null : null;
+    return route.data['reuse'] === true ? (this.handlers.get(key) ?? null) : null;
   }
 
-  shouldReuseRoute(
-    future: ActivatedRouteSnapshot,
-    curr: ActivatedRouteSnapshot
-  ): boolean {
+  shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
     if (future.data['onlySrr']) {
       const hasAllKeys = future.data?.['keys']?.every((key: string) => {
         return !!this.transferState.get(makeStateKey<string>(key), null);
