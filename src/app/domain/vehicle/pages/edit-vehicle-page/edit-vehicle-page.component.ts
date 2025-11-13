@@ -25,6 +25,7 @@ export class EditVehiclePageComponent implements OnInit {
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
+    this.vehicleForm.reset();
     this.vehicleForm.patchValue(data);
     const formValue = this.vehicleForm.getRawValue();
     this.initialFormValue = {
@@ -37,7 +38,6 @@ export class EditVehiclePageComponent implements OnInit {
 
   cancel() {
     this.router.navigateByUrl('');
-    this.vehicleForm.reset();
   }
 
   save() {
