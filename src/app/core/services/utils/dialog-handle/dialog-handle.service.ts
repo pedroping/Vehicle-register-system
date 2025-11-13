@@ -9,9 +9,9 @@ import {
   NgZone,
   Type,
 } from '@angular/core';
-import { DialogComponent } from '@core/ui/dialog';
 import { IDialogComponent } from '@shared/models';
 import { DIALOG_TOKEN } from '@shared/tokens/dialog/dialog-token';
+import { DialogComponent } from '@ui';
 import { debounceTime, Subject, take } from 'rxjs';
 
 @Injectable({

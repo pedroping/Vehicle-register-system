@@ -2,15 +2,14 @@
 
 import { provideHttpClient } from '@angular/common/http';
 import {
-  HttpClientTestingModule,
   HttpTestingController,
-  provideHttpClientTesting,
+  provideHttpClientTesting
 } from '@angular/common/http/testing';
-import { TestBed, tick } from '@angular/core/testing';
-import { VehiclesApiService } from '@core/services/api';
+import { TestBed } from '@angular/core/testing';
 import { IVehicle } from '@shared/models';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
-import { of, skip, take } from 'rxjs';
+import { of, take } from 'rxjs';
+import { VehiclesApiService } from '../../api/vehicles-api/vehicles-api.service';
 import { VehiclesFacade } from './vehicles-facade.service';
 
 describe('Service: VehiclesFacade', () => {

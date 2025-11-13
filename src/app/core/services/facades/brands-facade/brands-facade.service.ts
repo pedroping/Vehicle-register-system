@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { BrandsApiService } from '@core/services/api/brands-api/brands-api.service';
 import { IBrand } from '@shared/models';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { BrandsApiService } from '../../api/brands-api/brands-api.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,20 +1,15 @@
-/* tslint:disable:no-unused-variable */
-
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { BrandsFacade, VehiclesFacade } from '@core/services/facades';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
-import { provideToastr, ToastrService } from 'ngx-toastr';
-import { VehicleComponent } from './vehicle.component';
-import { IDialogComponent, IVehicle } from '@shared/models';
+import { BrandsFacade } from '@services';
 import { eRoutes } from '@shared/enums';
-import { By } from '@angular/platform-browser';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
-import { of, Subject } from 'rxjs';
-import { OutputEmitterRef } from '@angular/core';
+import { IVehicle } from '@shared/models';
+import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { provideToastr } from 'ngx-toastr';
+import { VehicleComponent } from './vehicle.component';
 
 describe('VehicleComponent', () => {
   beforeEach(async () => {

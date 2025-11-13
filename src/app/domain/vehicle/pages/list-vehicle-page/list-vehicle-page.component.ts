@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { VehiclesFacade } from '@core/services/facades';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
+import { VehiclesFacade } from '@services';
 import { eRoutes } from '@shared/enums';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
 import { ListVehicleHeaderComponent } from '../../components/list-vehicle-header/list-vehicle-header.component';
@@ -52,7 +52,7 @@ export class ListVehiclePageComponent implements OnInit {
       const envKey = process.env['TEST_KEY'] ?? '';
       this.transferState.set(key, envKey);
       this.testKey = envKey;
-      console.log('[SSR] TEST_KEY loaded:', envKey);
+      console.info('[SSR] TEST_KEY loaded:', envKey);
       return;
     }
 
@@ -60,7 +60,7 @@ export class ListVehiclePageComponent implements OnInit {
       const transferred = this.transferState.get<string>(key, '');
       if (transferred) {
         this.testKey = transferred;
-        console.log(`[Browser] TEST_KEY restored from TransferState: ${transferred}`);
+        console.info(`[Browser] TEST_KEY restored from TransferState: ${transferred}`);
       }
     }
   }

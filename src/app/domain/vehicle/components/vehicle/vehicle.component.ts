@@ -10,10 +10,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BrandsFacade, CategoriesFacade, VehiclesFacade } from '@core/services/facades';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { BrandsFacade, CategoriesFacade, DialogHandleService, VehiclesFacade } from '@services';
 import { eRoutes } from '@shared/enums';
 import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';

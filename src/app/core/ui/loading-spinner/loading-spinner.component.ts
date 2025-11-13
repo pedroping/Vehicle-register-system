@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LoadingHandleService } from '@core/services/utils';
+import { LoadingHandleService } from '@services';
 
 @Component({
   selector: 'info-loading-spinner',

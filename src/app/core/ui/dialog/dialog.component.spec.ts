@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
+import { DialogHandleService } from '../../services/utils/dialog-handle/dialog-handle.service';
 import { DialogComponent } from './dialog.component';
 
 describe('DialogComponent', () => {

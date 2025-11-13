@@ -10,10 +10,10 @@ import {
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
-import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@core/interceptors';
-import { loadingSpinnerProvider } from '@core/providers/loading-spinner-provider';
-import { CustomRouteReuseStrategy } from '@core/services/utils/custom-route-reuse-strategy/custom-route-reuse-strategy.service';
 import { environment } from '@environment/environment';
+import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
+import { loadingSpinnerProvider } from '@providers';
+import { CustomRouteReuseStrategy } from '@services';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';

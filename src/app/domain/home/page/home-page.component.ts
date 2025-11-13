@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from '@core/ui/footer';
-import { HeaderComponent } from '@core/ui/header';
+import { FooterComponent, HeaderComponent } from '@ui';
 
 @Component({
   selector: 'info-home-page',

@@ -1,9 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VehiclesFacade } from '@core/services/facades';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
-import { eRoutes } from '@shared/enums';
+import { DialogHandleService, VehiclesFacade } from '@services';
 import { IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';

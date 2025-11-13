@@ -21,8 +21,8 @@ import { BehaviorSubject, switchMap } from 'rxjs';
   ],
 })
 export class ImageFieldComponent implements ControlValueAccessor, OnInit {
-  onChange?: (value: string | ArrayBuffer) => {};
-  onTouch?: (value: string | ArrayBuffer) => {};
+  onChange?: (value: string | ArrayBuffer) => object;
+  onTouch?: (value: string | ArrayBuffer) => object;
   image$ = new BehaviorSubject<string | ArrayBuffer>('');
 
   _uploadFile = uploadFile;
@@ -45,11 +45,11 @@ export class ImageFieldComponent implements ControlValueAccessor, OnInit {
     if (value) this.image$.next(value);
   }
 
-  registerOnChange(fn: (value: string | ArrayBuffer) => {}) {
+  registerOnChange(fn: (value: string | ArrayBuffer) => object) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: (value: string | ArrayBuffer) => {}) {
+  registerOnTouched(fn: (value: string | ArrayBuffer) => object) {
     this.onTouch = fn;
   }
 

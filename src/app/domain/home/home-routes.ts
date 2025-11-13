@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { eRoutes } from '@shared/enums';
 
 export default [
   {
@@ -17,9 +16,9 @@ export default [
       },
     ],
   },
-  // {
-  //   path: '**',
-  //   redirectTo: '',
-  //   pathMatch: 'full',
-  // },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ] as Routes;

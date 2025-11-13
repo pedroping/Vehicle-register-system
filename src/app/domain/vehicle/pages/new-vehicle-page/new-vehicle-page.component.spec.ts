@@ -1,16 +1,14 @@
-/* tslint:disable:no-unused-variable */
-
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { Router, RouterModule } from '@angular/router';
+import { VehiclesFacade } from '@services';
+import { IVehicle } from '@shared/models';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr, ToastrService } from 'ngx-toastr';
-import { NewVehiclePageComponent } from './new-vehicle-page.component';
-import { VehiclesFacade } from '@core/services/facades';
 import { of } from 'rxjs';
-import { IVehicle } from '@shared/models';
+import { NewVehiclePageComponent } from './new-vehicle-page.component';
 
 describe('NewVehiclePageComponent', () => {
   beforeEach(async () => {

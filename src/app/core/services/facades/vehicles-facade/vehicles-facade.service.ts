@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { VehiclesApiService } from '@core/services/api';
 import { INewVehicle, IVehicle } from '@shared/models';
 import { BehaviorSubject, map } from 'rxjs';
+import { VehiclesApiService } from '../../api/vehicles-api/vehicles-api.service';
 
 @Injectable({
   providedIn: 'root',

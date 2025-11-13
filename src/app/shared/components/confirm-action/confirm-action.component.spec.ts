@@ -4,8 +4,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ConfirmActionComponent } from './confirm-action.component';
-import { DialogHandleService } from '@core/services/utils/dialog-handle/dialog-handle.service';
 import { By } from '@angular/platform-browser';
+import { DialogHandleService } from '@services';
 
 describe('ConfirmActionComponent', () => {
   beforeEach(async () => {

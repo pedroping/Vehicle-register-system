@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { LoadingHandleService } from '@services';
 import { LoadingSpinnerComponent } from './loading-spinner.component';
-import { LoadingHandleService } from '@core/services/utils';
 
 describe('LoadingSpinnerComponent', () => {
   beforeEach(async () => {

@@ -1,15 +1,14 @@
 import { DOCUMENT } from '@angular/common';
 import {
   afterNextRender,
-  APP_INITIALIZER,
   ApplicationRef,
   createComponent,
   EnvironmentInjector,
   inject,
-  provideAppInitializer,
+  provideAppInitializer
 } from '@angular/core';
-import { LoadingHandleService } from '@core/services/utils';
-import { LoadingSpinnerComponent } from '@core/ui/loading-spinner';
+import { LoadingHandleService } from '@services';
+import { LoadingSpinnerComponent } from '@ui';
 
 export const loadingSpinnerProvider = () => {
   return [

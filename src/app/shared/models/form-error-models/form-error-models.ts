@@ -13,7 +13,11 @@ export interface IMinLenghtError {
   actualLength: number;
 }
 
-export const FORM_ERRORS: { [key: string]: (...args: any) => string } = {
+export interface IGenericError extends IMaskError, IMaxLengthError, IMinLenghtError {}
+
+export const FORM_ERRORS: {
+  [key: string]: (...args: IGenericError[]) => string;
+} = {
   required: () => 'Esse campo é obrigatório!',
   maxlength: (maxLengthError: IMaxLengthError) =>
     `Máximo de ${maxLengthError.requiredLength} caracteres permitidos. Quantidade atual ${maxLengthError.actualLength}`,

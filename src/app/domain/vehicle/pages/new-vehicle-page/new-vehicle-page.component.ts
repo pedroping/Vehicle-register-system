@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { VehiclesFacade } from '@core/services/facades';
+import { VehiclesFacade } from '@services';
 import { INewVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
