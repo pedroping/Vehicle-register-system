@@ -6,9 +6,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {
   provideRouter,
   RouteReuseStrategy,
-  withEnabledBlockingInitialNavigation,
   withInMemoryScrolling,
-  withViewTransitions,
+  withViewTransitions
 } from '@angular/router';
 import { environment } from '@environment/environment';
 import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
@@ -42,7 +41,6 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'top',
         anchorScrolling: 'enabled',
       }),
-      withEnabledBlockingInitialNavigation(),
     ),
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),

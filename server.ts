@@ -19,14 +19,14 @@ export function app(): express.Express {
   server.set('views', browserDistFolder);
 
   server.get(
-    '**',
+    '*',
     express.static(browserDistFolder, {
       maxAge: '1y',
       index: 'index.html',
     }),
   );
 
-  server.get('**', (req, res, next) => {
+  server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
     commonEngine
