@@ -40,7 +40,6 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withInMemoryScrolling({
         scrollPositionRestoration: 'top',
-        anchorScrolling: 'enabled',
       }),
     ),
     provideToastr({ maxOpened: 1, autoDismiss: true }),
