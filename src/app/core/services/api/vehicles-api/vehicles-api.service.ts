@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { eHeaders } from '@shared/enums';
 import { INewVehicle, IVehicle } from '@shared/models';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 
@@ -16,8 +17,12 @@ export class VehiclesApiService {
     return this.http.get<IVehicle[]>(`${this.environment}/${this.VEHICLES}`);
   }
 
-  getVehicle(id: string | number) {
-    return this.http.get<IVehicle>(`${this.environment}/${this.VEHICLES}/${id}`);
+  getVehicle(id: string | number, hideLoading?: boolean) {
+    const headers = new HttpHeaders().set(eHeaders.HIDE_LOADING, hideLoading ? '1' : '0');
+
+    return this.http.get<IVehicle>(`${this.environment}/${this.VEHICLES}/${id}`, {
+      headers,
+    });
   }
 
   deleteVehicle(id: string | number) {

@@ -18,7 +18,7 @@ export default [
         .EditVehiclePageComponent,
     resolve: {
       data: (route: ActivatedRouteSnapshot) => {
-        return inject(VehiclesFacade).getVehicle(route.params['id']);
+        return inject(VehiclesFacade).getVehicle(route.params['id'], true);
       },
       viewTransitionName: (route: ActivatedRouteSnapshot) => {
         return `banner-img-${route.params['id']}`;

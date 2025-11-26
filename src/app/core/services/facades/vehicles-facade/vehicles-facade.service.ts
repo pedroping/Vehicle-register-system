@@ -25,8 +25,8 @@ export class VehiclesFacade {
     return this.vehicles$.asObservable();
   }
 
-  getVehicle(id: string | number) {
-    return this.vehiclesApiService.getVehicle(id);
+  getVehicle(id: string | number, hideLoading?: boolean) {
+    return this.vehiclesApiService.getVehicle(id, hideLoading);
   }
 
   deleteVehicle(id: string | number) {
