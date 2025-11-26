@@ -17,8 +17,8 @@ export class VehiclesApiService {
     return this.http.get<IVehicle[]>(`${this.environment}/${this.VEHICLES}`);
   }
 
-  getVehicle(id: string | number, hideLoading?: boolean) {
-    const headers = new HttpHeaders().set(eHeaders.HIDE_LOADING, hideLoading ? '1' : '0');
+  getVehicle(id: string | number) {
+    const headers = new HttpHeaders().set(eHeaders.HIDE_LOADING, '1');
 
     return this.http.get<IVehicle>(`${this.environment}/${this.VEHICLES}/${id}`, {
       headers,
