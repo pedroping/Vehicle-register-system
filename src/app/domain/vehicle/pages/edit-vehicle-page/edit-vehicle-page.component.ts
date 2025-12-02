@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogHandleService, VehiclesFacade } from '@services';
+import { DialogHandleService, HasChangesService, VehiclesFacade } from '@services';
 import { IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'info-edit-vehicle-page',
@@ -22,6 +23,7 @@ export class EditVehiclePageComponent implements OnInit {
   private readonly toastrService = inject(ToastrService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly dialogHandleService: DialogHandleService<boolean> = inject(DialogHandleService);
+  private readonly hasChangesService = inject(HasChangesService);
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
@@ -34,6 +36,10 @@ export class EditVehiclePageComponent implements OnInit {
       carBrand: Number(formValue.carBrand ?? -1),
       category: Number(formValue.category ?? -1),
     };
+
+    this.vehicleForm.valueChanges.pipe(take(1)).subscribe(() => {
+      this.hasChangesService.setChange(this.router.url, true);
+    });
   }
 
   cancel() {
@@ -83,6 +89,7 @@ export class EditVehiclePageComponent implements OnInit {
   }
 
   editVehicle() {
+    this.hasChangesService.setChange(this.router.url, false);
     const formValue = this.vehicleForm.getRawValue();
     const newVehicle: IVehicle = {
       id: formValue.id,

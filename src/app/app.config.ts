@@ -1,6 +1,13 @@
 import { IMAGE_CONFIG } from '@angular/common';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, isDevMode, Provider, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  isDevMode,
+  provideAppInitializer,
+  Provider,
+  provideZoneChangeDetection
+} from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -13,7 +20,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from '@environment/environment';
 import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
 import { loadingSpinnerProvider } from '@providers';
-import { CustomRouteReuseStrategy } from '@services';
+import { CustomRouteReuseStrategy, HasChangesService } from '@services';
 import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
@@ -51,10 +58,14 @@ export const appConfig: ApplicationConfig = {
     IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,
     provideClientHydration(),
-    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    provideAppInitializer(() => {
+      const hasChangesService = inject(HasChangesService);
+      return hasChangesService.startDomain();
+    }),
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
   ],
 };

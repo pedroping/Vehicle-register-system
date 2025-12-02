@@ -7,4 +7,4 @@ export * from './facades/vehicles-facade/vehicles-facade.service';
 export * from './utils/custom-route-reuse-strategy/custom-route-reuse-strategy.service';
 export * from './utils/dialog-handle/dialog-handle.service';
 export * from './utils/loading-handle/loading-handle.service';
-
+export * from './utils/has-changes/has-changes.service';

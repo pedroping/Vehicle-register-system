@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { VehiclesFacade } from '@services';
+import { HasChangesService, VehiclesFacade } from '@services';
 import { INewVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'info-new-vehicle-page',
@@ -19,9 +20,14 @@ export class NewVehiclePageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly toastrService = inject(ToastrService);
   private readonly vehiclesFacade = inject(VehiclesFacade);
+  private readonly hasChangesService = inject(HasChangesService);
 
   ngOnInit(): void {
     this.vehicleForm.reset();
+
+    this.vehicleForm.valueChanges.pipe(take(1)).subscribe(() => {
+      this.hasChangesService.setChange(this.router.url, true);
+    });
   }
 
   save() {
@@ -39,11 +45,14 @@ export class NewVehiclePageComponent implements OnInit {
   }
 
   cancel() {
+    if (this.hasChangesService.getChange(this.router.url)) return;
+
     this.router.navigateByUrl('');
-    this.vehicleForm.reset();
+    this.vehicleForm.reset({}, { emitEvent: false });
   }
 
   postVehicle() {
+    this.hasChangesService.setChange(this.router.url, false);
     const formValue = this.vehicleForm.getRawValue();
 
     const newVehicle: INewVehicle = {

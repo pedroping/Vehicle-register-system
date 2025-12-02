@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { canDeactivateGuard } from '@guards';
 import { VehiclesFacade } from '@services';
 import { eRoutes } from '@shared/enums';
 
@@ -24,11 +25,13 @@ export default [
         return `banner-img-${route.params['id']}`;
       },
     },
+    canDeactivate: [canDeactivateGuard],
   },
   {
     path: eRoutes.VEHICLE_NEW,
     loadComponent: async () =>
       (await import('./pages/new-vehicle-page/new-vehicle-page.component')).NewVehiclePageComponent,
     data: { reuse: true },
+    canDeactivate: [canDeactivateGuard],
   },
 ] as Routes;

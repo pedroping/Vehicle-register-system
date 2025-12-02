@@ -23,6 +23,7 @@
       "@models/*": ["./src/app/models/*"],
       "@environment/*": ["./src/environments/*"],
       "@interceptors": ["./src/app/core/interceptors/index"],
+      "@guards": ["./src/app/core/guards/index"],
       "@providers": ["./src/app/core/providers/index"],
       "@services": ["./src/app/core/services/index"],
       "@ui": ["./src/app/core/ui/index"]

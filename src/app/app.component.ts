@@ -10,7 +10,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   private readonly meta = inject(Meta);
-
+  
   constructor() {
     afterNextRender(() => {
       this.loadStyles();
