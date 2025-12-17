@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { eRoutes } from '@enums';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
-import { eRoutes } from '@shared/enums';
 
 @Component({
   selector: 'info-list-vehicle-header',

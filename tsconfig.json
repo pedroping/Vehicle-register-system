@@ -19,14 +19,19 @@
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@shared/*": ["./src/app/shared/*"],
-      "@models/*": ["./src/app/models/*"],
-      "@environment/*": ["./src/environments/*"],
+      "@utils": ["./src/app/shared/utils/index"],
+      "@tokens": ["./src/app/shared/tokens/index"],
+      "@models": ["./src/app/shared/models/index"],
+      "@enums": ["./src/app/shared/enums/index"],
+      "@directives": ["./src/app/shared/directives/index"],
+      "@components": ["./src/app/shared/components/index"],
+      "@animations": ["./src/app/shared/animations/index"],
       "@interceptors": ["./src/app/core/interceptors/index"],
       "@guards": ["./src/app/core/guards/index"],
       "@providers": ["./src/app/core/providers/index"],
       "@services": ["./src/app/core/services/index"],
-      "@ui": ["./src/app/core/ui/index"]
+      "@ui": ["./src/app/core/ui/index"],
+      "@environment": ["./src/environments/environment"]
     }
   },
   "angularCompilerOptions": {

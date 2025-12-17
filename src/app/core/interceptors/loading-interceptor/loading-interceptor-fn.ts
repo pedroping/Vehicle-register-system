@@ -1,7 +1,7 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { eHeaders } from '@enums';
 import { LoadingHandleService } from '@services';
-import { eHeaders } from '@shared/enums';
 import { finalize } from 'rxjs';
 
 export const loadingHttpInterceptorFn: HttpInterceptorFn = (

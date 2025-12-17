@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { INewVehicle } from '@models';
 import { HasChangesService, VehiclesFacade } from '@services';
-import { INewVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'info-new-vehicle-page',

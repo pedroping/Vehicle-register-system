@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, output } from '@angular/core';
-import { IDialogComponent, IDialogTokenData } from '@shared/models';
-import { DIALOG_TOKEN } from '@shared/tokens/dialog/dialog-token';
+import { IDialogComponent, IDialogTokenData } from '@models';
+import { DIALOG_TOKEN } from '@tokens';
 
 @Component({
   selector: 'info-confirm-action',

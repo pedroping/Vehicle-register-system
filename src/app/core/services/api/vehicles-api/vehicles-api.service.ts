@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { eHeaders } from '@shared/enums';
-import { INewVehicle, IVehicle } from '@shared/models';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { eHeaders } from '@enums';
+import { INewVehicle, IVehicle } from '@models';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 
 @Injectable({
   providedIn: 'root',

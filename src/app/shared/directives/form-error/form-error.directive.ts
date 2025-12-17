@@ -1,7 +1,7 @@
 import { DestroyRef, Directive, ElementRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormControl } from '@angular/forms';
-import { FORM_ERRORS } from '@shared/models';
+import { FORM_ERRORS } from '@models';
 import { merge, startWith } from 'rxjs';
 
 @Directive({

@@ -9,8 +9,8 @@ import {
   NgZone,
   Type,
 } from '@angular/core';
-import { IDialogComponent } from '@shared/models';
-import { DIALOG_TOKEN } from '@shared/tokens/dialog/dialog-token';
+import { IDialogComponent } from '@models';
+import { DIALOG_TOKEN } from '@tokens';
 import { DialogComponent } from '@ui';
 import { debounceTime, Subject, take } from 'rxjs';
 

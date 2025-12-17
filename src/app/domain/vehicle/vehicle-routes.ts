@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { eRoutes } from '@enums';
 import { canDeactivateGuard } from '@guards';
 import { VehiclesFacade } from '@services';
-import { eRoutes } from '@shared/enums';
 
 export default [
   {

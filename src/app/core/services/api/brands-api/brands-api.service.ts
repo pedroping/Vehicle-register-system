@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IBrand } from '@shared/models';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { IBrand } from '@models';
+import { ENVIRONMENT_TOKEN } from '@tokens';
+
 
 @Injectable({
   providedIn: 'root',

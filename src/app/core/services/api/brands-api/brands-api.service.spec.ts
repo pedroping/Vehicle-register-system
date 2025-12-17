@@ -1,9 +1,7 @@
-/* tslint:disable:no-unused-variable */
-
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { BrandsApiService } from './brands-api.service';
 
 describe('Service: BrandsApi', () => {

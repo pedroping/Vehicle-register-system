@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IVehicle } from '@models';
 import { DialogHandleService, HasChangesService, VehiclesFacade } from '@services';
-import { IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'info-edit-vehicle-page',
@@ -71,7 +71,7 @@ export class EditVehiclePageComponent implements OnInit {
 
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal<boolean>(() =>
-      import('@shared/components').then((c) => c.ConfirmActionComponent),
+      import('@components').then((c) => c.ConfirmActionComponent),
     );
 
     instance.close$.subscribe((value) => {

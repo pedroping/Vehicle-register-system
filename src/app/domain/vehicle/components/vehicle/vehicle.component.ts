@@ -10,11 +10,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { eRoutes } from '@enums';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { IBrand, ICategory, IVehicle } from '@models';
 import { BrandsFacade, CategoriesFacade, DialogHandleService, VehiclesFacade } from '@services';
-import { eRoutes } from '@shared/enums';
-import { IBrand, ICategory, IVehicle } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
@@ -67,7 +67,7 @@ export class VehicleComponent implements OnInit, OnChanges {
 
   deleteVehicle() {
     const instance = this.dialogHandleService.openModal<boolean>(() =>
-      import('@shared/components').then((c) => c.ConfirmActionComponent),
+      import('@components').then((c) => c.ConfirmActionComponent),
     );
 
     instance.close$.subscribe((value) => {

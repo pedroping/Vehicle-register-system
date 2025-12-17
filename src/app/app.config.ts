@@ -17,13 +17,13 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
-import { environment } from '@environment/environment';
+import { environment } from '@environment';
 import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
 import { loadingSpinnerProvider } from '@providers';
 import { CustomRouteReuseStrategy, HasChangesService } from '@services';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,

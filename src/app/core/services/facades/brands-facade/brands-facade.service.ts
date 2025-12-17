@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IBrand } from '@shared/models';
+import { IBrand } from '@models';
 import { BehaviorSubject } from 'rxjs';
 import { BrandsApiService } from '../../api/brands-api/brands-api.service';
 

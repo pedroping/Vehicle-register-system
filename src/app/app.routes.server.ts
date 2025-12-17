@@ -1,5 +1,5 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
-import { eRoutes } from '@shared/enums';
+import { eRoutes } from '@enums';
 
 export const serverRoutes: ServerRoute[] = [
   {

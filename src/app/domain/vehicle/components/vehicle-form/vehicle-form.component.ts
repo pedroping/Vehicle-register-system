@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { FormErrorDirective } from '@directives';
 import { BrandsFacade, CategoriesFacade } from '@services';
-import { FormErrorDirective } from '@shared/directives';
 import { ImageFieldComponent } from '../image-field/image-field.component';
 
 @Component({

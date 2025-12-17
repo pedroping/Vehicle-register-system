@@ -2,10 +2,10 @@ import { AsyncPipe } from '@angular/common';
 import { Component, forwardRef, inject, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DragFileDirective } from '@directives';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCloudArrowUp, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { DragFileDirective } from '@shared/directives';
-import { fileToBase64, uploadFile } from '@shared/utils';
+import { fileToBase64, uploadFile } from '@utils';
 import { BehaviorSubject, switchMap } from 'rxjs';
 @Component({
   selector: 'info-image-field',

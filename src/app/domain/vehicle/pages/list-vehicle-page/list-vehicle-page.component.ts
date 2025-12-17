@@ -11,10 +11,10 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { eRoutes } from '@enums';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { VehiclesFacade } from '@services';
-import { eRoutes } from '@shared/enums';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
 import { ListVehicleHeaderComponent } from '../../components/list-vehicle-header/list-vehicle-header.component';
 import { VehicleComponent } from '../../components/vehicle/vehicle.component';

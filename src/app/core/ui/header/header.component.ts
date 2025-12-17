@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { eRoutes } from '@enums';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
-import { eRoutes } from '@shared/enums';
 import { debounceTime, filter, fromEvent, startWith, switchMap } from 'rxjs';
 
 @Component({
