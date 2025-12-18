@@ -43,7 +43,7 @@
     "@types/compression": "^1.8.1",
     "@types/express": "^5.0.5",
     "@types/jasmine": "~5.1.12",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.4",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",

@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { VehiclesFacade } from '@services';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { VehicleFormComponent } from './vehicle-form.component';
 
 describe('VehicleFormComponent', () => {

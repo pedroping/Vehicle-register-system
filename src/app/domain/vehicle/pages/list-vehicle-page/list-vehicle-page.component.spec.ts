@@ -1,12 +1,12 @@
-/* tslint:disable:no-unused-variable */
-
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { ListVehiclePageComponent } from './list-vehicle-page.component';
+
+declare const process: any;
 
 describe('ListVehiclePageComponent', () => {
   beforeEach(async () => {
@@ -22,6 +22,12 @@ describe('ListVehiclePageComponent', () => {
         },
       ],
     }).compileComponents();
+
+    // (window as any).process = {
+    //   env: {
+    //     TEST_KEY: 'test',
+    //   },
+    // };
   });
 
   it('should create the app', () => {

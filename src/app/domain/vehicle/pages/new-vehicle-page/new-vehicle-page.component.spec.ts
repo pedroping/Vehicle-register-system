@@ -4,11 +4,11 @@ import { TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { Router, RouterModule } from '@angular/router';
 import { VehiclesFacade } from '@services';
-import { IVehicle } from '@shared/models';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { provideToastr, ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { NewVehiclePageComponent } from './new-vehicle-page.component';
+import { ENVIRONMENT_TOKEN } from '@tokens';
+import { IVehicle } from '@models';
 
 describe('NewVehiclePageComponent', () => {
   beforeEach(async () => {

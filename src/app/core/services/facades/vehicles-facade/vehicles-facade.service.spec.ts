@@ -6,11 +6,11 @@ import {
   provideHttpClientTesting
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { IVehicle } from '@shared/models';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
 import { of, take } from 'rxjs';
 import { VehiclesApiService } from '../../api/vehicles-api/vehicles-api.service';
 import { VehiclesFacade } from './vehicles-facade.service';
+import { IVehicle } from '@models';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 
 describe('Service: VehiclesFacade', () => {
   let service: VehiclesFacade;

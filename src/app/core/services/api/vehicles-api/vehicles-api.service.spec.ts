@@ -1,10 +1,8 @@
-/* tslint:disable:no-unused-variable */
-
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { INewVehicle } from '@shared/models';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { INewVehicle } from '@models';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { switchMap } from 'rxjs';
 import { VehiclesApiService } from './vehicles-api.service';
 

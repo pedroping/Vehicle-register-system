@@ -1,10 +1,8 @@
-/* tslint:disable:no-unused-variable */
-
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { BrandsApiService } from '@services';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { skip, take } from 'rxjs';
 import { BrandsFacade } from './brands-facade.service';
 

@@ -4,10 +4,10 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
+import { eRoutes } from '@enums';
+import { IVehicle } from '@models';
 import { BrandsFacade } from '@services';
-import { eRoutes } from '@shared/enums';
-import { IVehicle } from '@shared/models';
-import { ENVIRONMENT_TOKEN } from '@shared/tokens';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { provideToastr } from 'ngx-toastr';
 import { VehicleComponent } from './vehicle.component';
 

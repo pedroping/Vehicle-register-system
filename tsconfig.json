@@ -40,5 +40,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": ["node_modules", "**/.angular/**", "dist", "coverage", "**/*.spec.ts", "**/*.js"]
+  "exclude": ["node_modules", "**/.angular/**", "dist", "coverage", "**/*.js"]
 }
