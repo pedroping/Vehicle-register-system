@@ -9,6 +9,9 @@ import { faCar } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './list-vehicle-header.component.html',
   styleUrls: ['./list-vehicle-header.component.scss'],
   imports: [RouterLink, FontAwesomeModule],
+  host: {
+    ngSkipHydration: 'true',
+  },
 })
 export class ListVehicleHeaderComponent {
   newVehicleRoute = `${eRoutes.VEHICLE_NEW}`;

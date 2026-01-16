@@ -18,6 +18,9 @@ import { debounceTime, filter, fromEvent, startWith, switchMap } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   imports: [RouterLink, FontAwesomeModule],
+  host: {
+    ngSkipHydration: 'true',
+  },
 })
 export class HeaderComponent {
   newVehicleRoute = `${eRoutes.VEHICLE_NEW}`;

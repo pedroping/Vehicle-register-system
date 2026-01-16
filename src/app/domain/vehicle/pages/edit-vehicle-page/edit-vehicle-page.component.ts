@@ -1,12 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IVehicle } from '@models';
 import { DialogHandleService, HasChangesService, VehiclesFacade } from '@services';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'info-edit-vehicle-page',
@@ -24,6 +25,8 @@ export class EditVehiclePageComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly dialogHandleService: DialogHandleService<boolean> = inject(DialogHandleService);
   private readonly hasChangesService = inject(HasChangesService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly destroy$$ = new Subject<void>();
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
@@ -37,13 +40,16 @@ export class EditVehiclePageComponent implements OnInit {
       category: Number(formValue.category ?? -1),
     };
 
-    this.vehicleForm.valueChanges.pipe(take(1)).subscribe(() => {
-      this.hasChangesService.setChange(this.router.url, true);
-    });
+    this.vehicleForm.valueChanges
+      .pipe(take(1), takeUntilDestroyed(this.destroyRef), takeUntil(this.destroy$$))
+      .subscribe(() => {
+        this.hasChangesService.setChange(this.router.url, true);
+      });
   }
 
   cancel() {
-    this.router.navigateByUrl('');
+    this.destroy$$.next();
+    this.router.navigate(['./']);
   }
 
   save() {

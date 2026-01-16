@@ -16,9 +16,4 @@ export default [
       },
     ],
   },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
 ] as Routes;
