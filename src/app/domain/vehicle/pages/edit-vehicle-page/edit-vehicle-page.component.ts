@@ -1,4 +1,5 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IVehicle } from '@models';
@@ -7,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject, take, takeUntil } from 'rxjs';
 import { VehicleFormComponent } from '../../components/vehicle-form/vehicle-form.component';
 import { VehicleFormHandleService } from '../../service/vehicle-form-handle.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'info-edit-vehicle-page',
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./edit-vehicle-page.component.scss'],
   imports: [VehicleFormComponent, ReactiveFormsModule],
 })
-export class EditVehiclePageComponent implements OnInit {
+export class EditVehiclePageComponent implements OnInit, OnDestroy {
   initialFormValue?: IVehicle;
   vehicleForm = inject(VehicleFormHandleService).form;
 
@@ -31,7 +31,7 @@ export class EditVehiclePageComponent implements OnInit {
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data['data'] as IVehicle;
     this.vehicleForm.reset();
-    this.vehicleForm.patchValue(data);
+    this.vehicleForm.patchValue(data, { emitEvent: false });
     const formValue = this.vehicleForm.getRawValue();
     this.initialFormValue = {
       ...formValue,
@@ -45,6 +45,10 @@ export class EditVehiclePageComponent implements OnInit {
       .subscribe(() => {
         this.hasChangesService.setChange(this.router.url, true);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.hasChangesService.setChange(this.router.url, false);
   }
 
   cancel() {

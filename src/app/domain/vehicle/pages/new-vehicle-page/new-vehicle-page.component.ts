@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { INewVehicle } from '@models';
@@ -14,7 +14,7 @@ import { VehicleFormHandleService } from '../../service/vehicle-form-handle.serv
   styleUrls: ['./new-vehicle-page.component.scss'],
   imports: [VehicleFormComponent, ReactiveFormsModule],
 })
-export class NewVehiclePageComponent implements OnInit {
+export class NewVehiclePageComponent implements OnInit, OnDestroy {
   vehicleForm = inject(VehicleFormHandleService).form;
 
   private readonly router = inject(Router);
@@ -42,6 +42,10 @@ export class NewVehiclePageComponent implements OnInit {
     }
 
     this.postVehicle();
+  }
+
+  ngOnDestroy(): void {
+    this.hasChangesService.setChange(this.router.url, false);
   }
 
   cancel() {

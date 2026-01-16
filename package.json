@@ -10,7 +10,11 @@
     "serve:ssr": "npm run build && node dist/vehicle-register-system/server/server.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "compodoc": "npx compodoc -p tsconfig.doc.json",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +43,7 @@
     "@angular-devkit/build-angular": "^20.3.10",
     "@angular/cli": "^20.3.10",
     "@angular/compiler-cli": "^20.3.11",
+    "@compodoc/compodoc": "^1.2.0",
     "@eslint/js": "^9.39.1",
     "@types/compression": "^1.8.1",
     "@types/express": "^5.0.5",

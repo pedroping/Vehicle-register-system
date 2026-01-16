@@ -6,9 +6,9 @@ import {
   isDevMode,
   provideAppInitializer,
   Provider,
-  provideZoneChangeDetection
+  provideZoneChangeDetection,
 } from '@angular/core';
-import { provideClientHydration } from '@angular/platform-browser';
+import { provideClientHydration, withIncrementalHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   provideRouter,
@@ -21,9 +21,9 @@ import { environment } from '@environment';
 import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
 import { loadingSpinnerProvider } from '@providers';
 import { CustomRouteReuseStrategy, HasChangesService } from '@services';
+import { ENVIRONMENT_TOKEN } from '@tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
-import { ENVIRONMENT_TOKEN } from '@tokens';
 
 const ENVIRONMENT_PROVIDER: Provider = {
   provide: ENVIRONMENT_TOKEN,
@@ -57,7 +57,7 @@ export const appConfig: ApplicationConfig = {
     ),
     IMAGE_PROVIDER,
     ENVIRONMENT_PROVIDER,
-    provideClientHydration(),
+    provideClientHydration(withIncrementalHydration()),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
