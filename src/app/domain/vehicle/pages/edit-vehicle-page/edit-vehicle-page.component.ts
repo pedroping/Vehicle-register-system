@@ -40,6 +40,8 @@ export class EditVehiclePageComponent implements OnInit, OnDestroy {
       category: Number(formValue.category ?? -1),
     };
 
+    this.hasChangesService.setChange(this.router.url, false);
+
     this.vehicleForm.valueChanges
       .pipe(take(1), takeUntilDestroyed(this.destroyRef), takeUntil(this.destroy$$))
       .subscribe(() => {
