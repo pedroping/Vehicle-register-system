@@ -1,24 +1,18 @@
-import { inject, Injectable, makeStateKey, TransferState } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  DetachedRouteHandle,
-  RouteReuseStrategy,
-  UrlSegment,
-} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   private handlers = new Map<string, DetachedRouteHandle>();
-  private readonly transferState = inject(TransferState);
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return route.data['reuse'] === true;
+    return route.data?.['reuse'] === true;
   }
 
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null): void {
-    if (handle && route.data['reuse'] === true) {
+    if (route.data?.['reuse'] === true && handle) {
       const key = this.getRouteKey(route);
       this.handlers.set(key, handle);
     }
@@ -26,34 +20,24 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
     const key = this.getRouteKey(route);
-    return route.data['reuse'] === true && this.handlers.has(key);
+    const canAttach = !!route.routeConfig && !!this.handlers.get(key);
+    return route.data?.['reuse'] === true && canAttach;
   }
 
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
+    if (!route.routeConfig) return null;
     const key = this.getRouteKey(route);
-    return route.data['reuse'] === true ? (this.handlers.get(key) ?? null) : null;
+    return this.handlers.get(key) || null;
   }
 
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    if (future.data['onlySrr']) {
-      const hasAllKeys = future.data?.['keys']?.every((key: string) => {
-        return !!this.transferState.get(makeStateKey<string>(key), null);
-      });
-
-      if (!hasAllKeys || !future.data?.['keys'])
-        window.location.href = this.buildUrlPath(future.url);
-
-      return future.routeConfig === curr.routeConfig;
-    }
-
     return future.routeConfig === curr.routeConfig;
   }
 
-  private getRouteKey(route: ActivatedRouteSnapshot) {
-    return (route.routeConfig ?? '') as string;
-  }
-
-  private buildUrlPath(segments: UrlSegment[]): string {
-    return segments.map((segment) => segment.path).join('/');
+  private getRouteKey(route: ActivatedRouteSnapshot): string {
+    return route.pathFromRoot
+      .map((r) => r.url.map((segment) => segment.path).join('/'))
+      .filter((str) => str.length > 0)
+      .join('/');
   }
 }

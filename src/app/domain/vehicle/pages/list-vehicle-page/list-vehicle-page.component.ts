@@ -58,10 +58,8 @@ export class ListVehiclePageComponent implements OnInit {
 
     if (isBrowser) {
       const transferred = this.transferState.get<string>(key, '');
-      if (transferred) {
-        this.testKey = transferred;
-        console.info(`[Browser] TEST_KEY restored from TransferState: ${transferred}`);
-      }
+      console.info(`[Browser] TEST_KEY restored from TransferState: ${transferred}`);
+      this.testKey = transferred;
     }
   }
 

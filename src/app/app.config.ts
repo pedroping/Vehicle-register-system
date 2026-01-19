@@ -1,12 +1,15 @@
-import { IMAGE_CONFIG } from '@angular/common';
+import { IMAGE_CONFIG, isPlatformServer } from '@angular/common';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   inject,
   isDevMode,
+  makeStateKey,
+  PLATFORM_ID,
   provideAppInitializer,
   Provider,
   provideZoneChangeDetection,
+  TransferState,
 } from '@angular/core';
 import { provideClientHydration, withIncrementalHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -64,6 +67,12 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAppInitializer(() => {
       const hasChangesService = inject(HasChangesService);
+      const transferState = inject(TransferState);
+      const platformId = inject(PLATFORM_ID);
+
+      if (isPlatformServer(platformId))
+        transferState.set(makeStateKey<string>('myData'), process.env['TEST_KEY']);
+
       return hasChangesService.startDomain();
     }),
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
