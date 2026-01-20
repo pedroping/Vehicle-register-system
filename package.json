@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && javascript-obfuscator ./dist/vehicle-register-system/browser --output ./dist/vehicle-register-system/browser --config obfuscator.config.json",
+    "build": "ng build && npm run browser:obfuscator",
+    "server:obfuscator": "javascript-obfuscator ./dist/vehicle-register-system/server --output ./dist/vehicle-register-system/server --config obfuscator.config.json",
+    "browser:obfuscator": "javascript-obfuscator ./dist/vehicle-register-system/browser --output ./dist/vehicle-register-system/browser --config obfuscator.config.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr": "npm run build && node dist/vehicle-register-system/server/server.mjs",
