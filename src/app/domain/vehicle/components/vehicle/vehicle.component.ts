@@ -79,4 +79,9 @@ export class VehicleComponent implements OnInit, OnChanges {
       });
     });
   }
+
+  setTransition() {
+    this._elementRef.nativeElement.querySelector('img')!.style.viewTransitionName =
+      'banner-img-' + this.vehicle().id;
+  }
 }

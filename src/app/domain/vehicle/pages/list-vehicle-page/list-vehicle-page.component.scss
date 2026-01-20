@@ -62,12 +62,15 @@
   }
 
   .vehicles-list {
-    padding-bottom: calc(var(--numcards) * 5px);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(var(--numcards), clamp(65vh, 650px, 650px));
+    display: flex;
+    flex-direction: column;
     gap: 4vw;
     view-timeline-name: --cards-element-scrolls-in-body;
+    padding-bottom: calc(var(--numcards) * 5px);
+    margin: 20px auto;
+    padding: 25px;
+    max-width: 1000px;
+    width: 100%;
   }
 
   .section-2 {
