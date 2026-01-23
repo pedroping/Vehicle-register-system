@@ -4,6 +4,12 @@
   </a>
 
   <div class="actions">
+    <a [routerLink]="login">
+      <button class="primary-btn animated">
+        <span>Login</span><fa-icon [icon]="['fas', 'car']"></fa-icon>
+      </button>
+    </a>
+
     <a [routerLink]="newVehicleRoute">
       <button class="primary-btn animated">
         <span>Adicionar veiculo</span><fa-icon [icon]="['fas', 'car']"></fa-icon>

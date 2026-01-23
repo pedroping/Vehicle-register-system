@@ -26,11 +26,6 @@ export function app(): express.Express {
     }),
   );
 
-  server.get('/get-key', (_, res) => {
-    server.use(compression());
-    res.send(process.env['TEST_KEY'] ?? '');
-  });
-
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 

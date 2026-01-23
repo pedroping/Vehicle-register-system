@@ -1,15 +1,12 @@
-import { IMAGE_CONFIG, isPlatformServer } from '@angular/common';
+import { IMAGE_CONFIG } from '@angular/common';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   inject,
   isDevMode,
-  makeStateKey,
-  PLATFORM_ID,
   provideAppInitializer,
   Provider,
   provideZoneChangeDetection,
-  TransferState,
 } from '@angular/core';
 import { provideClientHydration, withIncrementalHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -23,7 +20,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from '@environment';
 import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
 import { loadingSpinnerProvider } from '@providers';
-import { CustomRouteReuseStrategy, HasChangesService } from '@services';
+import { CustomRouteReuseStrategy, HasChangesService, TransferStateService } from '@services';
 import { ENVIRONMENT_TOKEN } from '@tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
@@ -47,9 +44,19 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideRouter(
       routes,
-      withViewTransitions(),
       withInMemoryScrolling({
         scrollPositionRestoration: 'top',
+      }),
+      withViewTransitions({
+        onViewTransitionCreated: ({ transition }) => {
+          transition.finished
+            .then(() => {
+              window.transitionEnd?.();
+            })
+            .catch((error) => {
+              console.error('View transition finished with an error:', error);
+            });
+        },
       }),
     ),
     provideToastr({ maxOpened: 1, autoDismiss: true }),
@@ -67,13 +74,12 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAppInitializer(() => {
       const hasChangesService = inject(HasChangesService);
-      const transferState = inject(TransferState);
-      const platformId = inject(PLATFORM_ID);
+      const transferStateService = inject(TransferStateService);
 
-      if (isPlatformServer(platformId))
-        transferState.set(makeStateKey<string>('myData'), process.env['TEST_KEY']);
+      hasChangesService.startDomain();
+      transferStateService.setKey('myData');
 
-      return hasChangesService.startDomain();
+      return;
     }),
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
   ],

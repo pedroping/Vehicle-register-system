@@ -45,6 +45,9 @@
     }
 
     .actions {
+      display: flex;
+      gap: 5px;
+      
       button {
         display: flex;
         align-items: start;

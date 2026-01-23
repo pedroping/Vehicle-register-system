@@ -1,25 +1,14 @@
-import { AsyncPipe, isPlatformBrowser, isPlatformServer } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  Inject,
-  inject,
-  makeStateKey,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-} from '@angular/core';
+import { AsyncPipe, isPlatformServer } from '@angular/common';
+import { Component, DestroyRef, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { eRoutes } from '@enums';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
-import { VehiclesFacade } from '@services';
+import { TransferStateService, VehiclesFacade } from '@services';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
 import { ListVehicleHeaderComponent } from '../../components/list-vehicle-header/list-vehicle-header.component';
 import { VehicleComponent } from '../../components/vehicle/vehicle.component';
-
-const MY_DATA_KEY = makeStateKey<string>('myData');
 
 @Component({
   selector: 'info-list-vehicle-page',
@@ -39,28 +28,29 @@ export class ListVehiclePageComponent implements OnInit {
 
   constructor(
     library: FaIconLibrary,
-    private transferState: TransferState,
     @Inject(PLATFORM_ID) private readonly platformId: object,
+    private readonly transferStateService: TransferStateService,
   ) {
     library.addIcons(faCar);
 
-    const key = MY_DATA_KEY;
     const isServer = isPlatformServer(this.platformId);
-    const isBrowser = isPlatformBrowser(this.platformId);
 
     if (isServer) {
-      const envKey = process.env['TEST_KEY'] ?? '';
-      this.transferState.set(key, envKey);
-      this.testKey = envKey;
-      console.info('[SSR] TEST_KEY loaded:', envKey);
+      const keyValue = this.transferStateService.getKey('myData');
+      console.info('[SSR] KEY loaded:', keyValue);
       return;
     }
 
-    if (isBrowser) {
-      const transferred = this.transferState.get<string>(key, '');
-      console.info(`[Browser] TEST_KEY restored from TransferState: ${transferred}`);
-      this.testKey = transferred;
+    const keyValue = this.transferStateService.getKey('myData');
+
+    if (!keyValue) {
+      console.info(`[Browser] KEY not found`);
+
+      return;
     }
+
+    console.info(`[Browser] KEY restored from TransferState: ${keyValue}`);
+    this.testKey = keyValue;
   }
 
   ngOnInit(): void {

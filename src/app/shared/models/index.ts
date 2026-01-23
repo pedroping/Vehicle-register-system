@@ -5,3 +5,4 @@ export * from './dialog-models/dialog-models';
 export * from './form-error-models/form-error-models';
 export * from './vehicles-models/vehicle-form-models';
 export * from './vehicles-models/vehicles-models';
+export * from './transfer-state-models/transfer-state-models';

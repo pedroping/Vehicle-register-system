@@ -24,6 +24,7 @@ import { debounceTime, filter, fromEvent, startWith, switchMap } from 'rxjs';
 })
 export class HeaderComponent {
   newVehicleRoute = `${eRoutes.VEHICLE_NEW}`;
+  login = `${eRoutes.LOGIN}`;
 
   private readonly header = viewChild.required<ElementRef<HTMLElement>>('header');
   private readonly router = inject(Router);
