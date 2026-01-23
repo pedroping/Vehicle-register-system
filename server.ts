@@ -6,6 +6,7 @@ import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import bootstrap from './src/main.server';
+import crypto from 'crypto';
 
 export function app(): express.Express {
   const server = express();
@@ -23,6 +24,24 @@ export function app(): express.Express {
     express.static(browserDistFolder, {
       maxAge: '1y',
       index: 'index.html',
+      setHeaders: (res, path) => {
+        if (path.includes('index.html')) {
+          const cookieHash = crypto
+            .createHmac('sha256', crypto.randomBytes(128).toString('base64'))
+            .update('ProjectToken')
+            .digest('hex');
+
+          res.cookie('MyTokenAuth', cookieHash, {
+            path: '/',
+            httpOnly: true,
+            maxAge: 2592000,
+            sameSite: 'none',
+            secure: true,
+          });
+        }
+
+        res.header('X-Frame-Options', 'DENY');
+      },
     }),
   );
 
