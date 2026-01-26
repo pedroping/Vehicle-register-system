@@ -2,7 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
 import { Routes } from '@angular/router';
 import { eRoutes } from '@enums';
-import { AuthFacadeService, TransferStateService } from '@services';
+import { AuthFacadeService, TransferStateService, TransitionStateService } from '@services';
 import { catchError, of, tap } from 'rxjs';
 
 export default [
@@ -15,15 +15,16 @@ export default [
         const platformId = inject(PLATFORM_ID);
         const authFacadeService = inject(AuthFacadeService);
         const transferStateService = inject(TransferStateService);
+        const transitionStateService = inject(TransitionStateService);
 
         if (transferStateService.getKey('VERY_SECRET')) {
           return {};
         }
 
         if (isPlatformBrowser(platformId)) {
-          window.transitionEnd = () => {
+          transitionStateService.transitionEnd$.subscribe(() => {
             window.location.href = eRoutes.LOGIN;
-          };
+          });
           return {};
         }
 

@@ -24,7 +24,12 @@ import {
   serverCookieInterceptor,
 } from '@interceptors';
 import { loadingSpinnerProvider } from '@providers';
-import { CustomRouteReuseStrategy, HasChangesService, TransferStateService } from '@services';
+import {
+  CustomRouteReuseStrategy,
+  HasChangesService,
+  TransferStateService,
+  TransitionStateService,
+} from '@services';
 import { ENVIRONMENT_TOKEN } from '@tokens';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
@@ -53,10 +58,10 @@ export const appConfig: ApplicationConfig = {
       }),
       withViewTransitions({
         onViewTransitionCreated: ({ transition }) => {
+          const transitionStateService = inject(TransitionStateService);
+
           transition.finished
-            .then(() => {
-              window.transitionEnd?.();
-            })
+            .then(() => transitionStateService.transtionEnd())
             .catch((error) => {
               console.error('View transition finished with an error:', error);
             });
