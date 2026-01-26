@@ -13,7 +13,12 @@ const DB_PATH = path.join(__dirname, 'db.json');
 
 app.disable('x-powered-by');
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:4200',
+    credentials: true,
+  }),
+);
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
@@ -133,7 +138,7 @@ const createCrudRouter = (entityName) => {
 
   router.get('/secret/:id', async (req, res) => {
     const id = req.params.id;
-    
+
     if (id == process.env['VERY_SECRET']) {
       res.json({ message: 'Toop' });
     } else {

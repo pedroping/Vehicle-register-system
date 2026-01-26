@@ -1,12 +1,13 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
 import compression from 'compression';
+import crypto from 'crypto';
 import 'dotenv/config';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { REQUEST, RESPONSE } from './src/express.tokens';
 import bootstrap from './src/main.server';
-import crypto from 'crypto';
 
 export function app(): express.Express {
   const server = express();
@@ -54,7 +55,11 @@ export function app(): express.Express {
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+        providers: [
+          { provide: APP_BASE_HREF, useValue: baseUrl },
+          { provide: REQUEST, useValue: req },
+          { provide: RESPONSE, useValue: res },
+        ],
       })
       .then((html) => res.send(html))
       .catch((err) => next(err));

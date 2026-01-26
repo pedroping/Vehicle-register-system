@@ -18,7 +18,11 @@ import {
 } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from '@environment';
-import { errorHandleInterceptor, loadingHttpInterceptorFn } from '@interceptors';
+import {
+  errorHandleInterceptor,
+  loadingHttpInterceptorFn,
+  serverCookieInterceptor,
+} from '@interceptors';
 import { loadingSpinnerProvider } from '@providers';
 import { CustomRouteReuseStrategy, HasChangesService, TransferStateService } from '@services';
 import { ENVIRONMENT_TOKEN } from '@tokens';
@@ -62,7 +66,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr({ maxOpened: 1, autoDismiss: true }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
-      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn]),
+      withInterceptors([errorHandleInterceptor, loadingHttpInterceptorFn, serverCookieInterceptor]),
       withFetch(),
     ),
     IMAGE_PROVIDER,
