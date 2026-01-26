@@ -1,12 +1,12 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
+import { REQUEST, RESPONSE } from '@tokens';
 import compression from 'compression';
 import crypto from 'crypto';
 import 'dotenv/config';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { REQUEST, RESPONSE } from './src/express.tokens';
 import bootstrap from './src/main.server';
 
 export function app(): express.Express {
@@ -25,29 +25,34 @@ export function app(): express.Express {
     express.static(browserDistFolder, {
       maxAge: '1y',
       index: 'index.html',
-      setHeaders: (res, path) => {
-        if (path.includes('index.html')) {
-          const cookieHash = crypto
-            .createHmac('sha256', crypto.randomBytes(128).toString('base64'))
-            .update('ProjectToken')
-            .digest('hex');
-
-          res.cookie('MyTokenAuth', cookieHash, {
-            path: '/',
-            httpOnly: true,
-            maxAge: 2592000,
-            sameSite: 'none',
-            secure: true,
-          });
-        }
-
-        res.header('X-Frame-Options', 'DENY');
-      },
     }),
   );
 
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
+
+    const currentCookies = headers.cookie || '';
+
+    if (!currentCookies.includes('CurrentSessionCookie')) {
+      const cookieHash = crypto
+        .createHmac('sha256', crypto.randomBytes(128).toString('base64'))
+        .update('ProjectToken')
+        .digest('hex');
+
+      res.cookie('CurrentSessionCookie', cookieHash, {
+        path: '/',
+        httpOnly: true,
+        maxAge: 2592000,
+        sameSite: 'lax',
+        secure: process.env['NODE_ENV'] === 'production',
+      });
+
+      if (req.headers.cookie) {
+        req.headers.cookie += `; CurrentSessionCookie=${cookieHash}`;
+      } else {
+        req.headers.cookie = `CurrentSessionCookie=${cookieHash}`;
+      }
+    }
 
     commonEngine
       .render({

@@ -27,17 +27,5 @@
         "files": ["/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "api-performance",
-      "urls": ["http://localhost:3000/**"],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 500,
-        "maxAge": "3d",
-        "timeout": "10s"
-      }
-    }
   ]
 }

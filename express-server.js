@@ -15,7 +15,7 @@ app.disable('x-powered-by');
 
 app.use(
   cors({
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'http://localhost:4100'],
     credentials: true,
   }),
 );
@@ -45,6 +45,7 @@ const validateRequestSource = (req, _, next) => {
   req.requestSource = source;
 
   console.log(`[${req.method}] ${req.url} - Source: ${source}`);
+  console.log(`Cookie:`, req.cookies);
 
   next();
 };
