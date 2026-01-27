@@ -40,4 +40,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
       .filter((str) => str.length > 0)
       .join('/');
   }
+
+  clearHandlers() {
+    this.handlers.clear();
+  }
 }
