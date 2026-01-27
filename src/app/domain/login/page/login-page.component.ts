@@ -1,5 +1,5 @@
 import { afterNextRender, Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthFacadeService, TransferStateService } from '@services';
 
 @Component({
@@ -10,6 +10,7 @@ import { AuthFacadeService, TransferStateService } from '@services';
 })
 export class LoginPageComponent implements OnInit {
   constructor(
+    private readonly router: Router,
     private readonly authFacadeService: AuthFacadeService,
     private readonly transferStateService: TransferStateService,
   ) {
@@ -25,6 +26,7 @@ export class LoginPageComponent implements OnInit {
   login() {
     this.authFacadeService.login().subscribe(() => {
       console.info('Test');
+      this.router.navigateByUrl('', { replaceUrl: true });
     });
   }
 }

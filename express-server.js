@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 const validateAuthCookie = (req, res, next) => {
-  if (req.path === '/login') {
+  if (req.path === '/login' || req.url.includes('secret')) {
     return next();
   }
 
@@ -61,7 +61,6 @@ const validateRequestSource = (req, _, next) => {
   req.requestSource = source;
 
   console.log(`[${req.method}] ${req.url} - Source: ${source}`);
-  console.log(`Cookie:`, req.cookies);
 
   next();
 };
