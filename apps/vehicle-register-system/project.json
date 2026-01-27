@@ -1,0 +1,119 @@
+{
+  "name": "vehicle-register-system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "standalone": true
+    },
+    "@schematics/angular:pipe": {
+      "standalone": true
+    }
+  },
+  "sourceRoot": "apps/vehicle-register-system/src",
+  "prefix": "info",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": "dist/apps/vehicle-register-system",
+        "index": "apps/vehicle-register-system/src/index.html",
+        "browser": "apps/vehicle-register-system/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/vehicle-register-system/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/vehicle-register-system/src/assets",
+          "apps/vehicle-register-system/src/robots.txt"
+        ],
+        "styles": [
+          "apps/vehicle-register-system/src/styles.scss",
+          {
+            "inject": false,
+            "input": "node_modules/ngx-toastr/toastr.css"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/vehicle-register-system/src/styles"]
+        },
+        "scripts": [],
+        "server": "apps/vehicle-register-system/src/main.server.ts",
+        "prerender": true,
+        "ssr": false,
+        "allowedCommonJsDependencies": ["dotenv/config", "dotenv", "compression"]
+      },
+      "configurations": {
+        "production": {
+          "aot": true,
+          "optimization": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "5kB",
+              "maximumError": "10kB"
+            }
+          ],
+          "outputHashing": "all",
+          "serviceWorker": "apps/vehicle-register-system/ngsw-config.json"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/vehicle-register-system/src/environments/environment.ts",
+              "with": "apps/vehicle-register-system/src/environments/environment.development.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "vehicle-register-system:build:production"
+        },
+        "development": {
+          "buildTarget": "vehicle-register-system:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n"
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "tsConfig": "apps/vehicle-register-system/tsconfig.spec.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/vehicle-register-system/src/assets"],
+        "styles": [
+          "apps/vehicle-register-system/src/styles.scss",
+          {
+            "inject": false,
+            "input": "node_modules/ngx-toastr/toastr.css"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["src/styles"]
+        },
+        "scripts": [],
+        "karmaConfig": "apps/vehicle-register-system/karma.conf.js"
+      }
+    }
+  }
+}

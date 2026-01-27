@@ -1,0 +1,46 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@utils": ["./apps/vehicle-register-system/src/app/shared/utils/index"],
+      "@tokens": ["./apps/vehicle-register-system/src/app/shared/tokens/index"],
+      "@models": ["./apps/vehicle-register-system/src/app/shared/models/index"],
+      "@enums": ["./apps/vehicle-register-system/src/app/shared/enums/index"],
+      "@directives": ["./apps/vehicle-register-system/src/app/shared/directives/index"],
+      "@components": ["./apps/vehicle-register-system/src/app/shared/components/index"],
+      "@animations": ["./apps/vehicle-register-system/src/app/shared/animations/index"],
+      "@interceptors": ["./apps/vehicle-register-system/src/app/core/interceptors/index"],
+      "@guards": ["./apps/vehicle-register-system/src/app/core/guards/index"],
+      "@providers": ["./apps/vehicle-register-system/src/app/core/providers/index"],
+      "@services": ["./apps/vehicle-register-system/src/app/core/services/index"],
+      "@ui": ["./apps/vehicle-register-system/src/app/core/ui/index"],
+      "@environment": ["./apps/vehicle-register-system/src/environments/environment"]
+    },
+    "baseUrl": ".",
+    "rootDir": "."
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "exclude": ["node_modules", "**/.angular/**", "dist", "coverage", "**/*.js", "tmp", "**/*.spec.ts"]
+}

@@ -1,44 +1,28 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": false,
-    "experimentalDecorators": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "lib": ["ES2022", "dom"],
-    "paths": {
-      "@utils": ["./src/app/shared/utils/index"],
-      "@tokens": ["./src/app/shared/tokens/index"],
-      "@models": ["./src/app/shared/models/index"],
-      "@enums": ["./src/app/shared/enums/index"],
-      "@directives": ["./src/app/shared/directives/index"],
-      "@components": ["./src/app/shared/components/index"],
-      "@animations": ["./src/app/shared/animations/index"],
-      "@interceptors": ["./src/app/core/interceptors/index"],
-      "@guards": ["./src/app/core/guards/index"],
-      "@providers": ["./src/app/core/providers/index"],
-      "@services": ["./src/app/core/services/index"],
-      "@ui": ["./src/app/core/ui/index"],
-      "@environment": ["./src/environments/environment"]
-    }
+    "noFallthroughCasesInSwitch": true
   },
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.doc.json"
+    },
+    {
+      "path": "./tsconfig.eslint.json"
+    }
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": ["node_modules", "**/.angular/**", "dist", "coverage", "**/*.js"]
+  "extends": "./tsconfig.base.json"
 }
