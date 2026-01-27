@@ -6,6 +6,7 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const fs = require('fs').promises;
 const path = require('path');
+const crypto = require('crypto');
 
 const app = express();
 const PORT = 3000;
@@ -22,6 +23,21 @@ app.use(
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
+
+const validateAuthCookie = (req, res, next) => {
+  if (req.path === '/login') {
+    return next();
+  }
+
+  if (!req.cookies || !req.cookies.TokenCookie) {
+    console.warn(`[Blocked] Access attempt to ${req.url} without TokenCookie`);
+    return res.status(401).json({ message: 'Unauthorized: TokenCookie is required' });
+  }
+
+  next();
+};
+
+app.use(validateAuthCookie);
 
 const validateRequestSource = (req, _, next) => {
   const userAgent = req.headers['user-agent'] || '';
@@ -137,18 +153,39 @@ const createCrudRouter = (entityName) => {
     }
   });
 
-  router.get('/secret/:id', async (req, res) => {
-    const id = req.params.id;
-
-    if (id == process.env['VERY_SECRET']) {
-      res.json({ message: 'Toop' });
-    } else {
-      res.status(404).json({ message: 'Not found' });
-    }
-  });
-
   return router;
 };
+
+const router = express.Router();
+
+router.get('/secret/:id', async (req, res) => {
+  const id = req.params.id;
+
+  if (id == process.env['VERY_SECRET']) {
+    res.json({ message: 'Toop' });
+  } else {
+    res.status(404).json({ message: 'Not found' });
+  }
+});
+
+router.post('/login', async (req, res) => {
+  const { password } = req.body;
+
+  const cookieHash = crypto
+    .createHmac('sha256', crypto.randomBytes(128).toString('base64'))
+    .update(password)
+    .digest('hex');
+
+  res.cookie('TokenCookie', cookieHash, {
+    path: '/',
+    httpOnly: true,
+    maxAge: 2592000,
+    sameSite: 'lax',
+    secure: process.env['NODE_ENV'] === 'production',
+  });
+
+  res.json({ message: 'Toop' });
+});
 
 const encryptValue = (text, secretEnv) => {
   const algorithm = 'aes-256-cbc';
@@ -181,6 +218,7 @@ const decryptValue = (encryptedText, secretEnv) => {
   return decrypted;
 };
 
+app.use(router);
 app.use('/vehicles', createCrudRouter('vehicles'));
 app.use('/brands', createCrudRouter('brands'));
 app.use('/categories', createCrudRouter('categories'));

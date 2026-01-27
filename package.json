@@ -10,8 +10,8 @@
     "browser:obfuscator": "javascript-obfuscator ./dist/vehicle-register-system/browser --output ./dist/vehicle-register-system/browser --config obfuscator.config.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr": "npx concurrently \"npm run build && node dist/vehicle-register-system/server/server.mjs\" \"npm run serve:express-server\"",
-    "serve:express-server": "node ./express-server.js",
+    "serve:ssr": "npm run build && npx concurrently \"node dist/vehicle-register-system/server/server.mjs\" \"npm run serve:express-server\"",
+    "serve:express-server": "npx nodemon ./express-server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -69,6 +69,7 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nodemon": "^3.1.11",
     "prettier": "^3.6.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4"

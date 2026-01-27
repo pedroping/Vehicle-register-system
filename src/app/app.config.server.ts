@@ -1,7 +1,7 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
 import { provideServerRendering, withAppShell, withRoutes } from '@angular/ssr';
-import { serverCookieInterceptor } from '@interceptors';
+import { errorHandleInterceptor, serverCookieInterceptor } from '@interceptors';
 import { appConfig } from './app.config';
 import { serverRoutes } from './app.routes.server';
 
@@ -11,7 +11,7 @@ const serverConfig: ApplicationConfig = {
       withRoutes(serverRoutes),
       withAppShell(() => import('./app.component').then((m) => m.AppComponent)),
     ),
-    provideHttpClient(withInterceptors([serverCookieInterceptor])),
+    provideHttpClient(withInterceptors([serverCookieInterceptor, errorHandleInterceptor])),
   ],
 };
 
