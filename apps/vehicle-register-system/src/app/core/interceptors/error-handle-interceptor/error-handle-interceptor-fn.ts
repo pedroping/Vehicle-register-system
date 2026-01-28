@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from '@services';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
@@ -10,13 +10,21 @@ export const errorHandleInterceptor = (req: HttpRequest<unknown>, next: HttpHand
   const toastrService = inject(ToastrService);
   const platformId = inject(PLATFORM_ID);
   const router = inject(Router);
-  const customRouteReuseStrategy = inject(CustomRouteReuseStrategy, { optional: true });
+  const routeReuseStrategy = inject(RouteReuseStrategy, {
+    optional: true,
+  }) as CustomRouteReuseStrategy;
+  const customRouteReuseStrategy = inject(CustomRouteReuseStrategy, {
+    optional: true,
+  }) as CustomRouteReuseStrategy;
 
   return next(req).pipe(
     catchError((err: HttpErrorResponse) => {
       if (err.status == 401) {
-        router.navigateByUrl('login', { replaceUrl: true });
-        customRouteReuseStrategy?.clearHandlers();
+        if (isPlatformBrowser(platformId)) {
+          routeReuseStrategy?.clearHandlers?.();
+          customRouteReuseStrategy?.clearHandlers?.();
+          router.navigateByUrl('login', { replaceUrl: true });
+        }
         return EMPTY;
       }
 

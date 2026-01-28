@@ -14,7 +14,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"],
-      "cache": true
+      "cache": false
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/karma.conf.js"],

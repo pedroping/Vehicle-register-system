@@ -1,6 +1,7 @@
-import { afterNextRender, Component, OnInit } from '@angular/core';
+import { afterNextRender, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthFacadeService, TransferStateService } from '@services';
+import { AuthFacadeService, TransferStateService, VehiclesFacade } from '@services';
+import { skip, switchMap } from 'rxjs';
 
 @Component({
   selector: 'info-login-page',
@@ -9,11 +10,12 @@ import { AuthFacadeService, TransferStateService } from '@services';
   imports: [RouterLink],
 })
 export class LoginPageComponent implements OnInit {
-  constructor(
-    private readonly router: Router,
-    private readonly authFacadeService: AuthFacadeService,
-    private readonly transferStateService: TransferStateService,
-  ) {
+  private readonly router = inject(Router);
+  private readonly vehiclesFacade = inject(VehiclesFacade);
+  private readonly authFacadeService = inject(AuthFacadeService);
+  private readonly transferStateService = inject(TransferStateService);
+
+  constructor() {
     afterNextRender(() => {
       console.info('Secret res: ', this.transferStateService.getKey('VERY_SECRET'));
     });
@@ -24,9 +26,18 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    this.authFacadeService.login().subscribe(() => {
-      console.info('Test');
-      this.router.navigateByUrl('', { replaceUrl: true });
-    });
+    this.authFacadeService
+      .login()
+      .pipe(
+        switchMap(() => {
+          this.vehiclesFacade.setVehicles();
+          
+          return this.vehiclesFacade.getVehicles$$().pipe(skip(1));
+        }),
+      )
+      .subscribe(() => {
+        console.info('Test');
+        this.router.navigateByUrl('', { replaceUrl: true });
+      });
   }
 }

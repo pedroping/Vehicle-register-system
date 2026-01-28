@@ -19,7 +19,7 @@
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "options": {
-        "outputPath": "dist/apps/vehicle-register-system",
+        "outputPath": "dist/vehicle-register-system",
         "index": "apps/vehicle-register-system/src/index.html",
         "browser": "apps/vehicle-register-system/src/main.ts",
         "polyfills": ["zone.js"],
@@ -42,7 +42,9 @@
         "scripts": [],
         "server": "apps/vehicle-register-system/src/main.server.ts",
         "prerender": true,
-        "ssr": false,
+        "ssr": {
+          "entry": "apps/vehicle-register-system/server.ts"
+        },
         "allowedCommonJsDependencies": ["dotenv/config", "dotenv", "compression"]
       },
       "configurations": {
