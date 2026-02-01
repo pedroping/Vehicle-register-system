@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouteReuseStrategy } from '@angular/router';
+import { eRoutes } from '@enums';
 import { CustomRouteReuseStrategy } from '@services';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
@@ -23,8 +24,9 @@ export const errorHandleInterceptor = (req: HttpRequest<unknown>, next: HttpHand
         if (isPlatformBrowser(platformId)) {
           routeReuseStrategy?.clearHandlers?.();
           customRouteReuseStrategy?.clearHandlers?.();
-          router.navigateByUrl('login', { replaceUrl: true });
+          router.navigateByUrl(`/${eRoutes.LOGIN}`);
         }
+
         return EMPTY;
       }
 

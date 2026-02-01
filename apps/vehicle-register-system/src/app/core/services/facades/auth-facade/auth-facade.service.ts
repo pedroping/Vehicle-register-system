@@ -1,20 +1,21 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ENVIRONMENT_TOKEN } from '@tokens';
+import { AuthApiService } from '../../api/auth-api/auth-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacadeService {
-  token = 'test-token';
-  private readonly http = inject(HttpClient);
-  private readonly environment = inject(ENVIRONMENT_TOKEN);
+  private readonly authApiService = inject(AuthApiService);
 
   getSecret() {
-    return this.http.get(`${this.environment}/secret/${process?.env?.['VERY_SECRET']}`);
+    return this.authApiService.getSecret();
   }
 
   login() {
-    return this.http.post(`${this.environment}/login`, { password: 'Test123' });
+    return this.authApiService.login();
+  }
+
+  checkSession() {
+    return this.authApiService.checkSession();
   }
 }

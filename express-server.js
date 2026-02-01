@@ -186,6 +186,19 @@ router.post('/login', async (req, res) => {
   res.json({ message: 'Toop' });
 });
 
+router.get('/session', async (req, res) => {
+  try {
+    const cookie = req.cookies?.['TokenCookie'];
+
+    if (!cookie) return res.status(401);
+
+    return res.status(200).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(401);
+  }
+});
+
 const encryptValue = (text, secretEnv) => {
   const algorithm = 'aes-256-cbc';
 

@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { eRoutes } from '@enums';
-import { canDeactivateGuard } from '@guards';
+import { authGuard, canDeactivateGuard } from '@guards';
 import { VehiclesFacade } from '@services';
 
 export default [
@@ -11,6 +11,7 @@ export default [
       (await import('./pages/list-vehicle-page/list-vehicle-page.component'))
         .ListVehiclePageComponent,
     data: { reuse: true, keys: ['myData'] },
+    canActivate: [authGuard],
   },
   {
     path: eRoutes.VEHICLE_EDIT + '/:id',
@@ -26,6 +27,7 @@ export default [
       },
     },
     canDeactivate: [canDeactivateGuard],
+    canActivate: [authGuard],
   },
   {
     path: eRoutes.VEHICLE_NEW,
@@ -33,5 +35,6 @@ export default [
       (await import('./pages/new-vehicle-page/new-vehicle-page.component')).NewVehiclePageComponent,
     data: { reuse: true },
     canDeactivate: [canDeactivateGuard],
+    canActivate: [authGuard],
   },
 ] as Routes;
