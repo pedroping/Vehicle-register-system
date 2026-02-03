@@ -16,6 +16,8 @@ export function app(): express.Express {
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
+  const SECRET_KEY = process.env['COOKIE_SECRET'] || 'my-super-secret-key-that-is-32-chars-long';
+  const ALGORITHM = 'aes-256-cbc';
 
   const commonEngine = new CommonEngine();
 
@@ -35,27 +37,41 @@ export function app(): express.Express {
 
     const currentCookies = headers.cookie || '';
 
+    console.info('Client IP', req.ip);
+
     if (!req.url.includes(eRoutes.LOGIN)) {
       const hasCookie = req.headers.cookie?.includes('TokenCookie');
 
       if (!hasCookie) {
+        const cookieHash = encryptToken({ ip: req.ip });
+        res.cookie('CurrentSessionCookie', cookieHash, {
+          path: '/',
+          httpOnly: true,
+          maxAge: 2592000,
+          sameSite: 'none',
+          secure: true,
+        });
+
+        if (req.headers.cookie) {
+          req.headers.cookie += `; CurrentSessionCookie=${cookieHash}`;
+        } else {
+          req.headers.cookie = `CurrentSessionCookie=${cookieHash}`;
+        }
+
         res.sendFile('index.csr.html', { root: browserDistFolder });
         return;
       }
     }
 
     if (!currentCookies.includes('CurrentSessionCookie')) {
-      const cookieHash = crypto
-        .createHmac('sha256', crypto.randomBytes(128).toString('base64'))
-        .update('ProjectToken')
-        .digest('hex');
+      const cookieHash = encryptToken({ ip: req.ip });
 
       res.cookie('CurrentSessionCookie', cookieHash, {
         path: '/',
         httpOnly: true,
         maxAge: 2592000,
-        sameSite: 'lax',
-        secure: process.env['NODE_ENV'] === 'production',
+        sameSite: 'none',
+        secure: true,
       });
 
       if (req.headers.cookie) {
@@ -81,6 +97,19 @@ export function app(): express.Express {
       .catch((err) => next(err));
   });
 
+  const getKey = () => crypto.createHash('sha256').update(SECRET_KEY).digest();
+
+  const encryptToken = (payload: object): string => {
+    const text = JSON.stringify(payload);
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv(ALGORITHM, getKey(), iv);
+
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+
+    return `${iv.toString('hex')}:${encrypted}`;
+  };
+
   server.use(compression());
   server.use(cookieParser());
 
@@ -88,7 +117,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 4000;
+  const port = process.env['CLIENT_PORT'] || 4000;
 
   const server = app();
   server.listen(port, () => {
