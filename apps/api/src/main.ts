@@ -214,21 +214,24 @@ router.post('/login', async (req: Request, res: Response) => {
 
 router.get('/session', (req: Request, res: Response) => {
   const cookie = req.cookies['TokenCookie'];
+  const sessionCookie = req.cookies['CurrentSessionCookie'];
 
-  if (!cookie) {
+  if (!cookie || !sessionCookie) {
     res.status(401).json({ message: 'No cookie found' });
     return;
   }
 
   const data = decryptToken(cookie);
+  const sessionData = decryptToken(sessionCookie);
 
-  if (!data) {
+  if (!data || !sessionData) {
     res.status(401).json({ message: 'Invalid Token' });
     return;
   }
 
   const currentIp = req.headers['x-forwarded-for'] || req.ip;
-  if (data.ip !== currentIp) {
+
+  if (sessionData.ip !== currentIp) {
     res.status(401).json({ message: 'IP Address mismatch! Token stolen?' });
     return;
   }
