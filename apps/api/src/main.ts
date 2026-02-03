@@ -59,8 +59,6 @@ const validateAuthCookie = (req: Request, res: Response, next: NextFunction) => 
   next();
 };
 
-app.use(validateAuthCookie);
-
 const validateRequestSource = (req: CustomRequest, _: Response, next: NextFunction) => {
   const userAgent = req.headers['user-agent'] || '';
   const secFetch = req.headers['sec-fetch-mode'] as string | undefined;
@@ -88,6 +86,7 @@ const validateRequestSource = (req: CustomRequest, _: Response, next: NextFuncti
 };
 
 app.use(validateRequestSource);
+app.use(validateAuthCookie);
 
 const readDb = async (): Promise<DbSchema> => {
   try {

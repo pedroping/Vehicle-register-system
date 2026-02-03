@@ -39,7 +39,11 @@ export function app(): express.Express {
           if (req.headers.cookie) {
             proxyReq.setHeader('cookie', req.headers.cookie);
           }
-          console.info(req?.headers?.cookie, proxyReq.getRawHeaderNames());
+          console.info(
+            req?.headers?.cookie,
+            req.url,
+            proxyReq.getRawHeaderNames().includes('cookie'),
+          );
         },
       },
     }),
