@@ -234,6 +234,8 @@ router.get('/session', (req: Request, res: Response) => {
 
   const currentIp = req.headers['x-forwarded-for'] || req.ip;
 
+  console.info('[IP]', currentIp, req.headers['x-forwarded-for'], req.ip);
+
   if (data.ip !== currentIp) {
     res.status(401).json({ message: 'IP Address mismatch! Token stolen?' });
     return;
