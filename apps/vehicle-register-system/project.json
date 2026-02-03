@@ -45,7 +45,13 @@
         "ssr": {
           "entry": "apps/vehicle-register-system/server.ts"
         },
-        "allowedCommonJsDependencies": ["dotenv/config", "dotenv", "compression"]
+        "allowedCommonJsDependencies": [
+          "dotenv/config",
+          "dotenv",
+          "compression",
+          "cookie-parser",
+          "http-proxy-middleware"
+        ]
       },
       "configurations": {
         "production": {
