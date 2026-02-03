@@ -50,6 +50,7 @@ export function app(): express.Express {
           maxAge: 2592000,
           sameSite: 'none',
           secure: true,
+          domain: 'onrender.com',
         });
 
         if (req.headers.cookie) {
@@ -72,6 +73,7 @@ export function app(): express.Express {
         maxAge: 2592000,
         sameSite: 'none',
         secure: true,
+        domain: 'onrender.com',
       });
 
       if (req.headers.cookie) {

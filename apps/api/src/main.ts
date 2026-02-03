@@ -33,7 +33,12 @@ app.disable('x-powered-by');
 
 app.use(
   cors({
-    origin: ['http://localhost:4200', 'http://localhost:4100', 'http://127.0.0.1:4100'],
+    origin: [
+      'http://localhost:4200',
+      'http://localhost:4100',
+      'http://127.0.0.1:4100',
+      'https://vehicle-register-system-1.onrender.com',
+    ],
     credentials: true,
   }),
 );
@@ -42,14 +47,14 @@ app.use(cookieParser());
 app.use(express.json());
 
 const validateAuthCookie = (req: Request, res: Response, next: NextFunction) => {
-  if (req.path === '/login' || req.url.includes('secret')) {
-    return next();
-  }
+  // if (req.path === '/login' || req.url.includes('secret')) {
+  //   return next();
+  // }
 
-  if (!req.cookies || !req.cookies['TokenCookie']) {
-    console.warn(`[Blocked] Access attempt to ${req.url} without TokenCookie`);
-    return res.status(401).json({ message: 'Unauthorized: TokenCookie is required' });
-  }
+  // if (!req.cookies || !req.cookies['TokenCookie']) {
+  //   console.warn(`[Blocked] Access attempt to ${req.url} without TokenCookie`);
+  //   return res.status(401).json({ message: 'Unauthorized: TokenCookie is required' });
+  // }
 
   next();
 };
@@ -200,6 +205,7 @@ router.post('/login', async (req: Request, res: Response) => {
     maxAge: 2592000,
     sameSite: 'none',
     secure: true,
+    domain: 'onrender.com',
   });
 
   console.info(
@@ -214,24 +220,22 @@ router.post('/login', async (req: Request, res: Response) => {
 
 router.get('/session', (req: Request, res: Response) => {
   const cookie = req.cookies['TokenCookie'];
-  const sessionCookie = req.cookies['CurrentSessionCookie'];
 
-  if (!cookie || !sessionCookie) {
+  if (!cookie) {
     res.status(401).json({ message: 'No cookie found' });
     return;
   }
 
   const data = decryptToken(cookie);
-  const sessionData = decryptToken(sessionCookie);
 
-  if (!data || !sessionData) {
+  if (!data) {
     res.status(401).json({ message: 'Invalid Token' });
     return;
   }
 
   const currentIp = req.headers['x-forwarded-for'] || req.ip;
 
-  if (sessionData.ip !== currentIp) {
+  if (data.ip !== currentIp) {
     res.status(401).json({ message: 'IP Address mismatch! Token stolen?' });
     return;
   }
