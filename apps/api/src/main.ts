@@ -47,14 +47,14 @@ app.use(cookieParser());
 app.use(express.json());
 
 const validateAuthCookie = (req: Request, res: Response, next: NextFunction) => {
-  // if (req.path === '/login' || req.url.includes('secret')) {
-  //   return next();
-  // }
+  if (req.path === '/login' || req.url.includes('secret')) {
+    return next();
+  }
 
-  // if (!req.cookies || !req.cookies['TokenCookie']) {
-  //   console.warn(`[Blocked] Access attempt to ${req.url} without TokenCookie`);
-  //   return res.status(401).json({ message: 'Unauthorized: TokenCookie is required' });
-  // }
+  if (!req.cookies || !req.cookies['TokenCookie']) {
+    console.warn(`[Blocked] Access attempt to ${req.url} without TokenCookie`);
+    return res.status(401).json({ message: 'Unauthorized: TokenCookie is required' });
+  }
 
   next();
 };
