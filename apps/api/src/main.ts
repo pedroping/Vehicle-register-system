@@ -24,14 +24,16 @@ interface CustomRequest extends Request {
 }
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env['PORT'] || 3000;
 const DB_PATH = path.join(__dirname, './assets', 'db.json');
+const SECRET_KEY = process.env['COOKIE_SECRET'] || 'my-super-secret-key-that-is-32-chars-long';
+const ALGORITHM = 'aes-256-cbc';
 
 app.disable('x-powered-by');
 
 app.use(
   cors({
-    origin: ['http://localhost:4200', 'http://localhost:4100'],
+    origin: ['http://localhost:4200', 'http://localhost:4100', 'http://127.0.0.1:4100'],
     credentials: true,
   }),
 );
@@ -81,13 +83,6 @@ const validateRequestSource = (req: CustomRequest, _: Response, next: NextFuncti
 };
 
 app.use(validateRequestSource);
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-  if (!req.cookies['session_id']) {
-    res.cookie('session_id', 'user-' + Date.now(), { httpOnly: true });
-  }
-  next();
-});
 
 const readDb = async (): Promise<DbSchema> => {
   try {
@@ -184,78 +179,93 @@ router.get('/secret/:id', async (req: Request, res: Response) => {
 
 router.post('/login', async (req: Request, res: Response) => {
   const { password } = req.body;
+  const clientIp = req.headers['x-forwarded-for'] || req.ip;
 
   if (!password) {
     res.status(400).json({ message: 'Password required' });
     return;
   }
 
-  const cookieHash = crypto
-    .createHmac('sha256', crypto.randomBytes(128).toString('base64'))
-    .update(password)
-    .digest('hex');
+  const payload = {
+    ip: clientIp,
+    pass: password,
+    createdAt: Date.now(),
+  };
 
-  res.cookie('TokenCookie', cookieHash, {
+  const encryptedCookie = encryptToken(payload);
+
+  res.cookie('TokenCookie', encryptedCookie, {
     path: '/',
     httpOnly: true,
     maxAge: 2592000,
-    sameSite: 'lax',
-    secure: process.env['NODE_ENV'] === 'production',
+    sameSite: 'none',
+    secure: true,
   });
+
+  console.info(
+    `[Login] Token created for IP: ${clientIp}`,
+    req.headers['x-forwarded-for'],
+    req.headers['X-Forwarded-For'],
+    req.ip,
+  );
 
   res.json({ message: 'Toop' });
 });
 
-router.get('/session', async (req: Request, res: Response) => {
-  try {
-    const cookie = req.cookies?.['TokenCookie'];
+router.get('/session', (req: Request, res: Response) => {
+  const cookie = req.cookies['TokenCookie'];
 
-    if (!cookie) {
-      res.status(401).end();
-      return;
-    }
-
-    res.status(200).end();
-    return;
-  } catch (error) {
-    console.info(error);
-    res.status(401).end();
+  if (!cookie) {
+    res.status(401).json({ message: 'No cookie found' });
     return;
   }
+
+  const data = decryptToken(cookie);
+
+  if (!data) {
+    res.status(401).json({ message: 'Invalid Token' });
+    return;
+  }
+
+  const currentIp = req.headers['x-forwarded-for'] || req.ip;
+  if (data.ip !== currentIp) {
+    res.status(401).json({ message: 'IP Address mismatch! Token stolen?' });
+    return;
+  }
+
+  res.json({ message: 'Valid!' });
 });
 
-// const getSecretKey = (secretEnv: string | undefined): Buffer => {
-//   if (!secretEnv) throw new Error('Encryption key (env) is missing');
-//   return crypto.createHash('sha256').update(String(secretEnv)).digest();
-// };
+const getKey = () => crypto.createHash('sha256').update(SECRET_KEY).digest();
 
-// const encryptValue = (text: string, secretEnv: string | undefined): string => {
-//   const algorithm = 'aes-256-cbc';
-//   const key = getSecretKey(secretEnv);
-//   const iv = crypto.randomBytes(16);
+export const encryptToken = (payload: object): string => {
+  const text = JSON.stringify(payload);
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(ALGORITHM, getKey(), iv);
 
-//   const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
 
-//   let encrypted = cipher.update(text, 'utf8', 'hex');
-//   encrypted += cipher.final('hex');
+  return `${iv.toString('hex')}:${encrypted}`;
+};
 
-//   return iv.toString('hex') + ':' + encrypted;
-// };
+export const decryptToken = (token: string) => {
+  try {
+    const [ivHex, encryptedData] = token.split(':');
+    if (!ivHex || !encryptedData) return null;
 
-// const decryptValue = (encryptedText: string, secretEnv: string | undefined): string => {
-//   const algorithm = 'aes-256-cbc';
-//   const [ivHex, dataHex] = encryptedText.split(':');
+    const iv = Buffer.from(ivHex, 'hex');
+    const decipher = crypto.createDecipheriv(ALGORITHM, getKey(), iv);
 
-//   const key = getSecretKey(secretEnv);
-//   const iv = Buffer.from(ivHex, 'hex');
+    let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
 
-//   const decipher = crypto.createDecipheriv(algorithm, key, iv);
-
-//   let decrypted = decipher.update(dataHex, 'hex', 'utf8');
-//   decrypted += decipher.final('utf8');
-
-//   return decrypted;
-// };
+    return JSON.parse(decrypted);
+  } catch (error) {
+    console.error('Decryption failed:', error);
+    return null;
+  }
+};
 
 app.use(router);
 app.use('/vehicles', createCrudRouter('vehicles'));
