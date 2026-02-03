@@ -34,6 +34,14 @@ export function app(): express.Express {
       pathRewrite: {
         '^/api': '',
       },
+      on: {
+        proxyReq: (proxyReq, req) => {
+          if (req.headers.cookie) {
+            proxyReq.setHeader('cookie', req.headers.cookie);
+          }
+          console.info(req?.headers?.cookie, proxyReq.getRawHeaderNames());
+        },
+      },
     }),
   );
 
@@ -100,20 +108,36 @@ export function app(): express.Express {
       }
     }
 
-    commonEngine
-      .render({
-        bootstrap,
-        documentFilePath: indexHtml,
-        url: `${protocol}://${headers.host}${originalUrl}`,
-        publicPath: browserDistFolder,
-        providers: [
-          { provide: APP_BASE_HREF, useValue: baseUrl },
-          { provide: REQUEST, useValue: req },
-          { provide: RESPONSE, useValue: res },
-        ],
-      })
+    const SSR_TIMEOUT = 30000;
+
+    const renderPromise = commonEngine.render({
+      bootstrap,
+      documentFilePath: indexHtml,
+      url: `${protocol}://${headers.host}${originalUrl}`,
+      publicPath: browserDistFolder,
+      providers: [
+        { provide: APP_BASE_HREF, useValue: baseUrl },
+        { provide: REQUEST, useValue: req },
+        { provide: RESPONSE, useValue: res },
+      ],
+    });
+
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('SSR_TIMEOUT')), SSR_TIMEOUT);
+    });
+
+    Promise.race([renderPromise, timeoutPromise])
       .then((html) => res.send(html))
-      .catch((err) => next(err));
+      .catch((err) => {
+        if (err.message === 'SSR_TIMEOUT') {
+          console.warn(
+            `SSR Timeout for ${originalUrl} after ${SSR_TIMEOUT}ms - Falling back to CSR`,
+          );
+          res.sendFile('index.csr.html', { root: browserDistFolder });
+        } else {
+          next(err);
+        }
+      });
   });
 
   server.use(compression());

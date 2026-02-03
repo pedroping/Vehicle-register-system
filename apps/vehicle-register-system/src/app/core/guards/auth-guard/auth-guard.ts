@@ -16,6 +16,8 @@ export const authGuard: CanActivateFn = ():
 
   if (isPlatformServer(platformId)) return of(true);
 
+  console.info('Guard', platformId);
+
   return authFacadeService.checkSession().pipe(
     take(1),
     defaultIfEmpty(false),
