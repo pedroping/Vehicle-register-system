@@ -24,6 +24,7 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+  server.set('trust proxy', 1);
 
   server.use(
     '/api',
@@ -34,16 +35,27 @@ export function app(): express.Express {
       pathRewrite: {
         '^/api': '',
       },
+      cookieDomainRewrite: {
+        '*': '',
+      },
       on: {
         proxyReq: (proxyReq, req) => {
           if (req.headers.cookie) {
             proxyReq.setHeader('cookie', req.headers.cookie);
           }
           console.info(
-            req?.headers?.cookie,
+            'Req',
             req.url,
+            !!req?.headers?.cookie,
             proxyReq.getRawHeaderNames().includes('cookie'),
           );
+        },
+        proxyRes: (proxyRes) => {
+          console.info('Res', proxyRes?.headers?.cookie);
+
+          if (proxyRes.headers['set-cookie']) {
+            console.info(`[Proxy] Received Set-Cookie from API`);
+          }
         },
       },
     }),
