@@ -242,9 +242,16 @@ router.get('/session', (req: Request, res: Response) => {
     data.ip,
     data.ip !== currentIp,
     `Data ip: ${data.ip} | CurrentIp: ${currentIp}`,
+    typeof data.ip,
+    typeof currentIp,
   );
 
-  if (data.ip !== currentIp) {
+  if (data.ip?.[0] === currentIp?.[0]) {
+    res.json({ message: 'Valid!' });
+    return;
+  }
+
+  if (data.ip !== currentIp && !data.ip?.inclues(currentIp?.slice?.(0, 14))) {
     res.status(401).json({ message: 'IP Address mismatch! Token stolen?' });
     return;
   }
