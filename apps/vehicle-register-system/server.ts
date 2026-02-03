@@ -1,7 +1,9 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
+import { eRoutes } from '@enums';
 import { REQUEST, RESPONSE } from '@tokens';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import crypto from 'crypto';
 import 'dotenv/config';
 import express from 'express';
@@ -32,6 +34,15 @@ export function app(): express.Express {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
     const currentCookies = headers.cookie || '';
+
+    if (!req.url.includes(eRoutes.LOGIN)) {
+      const hasCookie = req.headers.cookie?.includes('TokenCookie');
+
+      if (!hasCookie) {
+        res.sendFile('index.csr.html', { root: browserDistFolder });
+        return;
+      }
+    }
 
     if (!currentCookies.includes('CurrentSessionCookie')) {
       const cookieHash = crypto
@@ -71,6 +82,7 @@ export function app(): express.Express {
   });
 
   server.use(compression());
+  server.use(cookieParser());
 
   return server;
 }

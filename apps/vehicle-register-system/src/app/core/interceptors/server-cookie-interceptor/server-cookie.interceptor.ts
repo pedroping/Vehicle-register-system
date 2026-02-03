@@ -9,9 +9,7 @@ export const serverCookieInterceptor: HttpInterceptorFn = (
   const expressRequest = inject(REQUEST, { optional: true });
 
   if (expressRequest) {
-    console.info('[SSR Interceptor] Processing URL:', req.url);
     const cookies = expressRequest.headers.cookie;
-    console.info('[SSR Interceptor] Found Cookies:', cookies);
 
     if (cookies) {
       const newReq = req.clone({
@@ -20,8 +18,6 @@ export const serverCookieInterceptor: HttpInterceptorFn = (
       });
       return next(newReq);
     }
-  } else {
-    console.info('[SSR Interceptor] No Express Request token found!');
   }
 
   const newReq = req.clone({
