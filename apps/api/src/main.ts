@@ -241,6 +241,7 @@ router.get('/session', (req: Request, res: Response) => {
     req.ip,
     data.ip,
     data.ip !== currentIp,
+    `Data ip: ${data.ip} | CurrentIp: ${currentIp}`,
   );
 
   if (data.ip !== currentIp) {
