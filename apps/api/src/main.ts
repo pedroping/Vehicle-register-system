@@ -205,7 +205,6 @@ router.post('/login', async (req: Request, res: Response) => {
     maxAge: 2592000,
     sameSite: 'none',
     secure: true,
-    domain: 'onrender.com',
   });
 
   console.info(

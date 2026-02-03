@@ -9,6 +9,7 @@ import 'dotenv/config';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import bootstrap from './src/main.server';
 
 export function app(): express.Express {
@@ -24,6 +25,18 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
+  server.use(
+    '/api',
+    createProxyMiddleware({
+      target: process.env['API_URL'] || 'http://localhost:3000',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: {
+        '^/api': '',
+      },
+    }),
+  );
+
   server.get(
     '*',
     express.static(browserDistFolder, {
@@ -32,39 +45,20 @@ export function app(): express.Express {
     }),
   );
 
+  const getKey = () => crypto.createHash('sha256').update(SECRET_KEY).digest();
+  const encryptToken = (payload: object): string => {
+    const text = JSON.stringify(payload);
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv(ALGORITHM, getKey(), iv);
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    return `${iv.toString('hex')}:${encrypted}`;
+  };
+
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
-    const currentCookies = headers.cookie || '';
-
-    console.info('Client IP', req.ip);
-
-    if (!req.url.includes(eRoutes.LOGIN)) {
-      const hasCookie = req.headers.cookie?.includes('TokenCookie');
-
-      if (!hasCookie) {
-        const cookieHash = encryptToken({ ip: req.ip });
-        res.cookie('CurrentSessionCookie', cookieHash, {
-          path: '/',
-          httpOnly: true,
-          maxAge: 2592000,
-          sameSite: 'none',
-          secure: true,
-          domain: 'onrender.com',
-        });
-
-        if (req.headers.cookie) {
-          req.headers.cookie += `; CurrentSessionCookie=${cookieHash}`;
-        } else {
-          req.headers.cookie = `CurrentSessionCookie=${cookieHash}`;
-        }
-
-        res.sendFile('index.csr.html', { root: browserDistFolder });
-        return;
-      }
-    }
-
-    if (!currentCookies.includes('CurrentSessionCookie')) {
+    if (!req.url.includes(eRoutes.LOGIN) && !headers.cookie?.includes('CurrentSessionCookie')) {
       const cookieHash = encryptToken({ ip: req.ip });
 
       res.cookie('CurrentSessionCookie', cookieHash, {
@@ -73,7 +67,6 @@ export function app(): express.Express {
         maxAge: 2592000,
         sameSite: 'none',
         secure: true,
-        domain: 'onrender.com',
       });
 
       if (req.headers.cookie) {
@@ -99,19 +92,6 @@ export function app(): express.Express {
       .catch((err) => next(err));
   });
 
-  const getKey = () => crypto.createHash('sha256').update(SECRET_KEY).digest();
-
-  const encryptToken = (payload: object): string => {
-    const text = JSON.stringify(payload);
-    const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv(ALGORITHM, getKey(), iv);
-
-    let encrypted = cipher.update(text, 'utf8', 'hex');
-    encrypted += cipher.final('hex');
-
-    return `${iv.toString('hex')}:${encrypted}`;
-  };
-
   server.use(compression());
   server.use(cookieParser());
 
@@ -119,7 +99,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['CLIENT_PORT'] || 3000;
+  const port = process.env['CLIENT_PORT'] || 4000;
 
   const server = app();
   server.listen(port, () => {
