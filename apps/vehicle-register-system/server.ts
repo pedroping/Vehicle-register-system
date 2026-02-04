@@ -24,7 +24,28 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+
   server.set('trust proxy', 1);
+  server.use((req, res, next) => {
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; " +
+        "script-src 'self' 'unsafe-inline' https://apis.google.com; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+        "font-src 'self' https://fonts.gstatic.com; " +
+        "img-src 'self' data: https://my-bucket.s3.amazonaws.com;",
+    );
+
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.removeHeader('X-Powered-By');
+
+    next();
+  });
 
   server.use(
     '/api',
@@ -51,8 +72,6 @@ export function app(): express.Express {
           );
         },
         proxyRes: (proxyRes) => {
-          console.info('Res', proxyRes?.headers?.cookie);
-
           if (proxyRes.headers['set-cookie']) {
             console.info(`[Proxy] Received Set-Cookie from API`);
           }
