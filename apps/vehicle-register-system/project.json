@@ -19,6 +19,9 @@
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "options": {
+        "define": {
+          "API_URL": "\"http://localhost:3000\""
+        },
         "outputPath": "dist/vehicle-register-system",
         "index": "apps/vehicle-register-system/src/index.html",
         "browser": "apps/vehicle-register-system/src/main.ts",
@@ -69,6 +72,9 @@
               "maximumError": "10kB"
             }
           ],
+          "define": {
+            "API_URL": "\"/api\""
+          },
           "outputHashing": "all",
           "serviceWorker": "apps/vehicle-register-system/ngsw-config.json"
         },

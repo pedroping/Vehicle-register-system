@@ -26,14 +26,14 @@ export function app(): express.Express {
   server.set('views', browserDistFolder);
 
   server.set('trust proxy', 1);
-  server.use((req, res, next) => {
+  server.use((_, res, next) => {
     res.setHeader(
       'Content-Security-Policy',
       "default-src 'self'; " +
         "script-src 'self' 'unsafe-inline' https://apis.google.com; " +
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
         "font-src 'self' https://fonts.gstatic.com; " +
-        "img-src 'self' data: https://my-bucket.s3.amazonaws.com;",
+        "img-src 'self' data: https://my-bucket.s3.amazonaws.com https://thumbs.dreamstime.com;",
     );
 
     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
@@ -41,7 +41,7 @@ export function app(): express.Express {
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
     res.removeHeader('X-Powered-By');
 
     next();
