@@ -22,8 +22,9 @@ export class DialogHandleService<T> {
   private _environmentInjector = inject(EnvironmentInjector);
   private _document = inject(DOCUMENT, { optional: true });
   private _ngZone = inject(NgZone);
+  private _injector = inject(Injector);
 
-  openModal<Y = unknown>(component: () => Promise<Type<IDialogComponent<T>>>) {
+  openModal<Y = unknown>(component: () => Promise<Type<IDialogComponent<T>>>, injector?: Injector) {
     const close$ = new Subject<Y>();
     const open$ = new Subject<void>();
     const close = (arg: Y) => {
@@ -41,7 +42,7 @@ export class DialogHandleService<T> {
           },
         },
       ],
-      parent: this._environmentInjector,
+      parent: injector ?? this._injector ?? this._environmentInjector,
     });
 
     component().then((_component) => {
