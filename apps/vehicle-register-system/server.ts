@@ -101,33 +101,8 @@ export function app(): express.Express {
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
-    if (!req.url.includes(eRoutes.LOGIN)) {
-      const hasCookie = req.headers.cookie?.includes('TokenCookie');
-
-      if (!hasCookie) {
-        const cookieHash = encryptToken({ ip: req.ip });
-        res.cookie('CurrentSessionCookie', cookieHash, {
-          path: '/',
-          httpOnly: true,
-          maxAge: 2592000,
-          sameSite: 'none',
-          secure: true,
-        });
-
-        if (req.headers.cookie) {
-          req.headers.cookie += `; CurrentSessionCookie=${cookieHash}`;
-        } else {
-          req.headers.cookie = `CurrentSessionCookie=${cookieHash}`;
-        }
-
-        res.sendFile('index.csr.html', { root: browserDistFolder });
-        return;
-      }
-    }
-
     if (!headers.cookie?.includes('CurrentSessionCookie')) {
       const cookieHash = encryptToken({ ip: req.ip });
-
       res.cookie('CurrentSessionCookie', cookieHash, {
         path: '/',
         httpOnly: true,
@@ -136,11 +111,14 @@ export function app(): express.Express {
         secure: true,
       });
 
-      if (req.headers.cookie) {
-        req.headers.cookie += `; CurrentSessionCookie=${cookieHash}`;
-      } else {
-        req.headers.cookie = `CurrentSessionCookie=${cookieHash}`;
-      }
+      req.headers.cookie = req.headers.cookie
+        ? (req.headers.cookie += `; CurrentSessionCookie=${cookieHash}`)
+        : `CurrentSessionCookie=${cookieHash}`;
+    }
+
+    if (!req.url.includes(eRoutes.LOGIN) && !req.headers.cookie?.includes('TokenCookie')) {
+      res.sendFile('index.csr.html', { root: browserDistFolder });
+      return;
     }
 
     const SSR_TIMEOUT = 30000;
