@@ -48,7 +48,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/api-e2e/**/*"]
+      "exclude": ["apps/api-e2e/**/*", "apps/nest-api-e2e/**/*"]
     }
   ]
 }
