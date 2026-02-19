@@ -19,6 +19,8 @@ export class AuthApiService {
   }
 
   checkSession() {
-    return this.http.get(`${this.environment}/session`).pipe(map(() => true));
+    return this.http
+      .get(`${this.environment}/session?bust=${crypto.randomUUID()}`)
+      .pipe(map(() => true));
   }
 }

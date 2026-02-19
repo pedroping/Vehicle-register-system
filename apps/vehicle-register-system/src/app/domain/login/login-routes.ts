@@ -22,8 +22,17 @@ export default [
         }
 
         if (isPlatformBrowser(platformId)) {
-          transitionStateService.transitionEnd$.subscribe(() => {
-            window.location.href = eRoutes.LOGIN;
+          transitionStateService.transitionEnd$.subscribe(async () => {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(registrations.map((registration) => registration.unregister()));
+
+            caches.keys().then(async function (names) {
+              console.info(names);
+              for (const name of names) {
+                await caches.delete(name);
+              }
+              window.location.href = eRoutes.LOGIN;
+            });
           });
           return {};
         }

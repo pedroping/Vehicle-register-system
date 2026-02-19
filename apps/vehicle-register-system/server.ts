@@ -33,7 +33,8 @@ export function app(): express.Express {
         "script-src 'self' 'unsafe-inline' https://apis.google.com; " +
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
         "font-src 'self' https://fonts.gstatic.com; " +
-        "img-src 'self' data: https://thumbs.dreamstime.com;",
+        "img-src 'self' data: https://thumbs.dreamstime.com;" +
+        "connect-src 'self' https://thumbs.dreamstime.com https://fonts.gstatic.com;",
     );
 
     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
