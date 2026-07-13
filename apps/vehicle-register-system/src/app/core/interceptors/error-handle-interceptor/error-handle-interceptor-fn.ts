@@ -14,16 +14,12 @@ export const errorHandleInterceptor = (req: HttpRequest<unknown>, next: HttpHand
   const routeReuseStrategy = inject(RouteReuseStrategy, {
     optional: true,
   }) as CustomRouteReuseStrategy;
-  const customRouteReuseStrategy = inject(CustomRouteReuseStrategy, {
-    optional: true,
-  }) as CustomRouteReuseStrategy;
 
   return next(req).pipe(
     catchError((err: HttpErrorResponse) => {
       if (err.status == 401) {
         if (isPlatformBrowser(platformId)) {
           routeReuseStrategy?.clearHandlers?.();
-          customRouteReuseStrategy?.clearHandlers?.();
           router.navigateByUrl(`/${eRoutes.LOGIN}`);
         }
 

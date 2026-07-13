@@ -26,6 +26,8 @@ export function app(): express.Express {
   server.set('views', browserDistFolder);
 
   server.set('trust proxy', 1);
+  server.use(compression());
+  server.use(cookieParser());
   server.use((_, res, next) => {
     res.setHeader(
       'Content-Security-Policy',
@@ -153,9 +155,6 @@ export function app(): express.Express {
         }
       });
   });
-
-  server.use(compression());
-  server.use(cookieParser());
 
   return server;
 }
